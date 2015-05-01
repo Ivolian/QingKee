@@ -1,29 +1,83 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="top"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar" />
-
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:text="@string/hello_world"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <!-- 登录布局 start -->
 
-        <EditText
-            android:text="@string/hello_world"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/activity_default_padding">
 
-        <include layout="@layout/toolbar_shadow" />
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/qingke_logo"
+                android:layout_marginTop="20dp" />
 
+            <com.cengalabs.flatui.views.FlatEditText
+                android:id="@+id/et_login_code"
+                android:hint="输入登录ID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/login_activity_textsize"
+                android:maxLines="1"
+                android:padding="8dp"
+                flatui:fl_fieldStyle="fl_box"
+                flatui:fl_borderWidth="2dp"
+                android:layout_marginTop="20dp" />
+
+            <com.cengalabs.flatui.views.FlatEditText
+                android:id="@+id/et_login_password"
+                android:hint="输入密码"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/login_activity_textsize"
+                android:maxLines="1"
+                android:padding="8dp"
+                android:inputType="textPassword"
+                flatui:fl_fieldStyle="fl_box"
+                flatui:fl_borderWidth="2dp"
+                android:layout_marginTop="10dp" />
+
+            <com.cengalabs.flatui.views.FlatCheckBox
+                android:layout_gravity="right"
+                android:id="@+id/cb_remember_me"
+                android:text="记住我"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                flatui:fl_size="20dp"
+                android:layout_marginTop="20dp" />
+
+            <com.cengalabs.flatui.views.FlatButton
+                android:id="@+id/btn_login"
+                android:text="登录"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/login_activity_textsize"
+                flatui:fl_textAppearance="fl_none"
+                flatui:fl_blockButtonEffectHeight="3dp"
+                flatui:fl_touchEffect="fl_ease"
+                android:layout_marginTop="40dp" />
+
+        </LinearLayout>
+
+        <!-- end 登录布局 -->
+
+       <include layout="@layout/toolbar_shadow" />
 
     </FrameLayout>
+
 </LinearLayout>

@@ -3,6 +3,5 @@
     android:id="@+id/toolbar"
     android:layout_height="wrap_content"
     android:minHeight="@dimen/toolbar_min_height"
-    android:background="@color/grass_primary"
     android:layout_width="match_parent"
     app:popupTheme="@style/Theme.AppCompat.Light" />

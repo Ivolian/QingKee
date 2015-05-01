@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.cengalabs.flatui.FlatUI;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -19,11 +21,19 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FlatUI.initDefaultValues(this);
+
+        // Default theme should be set before content view is added
+        FlatUI.setDefaultTheme(FlatUI.GRASS);
+
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
      toolbar.setTitle("登录");
         setSupportActionBar(toolbar);
+        getSupportActionBar().setBackgroundDrawable(FlatUI.getActionBarDrawable(this, FlatUI.GRASS, false, 0));
+
     }
 
 

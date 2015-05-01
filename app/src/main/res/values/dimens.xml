@@ -1,4 +1,7 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="toolbar_min_height">60dp</dimen>
+    <dimen name="activity_default_padding">16dp</dimen>
+    <dimen name="login_activity_textsize">20sp</dimen>
+
 </resources>
