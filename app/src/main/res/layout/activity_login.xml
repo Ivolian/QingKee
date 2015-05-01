@@ -23,17 +23,15 @@
                 android:id="@+id/iv_logo"
                 android:layout_width="200dp"
                 android:layout_height="150dp"
-                android:scaleType="centerInside"
                 android:src="@drawable/qingke_logo"
                 android:layout_marginTop="20dp" />
 
             <com.cengalabs.flatui.views.FlatEditText
                 android:id="@+id/et_login_code"
-                android:hint="输入登录ID"
+                android:hint="输入用户名"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/login_activity_textsize"
-                android:maxLines="1"
                 android:padding="8dp"
                 flatui:fl_fieldStyle="fl_box"
                 flatui:fl_borderWidth="2dp"
@@ -45,7 +43,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/login_activity_textsize"
-                android:maxLines="1"
                 android:padding="8dp"
                 android:inputType="textPassword"
                 flatui:fl_fieldStyle="fl_box"
@@ -53,7 +50,7 @@
                 android:layout_marginTop="10dp" />
 
             <com.cengalabs.flatui.views.FlatCheckBox
-                android:layout_gravity="right"
+                android:layout_gravity="end"
                 android:id="@+id/cb_remember_me"
                 android:text="记住我"
                 android:layout_width="wrap_content"
