@@ -12,4 +12,6 @@
 8. 为 Toolbar 添加阴影，使界面更有层次感。
 9. 添加 [https://github.com/mcxiaoke/android-volley](https://github.com/mcxiaoke/android-volley)，记得添加访问网络的权限。
 10. 添加 [https://github.com/navasmdc/MaterialDesignLibrary](https://github.com/navasmdc/MaterialDesignLibrary)。
+11. 添加 [https://github.com/afollestad/material-dialogs](https://github.com/afollestad/material-dialogs)，
+因为上一个库的 Dialog 不符合需求。
 
