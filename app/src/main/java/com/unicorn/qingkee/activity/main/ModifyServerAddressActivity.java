@@ -1,9 +1,10 @@
-package com.unicorn.qingkee;
+package com.unicorn.qingkee.activity.main;
 
 import android.os.Bundle;
 import android.widget.EditText;
 
-import com.unicorn.qingkee.base.BaseActivity;
+import com.unicorn.qingkee.R;
+import com.unicorn.qingkee.activity.base.BaseActivity;
 import com.unicorn.qingkee.util.SharedPreferencesUtils;
 import com.unicorn.qingkee.util.ToastUtils;
 import com.unicorn.qingkee.util.UrlUtils;

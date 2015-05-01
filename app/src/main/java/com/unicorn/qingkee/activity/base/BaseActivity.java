@@ -1,4 +1,4 @@
-package com.unicorn.qingkee.base;
+package com.unicorn.qingkee.activity.base;
 
 import android.content.Intent;
 import android.os.Bundle;

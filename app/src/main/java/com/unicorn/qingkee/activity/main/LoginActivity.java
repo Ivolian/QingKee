@@ -1,10 +1,11 @@
-package com.unicorn.qingkee;
+package com.unicorn.qingkee.activity.main;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.unicorn.qingkee.base.BaseActivity;
+import com.unicorn.qingkee.R;
+import com.unicorn.qingkee.activity.base.BaseActivity;
 
 import butterknife.ButterKnife;
 
