@@ -10,7 +10,5 @@
         <!-- editText 光标 radioButton CheckBox -->
         <item name="colorAccent">@color/grass_primary</item>
 
-
-
     </style>
 </resources>
