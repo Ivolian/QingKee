@@ -21,7 +21,7 @@ public class ModifyServerAddressActivity extends BaseActivity {
     @InjectView(R.id.et_server_address)
     EditText etServerAddress;
 
-    boolean isSnackBarShow = false;
+    SnackBar snackbar;
 
     // ========================= onCreate ===========================
 
@@ -34,9 +34,28 @@ public class ModifyServerAddressActivity extends BaseActivity {
         initToolbar("修改服务器地址", true);
 
         etServerAddress.setText(UrlUtils.getServerAddress());
+        initSnackBar();
     }
 
-    // ========================= 点击确认修改 ===========================
+    private void initSnackBar() {
+
+        snackbar = new SnackBar(this, "确认修改服务器地址?", "确认", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modifyServerAddress();
+            }
+        });
+        snackbar.setIndeterminate(true);
+        snackbar.setColorButton(0xff2ab081);
+    }
+
+    @OnClick(R.id.btn_modify)
+    public void confirm() {
+
+        if (!snackbar.isShowing()) {
+            snackbar.show();
+        }
+    }
 
     private void modifyServerAddress() {
 
@@ -44,26 +63,6 @@ public class ModifyServerAddressActivity extends BaseActivity {
         UrlUtils.setServerAddress(serverAddress);
         SharedPreferencesUtils.putString(UrlUtils.SF_SERVER_ADDRESS, serverAddress);
         ToastUtils.show("修改成功");
-    }
-
-    @OnClick(R.id.btn_modify)
-    public void confirm() {
-
-        if (isSnackBarShow) {
-            return;
-        }
-
-        SnackBar snackbar = new SnackBar(this, "确认修改服务器地址?", "确认", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                modifyServerAddress();
-                isSnackBarShow = false;
-            }
-        });
-        snackbar.setIndeterminate(true);
-        snackbar.setColorButton(0xff2ab081);
-        snackbar.show();
-        isSnackBarShow = true;
     }
 
 }
