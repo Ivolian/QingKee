@@ -8,10 +8,11 @@ import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.gc.materialdesign.widgets.Dialog;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.BaseActivity;
 import com.unicorn.qingkee.util.JSONUtils;
@@ -32,6 +33,8 @@ public class LoginActivity extends BaseActivity {
     final String SF_LOGIN_CODE = "login_code";
 
     final String SF_REMEMBER_ME = "remember_me";
+
+    MaterialDialog progressDialog;
 
     // ========================= views ===========================
 
@@ -67,13 +70,10 @@ public class LoginActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        int id = item.getItemId();
-
-        if (id == R.id.modify_server_address) {
+        if (item.getItemId() == R.id.modify_server_address) {
             startActivity(ModifyServerAddressActivity.class);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -81,22 +81,12 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.btn_login)
     public void login() {
-
-        Uri.Builder builder = Uri.parse(UrlUtils.getBaseUrl() + "/login?").buildUpon();
-        builder.appendQueryParameter("logincode", etLoginCode.getText().toString().trim());
-        builder.appendQueryParameter("loginpwd", etLoginPassword.getText().toString().trim());
-
-        final Dialog dialog = new Dialog(this,"登录中...","请稍后...");
-        dialog.show();
-
-
-//        final ProgressDialog loginDialog = ProgressDialog.show(this, "登录中...", "请稍后...", true);
-        MyVolley.getRequestQueue().add(new JsonObjectRequest(builder.toString(),
+        showProgressDialog();
+        MyVolley.getRequestQueue().add(new JsonObjectRequest(getLoginUrl(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-//                        loginDialog.dismiss();
-//                        dialog.dismiss();
+//                        hideProgressDialog();
                         int result = JSONUtils.getInt(response, "Result", 1);
                         if (result != 0) {
                             // 0表示成功，非0则显示Msg
@@ -114,12 +104,19 @@ public class LoginActivity extends BaseActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-//                    dialog.dismiss();
+                        hideProgressDialog();
 //                        ToastUtils.show(VolleyErrorHelper.getErrorMessage(volleyError));
                     }
                 }));
     }
 
+    private String getLoginUrl() {
+
+        Uri.Builder builder = Uri.parse(UrlUtils.getBaseUrl() + "/login?").buildUpon();
+        builder.appendQueryParameter("logincode", etLoginCode.getText().toString().trim());
+        builder.appendQueryParameter("loginpwd", etLoginPassword.getText().toString().trim());
+        return builder.toString();
+    }
 
     // ========================= 处理 SharedPreferences ===========================
 
@@ -135,6 +132,28 @@ public class LoginActivity extends BaseActivity {
 
         SharedPreferencesUtils.putBoolean(SF_REMEMBER_ME, cbRememberMe.isChecked());
         SharedPreferencesUtils.putString(SF_LOGIN_CODE, etLoginCode.getText().toString());
+    }
+
+    // ========================= progress dialog ===========================
+
+    private void showProgressDialog() {
+
+        if (progressDialog == null) {
+            progressDialog = new MaterialDialog.Builder(this)
+                    .theme(Theme.LIGHT)
+                    .title("登录中...")
+                    .content("请稍后...")
+                    .cancelable(false)
+                    .progress(true, 0)
+                    .show();
+        } else {
+            progressDialog.show();
+        }
+    }
+
+    private void hideProgressDialog() {
+
+        progressDialog.dismiss();
     }
 
 }
