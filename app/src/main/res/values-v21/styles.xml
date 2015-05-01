@@ -2,8 +2,8 @@
 <resources>
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
 
-        <!--<item name="colorPrimary">@color/grass_primary</item>-->
-        <!--<item name="colorPrimaryDark">@color/grass_dark</item>-->
+        <item name="colorPrimary">@color/grass_primary</item>
+        <item name="colorPrimaryDark">@color/grass_dark</item>
         <!-- 默认背景色 -->
         <item name="android:windowBackground">@color/background_material_light</item>
 
