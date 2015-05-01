@@ -8,5 +8,7 @@
 4. 添加 appcompat-v7:21.0.3，使低版本系统兼容 Material 主题。
 5. Toolbar 的背景色不受主题的影响，需要另外设置。
 6. 为 Toolbar 添加菜单：setSupportActionBar(toolbar)。
-7. 改变 Toolbar 菜单主题：app:popupTheme="@style/Theme.AppCompat.Light"。  
+7. 改变 Toolbar 菜单主题：app:popupTheme="@style/Theme.AppCompat.Light"。
+8. 为 Toolbar 添加阴影，使界面更有层次感。
+9. 
 
