@@ -7,7 +7,9 @@
         <!-- 默认背景色 -->
         <item name="android:windowBackground">@color/background_material_light</item>
 
-        <item name="android:textColor">@color/primary_text_default_material_light</item>
+        <!-- editText 光标 radioButton CheckBox -->
+        <item name="colorAccent">@color/grass_primary</item>
+
 
 
     </style>
