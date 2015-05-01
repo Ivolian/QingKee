@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.gc.materialdesign.widgets.Dialog;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.BaseActivity;
 import com.unicorn.qingkee.util.JSONUtils;
@@ -85,12 +86,16 @@ public class LoginActivity extends BaseActivity {
         builder.appendQueryParameter("logincode", etLoginCode.getText().toString().trim());
         builder.appendQueryParameter("loginpwd", etLoginPassword.getText().toString().trim());
 
-        final ProgressDialog loginDialog = ProgressDialog.show(this, "登录中...", "请稍后...", true);
+        final Dialog dialog = new Dialog(this,"登录中...","请稍后...");
+        dialog.show();
+
+//        final ProgressDialog loginDialog = ProgressDialog.show(this, "登录中...", "请稍后...", true);
         MyVolley.getRequestQueue().add(new JsonObjectRequest(builder.toString(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        loginDialog.dismiss();
+//                        loginDialog.dismiss();
+//                        dialog.dismiss();
                         int result = JSONUtils.getInt(response, "Result", 1);
                         if (result != 0) {
                             // 0表示成功，非0则显示Msg
@@ -108,7 +113,7 @@ public class LoginActivity extends BaseActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        loginDialog.dismiss();
+//                    dialog.dismiss();
 //                        ToastUtils.show(VolleyErrorHelper.getErrorMessage(volleyError));
                     }
                 }));

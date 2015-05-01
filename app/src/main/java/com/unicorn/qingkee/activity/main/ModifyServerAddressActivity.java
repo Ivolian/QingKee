@@ -1,8 +1,10 @@
 package com.unicorn.qingkee.activity.main;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
+import com.gc.materialdesign.widgets.SnackBar;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.BaseActivity;
 import com.unicorn.qingkee.util.SharedPreferencesUtils;
@@ -34,15 +36,26 @@ public class ModifyServerAddressActivity extends BaseActivity {
 
     // ========================= 点击确认修改 ===========================
 
-    @OnClick(R.id.btn_modify)
-    public void modifyServerAddress() {
+    private void modifyServerAddress() {
 
         String serverAddress = etServerAddress.getText().toString().trim();
         UrlUtils.setServerAddress(serverAddress);
         SharedPreferencesUtils.putString(UrlUtils.SF_SERVER_ADDRESS, serverAddress);
-
         ToastUtils.show("修改成功");
-        finish();
+    }
+
+    @OnClick(R.id.btn_modify)
+    public void confirm() {
+
+        SnackBar snackbar = new SnackBar(this, "确认修改服务器地址?", "确认", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modifyServerAddress();
+            }
+        });
+        snackbar.setIndeterminate(true);
+        snackbar.setColorButton(0xff2ab081);
+        snackbar.show();
     }
 
 }
