@@ -21,6 +21,8 @@ public class ModifyServerAddressActivity extends BaseActivity {
     @InjectView(R.id.et_server_address)
     EditText etServerAddress;
 
+    boolean isSnackBarShow = false;
+
     // ========================= onCreate ===========================
 
     @Override
@@ -47,15 +49,21 @@ public class ModifyServerAddressActivity extends BaseActivity {
     @OnClick(R.id.btn_modify)
     public void confirm() {
 
+        if (isSnackBarShow) {
+            return;
+        }
+
         SnackBar snackbar = new SnackBar(this, "确认修改服务器地址?", "确认", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 modifyServerAddress();
+                isSnackBarShow = false;
             }
         });
         snackbar.setIndeterminate(true);
         snackbar.setColorButton(0xff2ab081);
         snackbar.show();
+        isSnackBarShow = true;
     }
 
 }
