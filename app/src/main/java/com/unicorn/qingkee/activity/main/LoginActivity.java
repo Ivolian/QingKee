@@ -89,6 +89,7 @@ public class LoginActivity extends BaseActivity {
         final Dialog dialog = new Dialog(this,"登录中...","请稍后...");
         dialog.show();
 
+
 //        final ProgressDialog loginDialog = ProgressDialog.show(this, "登录中...", "请稍后...", true);
         MyVolley.getRequestQueue().add(new JsonObjectRequest(builder.toString(),
                 new Response.Listener<JSONObject>() {
