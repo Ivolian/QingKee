@@ -2,16 +2,28 @@ package com.unicorn.qingkee;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
-public class MainActivity extends Activity {
+
+public class MainActivity extends ActionBarActivity {
+
+    @InjectView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.inject(this);
+
+     toolbar.setTitle("登录");
+        setSupportActionBar(toolbar);
     }
 
 
