@@ -2,6 +2,7 @@ package com.unicorn.qingkee;
 
 import android.app.Application;
 
+import com.unicorn.qingkee.volley.MyVolley;
 
 
 public class MyApplication extends Application {
@@ -18,6 +19,8 @@ public class MyApplication extends Application {
     private void init() {
 
         instance = this;
+        MyVolley.init(this);
+
     }
 
 

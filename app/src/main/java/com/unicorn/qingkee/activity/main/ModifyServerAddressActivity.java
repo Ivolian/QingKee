@@ -37,9 +37,9 @@ public class ModifyServerAddressActivity extends BaseActivity {
     @OnClick(R.id.btn_modify)
     public void modifyServerAddress() {
 
-        String newServerAddress = etServerAddress.getText().toString().trim();
-        UrlUtils.setServerAddress(newServerAddress);
-        SharedPreferencesUtils.putString(UrlUtils.SF_SERVER_ADDRESS, newServerAddress);
+        String serverAddress = etServerAddress.getText().toString().trim();
+        UrlUtils.setServerAddress(serverAddress);
+        SharedPreferencesUtils.putString(UrlUtils.SF_SERVER_ADDRESS, serverAddress);
 
         ToastUtils.show("修改成功");
         finish();
