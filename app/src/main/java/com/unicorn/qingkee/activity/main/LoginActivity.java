@@ -1,9 +1,11 @@
 package com.unicorn.qingkee.activity.main;
 
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -36,14 +38,14 @@ public class LoginActivity extends BaseActivity {
 
     // ========================= views ===========================
 
-    @InjectView(R.id.login_code)
+    @InjectView(R.id.et_login_code)
     EditText etLoginCode;
 
-    @InjectView(R.id.login_password)
+    @InjectView(R.id.et_login_password)
     EditText etLoginPassword;
 
-    @InjectView(R.id.checkBox)
-    com.gc.materialdesign.views.CheckBox checkBox;
+    @InjectView(R.id.cb_remember_me)
+    CheckBox cbRememberMe;
 
     // ========================= onCreate ===========================
 
@@ -120,15 +122,16 @@ public class LoginActivity extends BaseActivity {
 
     private void restoreSharedPreferencesInfo() {
 
-        checkBox.setChecked(SharedPreferencesUtils.getBoolean(SF_REMEMBER_ME));
-        if (checkBox.isCheck()) {
+        cbRememberMe.setChecked(SharedPreferencesUtils.getBoolean(SF_REMEMBER_ME));
+        if (cbRememberMe.isChecked()) {
             etLoginCode.setText(SharedPreferencesUtils.getString(SF_LOGIN_CODE));
         }
     }
 
     private void storeSharedPreferencesInfo() {
 
-        SharedPreferencesUtils.putBoolean(SF_REMEMBER_ME, checkBox.isCheck());
+
+        SharedPreferencesUtils.putBoolean(SF_REMEMBER_ME, cbRememberMe.isChecked());
         SharedPreferencesUtils.putString(SF_LOGIN_CODE, etLoginCode.getText().toString());
     }
 
