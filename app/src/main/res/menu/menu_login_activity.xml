@@ -3,5 +3,5 @@
     tools:context=".MainActivity">
     <item
         android:id="@+id/modify_server_address"
-        android:title="修改目标服务器地址" />
+        android:title="修改服务器地址" />
 </menu>

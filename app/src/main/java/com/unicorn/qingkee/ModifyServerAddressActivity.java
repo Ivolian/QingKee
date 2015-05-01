@@ -3,8 +3,10 @@ package com.unicorn.qingkee;
 import android.os.Bundle;
 import android.widget.EditText;
 
-
 import com.unicorn.qingkee.base.BaseActivity;
+import com.unicorn.qingkee.util.SharedPreferencesUtils;
+import com.unicorn.qingkee.util.ToastUtils;
+import com.unicorn.qingkee.util.UrlUtils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -26,7 +28,7 @@ public class ModifyServerAddressActivity extends BaseActivity {
         ButterKnife.inject(this);
         initToolbar("修改服务器地址", true);
 
-//        etServerAddress.setText(Url.getServerAddress());
+        etServerAddress.setText(UrlUtils.getServerAddress());
     }
 
     // ========================= 点击确认修改 ===========================
@@ -34,12 +36,12 @@ public class ModifyServerAddressActivity extends BaseActivity {
     @OnClick(R.id.btn_modify)
     public void modifyServerAddress() {
 
-//        String newServerAddress = etServerAddress.getText().toString().trim();
-//        Url.setServerAddress(newServerAddress);
-//        SharedPreferencesUtils.putString(Url.SF_SERVER_ADDRESS, newServerAddress);
-//
-//        ToastUtils.show("修改成功");
-//        finish();
+        String newServerAddress = etServerAddress.getText().toString().trim();
+        UrlUtils.setServerAddress(newServerAddress);
+        SharedPreferencesUtils.putString(UrlUtils.SF_SERVER_ADDRESS, newServerAddress);
+
+        ToastUtils.show("修改成功");
+        finish();
     }
 
 }
