@@ -14,4 +14,5 @@
 10. 添加 [https://github.com/navasmdc/MaterialDesignLibrary](https://github.com/navasmdc/MaterialDesignLibrary)。
 11. 添加 [https://github.com/afollestad/material-dialogs](https://github.com/afollestad/material-dialogs)，
 因为上一个库的 Dialog 不符合需求。
+12. 用 AppCompatActivity 替换掉已过时的 ActionBarActivity。
 
