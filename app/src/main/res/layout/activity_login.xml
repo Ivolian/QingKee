@@ -27,7 +27,7 @@
                 android:layout_marginTop="20dp" />
 
             <com.cengalabs.flatui.views.FlatEditText
-                android:id="@+id/et_login_code"
+                android:id="@+id/login_code"
                 android:hint="输入用户名"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 android:layout_marginTop="20dp" />
 
             <com.cengalabs.flatui.views.FlatEditText
-                android:id="@+id/et_login_password"
+                android:id="@+id/login_password"
                 android:hint="输入密码"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,14 +49,27 @@
                 flatui:fl_borderWidth="2dp"
                 android:layout_marginTop="10dp" />
 
-            <com.cengalabs.flatui.views.FlatCheckBox
+
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:id="@+id/cb_remember_me"
-                android:text="记住我"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="20dp">
+                <com.gc.materialdesign.views.CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/grass_primary"
+                    />
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                flatui:fl_size="20dp"
-                android:layout_marginTop="20dp" />
+                android:text="记住我"
+                android:textColor="@color/grass_primary"
+                android:textSize="16sp"/>
+
+            </LinearLayout>
 
             <com.cengalabs.flatui.views.FlatButton
                 android:id="@+id/btn_login"
