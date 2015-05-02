@@ -21,8 +21,10 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCal
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.nineoldandroids.animation.ValueAnimator;
 import com.nineoldandroids.view.ViewHelper;
+import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.BaseActivity;
+import com.unicorn.qingkee.bean.UserInfo;
 import com.unicorn.qingkee.util.JSONUtils;
 import com.unicorn.qingkee.util.SharedPreferencesUtils;
 import com.unicorn.qingkee.util.ToastUtils;
@@ -110,10 +112,9 @@ public class LoginActivity extends BaseActivity implements ObservableScrollViewC
                         } else {
                             storeSharedPreferencesInfo();
                             // 全局化 UserInfo
-                            ToastUtils.show("OK");
-//                            MyApplication.getInstance().setUserInfo(UserInfo.getUserInfo(JSONUtils.getJSONObject(response, "UserInfo", null)));
+                            MyApplication.getInstance().setUserInfo(UserInfo.parse(JSONUtils.getJSONObject(response, "UserInfo", null)));
 //                            startActivity(SelectActivity.class);
-//                            finish();
+                            finish();
                         }
                     }
                 },
@@ -220,12 +221,12 @@ public class LoginActivity extends BaseActivity implements ObservableScrollViewC
             public void onAnimationUpdate(ValueAnimator animation) {
                 float translationY = (float) animation.getAnimatedValue();
                 ViewHelper.setTranslationY(mToolbar, translationY);
-                ViewHelper.setTranslationY( scrollView, translationY);
-                ViewHelper.setTranslationY( shadow, translationY);
+                ViewHelper.setTranslationY(scrollView, translationY);
+                ViewHelper.setTranslationY(shadow, translationY);
 
                 FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) (scrollView).getLayoutParams();
                 lp.height = (int) -translationY + getScreenHeight() - lp.topMargin;
-                ( scrollView).requestLayout();
+                (scrollView).requestLayout();
             }
         });
         animator.start();

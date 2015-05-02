@@ -30,6 +30,7 @@
             <com.cengalabs.flatui.views.FlatEditText
                 android:id="@+id/et_login_code"
                 android:hint="输入用户名"
+                android:maxLines="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/login_activity_textsize"
@@ -41,6 +42,7 @@
             <com.cengalabs.flatui.views.FlatEditText
                 android:id="@+id/et_login_password"
                 android:hint="输入密码"
+                android:maxLines="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/login_activity_textsize"
