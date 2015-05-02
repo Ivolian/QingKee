@@ -34,6 +34,8 @@ import butterknife.OnClick;
 
 public class ArrivalAssetQueryFragment extends Fragment {
 
+
+
     @InjectView(R.id.et_asset_name)
     MaterialEditText etAssetName;
 
@@ -117,7 +119,6 @@ public class ArrivalAssetQueryFragment extends Fragment {
                                 String companyId = JSONUtils.getString(jsonObject, "ID", "");
                                 String companyName = JSONUtils.getString(jsonObject, "Commanyname", "");
                                 spinnerDataList.add(new SpinnerData(companyId, companyName));
-//                                spCompany.addSpinnerData(new SpinnerData(companyId, companyName));
                             }
                             spCompany.setSpinnerDataList(spinnerDataList);
                         }
@@ -126,29 +127,31 @@ public class ArrivalAssetQueryFragment extends Fragment {
                 MyVolley.getDefaultErrorListener()));
     }
 
-//    private void fetchDeptList(final String companyId) {
-//
-//        String url = Url.getBaseUrl() + "/GetDept?companyid=" + companyId;
-//        MyVolley.getRequestQueue().add(new JsonObjectRequest(url,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        int result = JSONUtils.getInt(response, "Result", 1);
-//                        if (result != 0) {
-//                            ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
-//                        } else {
-//                            JSONArray deptJSONArray = JSONUtils.getJSONArray(response, "lstDept", null);
-//                            for (int i = 0; i != deptJSONArray.length(); i++) {
-//                                JSONObject jsonObject = JSONUtils.getJSONObject(deptJSONArray, i);
-//                                String deptId = JSONUtils.getString(jsonObject, "ID", "");
-//                                String deptName = JSONUtils.getString(jsonObject, "Deptname", "");
-//                                spDept.addSpinnerData(new SpinnerData(deptId, deptName));
-//                            }
-//                        }
-//                    }
-//                },
-//                MyVolley.getDefaultErrorListener()));
-//    }
+    private void fetchDeptList(final String companyId) {
+
+        String url = UrlUtils.getBaseUrl() + "/GetDept?companyid=" + companyId;
+        MyVolley.getRequestQueue().add(new JsonObjectRequest(url,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        int result = JSONUtils.getInt(response, "Result", 1);
+                        if (result != 0) {
+                            ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
+                        } else {
+                            JSONArray deptJSONArray = JSONUtils.getJSONArray(response, "lstDept", null);
+                            List<SpinnerData> spinnerDataList = new ArrayList<>();
+                            for (int i = 0; i != deptJSONArray.length(); i++) {
+                                JSONObject jsonObject = JSONUtils.getJSONObject(deptJSONArray, i);
+                                String deptId = JSONUtils.getString(jsonObject, "ID", "");
+                                String deptName = JSONUtils.getString(jsonObject, "Deptname", "");
+                                spinnerDataList.add(new SpinnerData(deptId, deptName));
+                            }
+                            spDept.setSpinnerDataList(spinnerDataList);
+                        }
+                    }
+                },
+                MyVolley.getDefaultErrorListener()));
+    }
 
     private void initViews() {
 
@@ -163,15 +166,17 @@ public class ArrivalAssetQueryFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 spDept.clear();
-//                fetchDeptList(spCompany.getSelectedValue());
+                fetchDeptList(spCompany.getSelectedValue());
             }
         });
     }
 
     private void initSpAssetSort() {
 
-//        spAssetSort.addSpinnerData(new SpinnerData("1", "办公"));
-//        spAssetSort.addSpinnerData(new SpinnerData("2", "租赁"));
+        List<SpinnerData> spinnerDataList = new ArrayList<>();
+        spinnerDataList.add(new SpinnerData("1", "办公"));
+        spinnerDataList.add(new SpinnerData("2", "租赁"));
+        spAssetSort.setSpinnerDataList(spinnerDataList);
     }
 
 }

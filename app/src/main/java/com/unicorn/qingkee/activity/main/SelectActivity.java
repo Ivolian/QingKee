@@ -4,21 +4,18 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.unicorn.qingkee.R;
-import com.unicorn.qingkee.activity.base.ScrollableActivity;
-import com.unicorn.qingkee.util.ToastUtils;
+import com.unicorn.qingkee.activity.base.ToolbarActivity;
 
 import butterknife.OnClick;
 
 
-public class SelectActivity extends ScrollableActivity {
+public class SelectActivity extends ToolbarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         initToolbar("青客资产管理");
-
-        mStickyToolbar = true;
     }
 
     @Override

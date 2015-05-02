@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+    <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
         </LinearLayout>
         <!-- end 布局 -->
 
-    </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
+    </ScrollView>
 
     <include layout="@layout/toolbar" />
 

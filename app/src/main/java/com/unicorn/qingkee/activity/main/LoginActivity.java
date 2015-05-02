@@ -14,7 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
-import com.unicorn.qingkee.activity.base.ScrollableActivity;
+import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.bean.UserInfo;
 import com.unicorn.qingkee.util.JSONUtils;
 import com.unicorn.qingkee.util.SharedPreferencesUtils;
@@ -25,12 +25,11 @@ import com.unicorn.qingkee.volley.toolbox.VolleyErrorHelper;
 
 import org.json.JSONObject;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
 
-public class LoginActivity extends ScrollableActivity {
+public class LoginActivity extends ToolbarActivity {
 
     final String SF_LOGIN_CODE = "login_code";
 
