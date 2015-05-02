@@ -28,7 +28,8 @@ public class SelectActivity extends ScrollableActivity {
 
     @OnClick(R.id.asset_add)
     public void onClick(){
-        ToastUtils.show("hehe");
+
+        startActivity(MainActivity.class);
     }
 
 }
