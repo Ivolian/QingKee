@@ -1,9 +1,7 @@
 package com.unicorn.qingkee.activity.main;
 
-import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +28,7 @@ import com.unicorn.qingkee.util.SharedPreferencesUtils;
 import com.unicorn.qingkee.util.ToastUtils;
 import com.unicorn.qingkee.util.UrlUtils;
 import com.unicorn.qingkee.volley.MyVolley;
+import com.unicorn.qingkee.volley.toolbox.VolleyErrorHelper;
 
 import org.json.JSONObject;
 
@@ -122,7 +121,7 @@ public class LoginActivity extends BaseActivity implements ObservableScrollViewC
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         hideProgressDialog();
-//                        ToastUtils.show(VolleyErrorHelper.getErrorMessage(volleyError));
+                        ToastUtils.show(VolleyErrorHelper.getErrorMessage(volleyError));
                     }
                 }));
     }
