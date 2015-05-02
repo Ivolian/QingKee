@@ -14,7 +14,6 @@ import butterknife.InjectView;
 
 public class MainActivity extends ToolbarActivity {
 
-
     // ========================= onCreate ===========================
 
     @InjectView(R.id.viewpager)
@@ -22,6 +21,8 @@ public class MainActivity extends ToolbarActivity {
 
     @InjectView(R.id.drawer)
      DrawerLayout mDrawerLayout;
+
+
 
     @Override
     public int getLayoutResourceId() {

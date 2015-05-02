@@ -1,6 +1,7 @@
 package com.unicorn.qingkee.activity.main;
 
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ScrollableActivity;
@@ -27,9 +28,14 @@ public class SelectActivity extends ScrollableActivity {
     }
 
     @OnClick(R.id.asset_add)
-    public void onClick(){
+    public void onClick() {
 
-        startActivity(MainActivity.class);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(MainActivity.class);
+            }
+        }, 1000);
     }
 
 }
