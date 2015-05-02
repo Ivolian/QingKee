@@ -18,7 +18,7 @@ public class SelectActivity extends ScrollableActivity {
         super.onCreate(savedInstanceState);
         initToolbar("青客资产管理");
 
-        mStickyToolbar = false;
+        mStickyToolbar = true;
     }
 
     @Override
