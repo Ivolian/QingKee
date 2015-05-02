@@ -1,5 +1,4 @@
 <resources>
-    <dimen name="toolbar_height">60dp</dimen>
     <dimen name="default_activity_padding">16dp</dimen>
     <dimen name="login_activity_textsize">20sp</dimen>
     <dimen name="select_activity_interval">10dp</dimen>
