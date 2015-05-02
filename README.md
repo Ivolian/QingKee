@@ -1,6 +1,6 @@
 # QingKee
 
-对青客项目的完全重构，为了理清思路，总结经验。
+对青客项目的完全重构，理清思路，总结经验。
 >
 1. minSdkVersion 14，最低支持 Android 4.0。
 2. 添加 [http://jakewharton.github.io/butterknife](http://jakewharton.github.io/butterknife)，简化代码。
@@ -14,5 +14,7 @@
 10. 添加 [https://github.com/navasmdc/MaterialDesignLibrary](https://github.com/navasmdc/MaterialDesignLibrary)。
 11. 添加 [https://github.com/afollestad/material-dialogs](https://github.com/afollestad/material-dialogs)，
 因为上一个库的 Dialog 不符合需求。
-12. 用 AppCompatActivity 替换掉已过时的 ActionBarActivity，好像解决了图标对齐问题。
+12. 用 AppCompatActivity 替换掉已过时的 ActionBarActivity，解决了图标对齐问题。
+13. 添加 [https://github.com/ksoichiro/Android-ObservableScrollView](https://github.com/ksoichiro/Android-ObservableScrollView)
+和 [http://nineoldandroids.com](http://nineoldandroids.com)，实现 toolbar 自动隐藏动画效果。
 
