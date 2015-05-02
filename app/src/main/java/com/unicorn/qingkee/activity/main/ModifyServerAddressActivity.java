@@ -1,6 +1,7 @@
 package com.unicorn.qingkee.activity.main;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 
@@ -11,7 +12,6 @@ import com.unicorn.qingkee.util.SharedPreferencesUtils;
 import com.unicorn.qingkee.util.ToastUtils;
 import com.unicorn.qingkee.util.UrlUtils;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
@@ -48,6 +48,12 @@ public class ModifyServerAddressActivity extends ToolbarActivity {
             @Override
             public void onClick(View v) {
                 modifyServerAddress();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 800);
             }
         });
         snackbar.setIndeterminate(true);
