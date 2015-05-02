@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
         <item name="colorPrimary">@color/grass_primary</item>
         <item name="colorPrimaryDark">@color/grass_dark</item>
@@ -9,5 +9,6 @@
 
         <!-- editText 光标 radioButton CheckBox -->
         <item name="colorAccent">@color/grass_primary</item>
+
     </style>
 </resources>
