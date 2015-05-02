@@ -18,4 +18,6 @@
 13. 添加 [https://github.com/ksoichiro/Android-ObservableScrollView](https://github.com/ksoichiro/Android-ObservableScrollView)
 和 [http://nineoldandroids.com](http://nineoldandroids.com)，实现 toolbar 自动隐藏的 activity。
 14. 添加 [https://github.com/traex/RippleEffect](https://github.com/traex/RippleEffect)。
+15. 添加 [https://github.com/Lesilva/BetterSpinner](https://github.com/Lesilva/BetterSpinner) 以及
+[https://github.com/rengwuxian/MaterialEditText](https://github.com/rengwuxian/MaterialEditText)
 
