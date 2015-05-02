@@ -1,0 +1,167 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/toolbar_height">
+
+        <!-- 布局 start -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/select_activity_interval">
+
+            <!-- 资产新增 -->
+            <com.andexert.library.RippleView
+                android:id="@+id/asset_add"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                ripple:rv_type="rectangle"
+                ripple:rv_zoom="true">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/asset_add" />
+
+            </com.andexert.library.RippleView>
+
+            <!-- 调拨出库 & 调拨入库 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/select_activity_interval">
+
+                <com.andexert.library.RippleView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/select_activity_half_interval"
+                    ripple:rv_type="rectangle"
+                    ripple:rv_zoom="true">
+
+                    <ImageView
+                        android:id="@+id/iv_asset_allot_out"
+                        android:scaleType="fitXY"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/asset_allot_out" />
+                </com.andexert.library.RippleView>
+
+                <com.andexert.library.RippleView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/select_activity_half_interval"
+                    ripple:rv_type="rectangle"
+                    ripple:rv_zoom="true">
+
+                    <ImageView
+                        android:id="@+id/iv_asset_allot_in"
+                        android:scaleType="fitXY"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/asset_allot_in" />
+                </com.andexert.library.RippleView>
+
+            </LinearLayout>
+
+            <!-- 领用 & 盘点 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_asset_apply"
+                    android:scaleType="fitXY"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/asset_apply"
+                    android:layout_marginRight="5dp" />
+
+                <ImageView
+                    android:id="@+id/iv_asset_inventory"
+                    android:scaleType="fitXY"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/asset_inventory"
+                    android:layout_marginLeft="5dp" />
+
+            </LinearLayout>
+
+            <!-- 转移 & 报废 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_asset_transfer"
+                    android:scaleType="fitXY"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/asset_transfer"
+                    android:layout_marginRight="5dp" />
+
+                <ImageView
+                    android:id="@+id/iv_asset_abandon"
+                    android:scaleType="fitXY"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/asset_abandon"
+                    android:layout_marginLeft="5dp" />
+
+            </LinearLayout>
+
+            <!-- 维修入库 & 维修出库 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_asset_repair_in"
+                    android:scaleType="fitXY"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/asset_repair_in"
+                    android:layout_marginRight="5dp" />
+
+                <ImageView
+                    android:id="@+id/iv_asset_repair_out"
+                    android:scaleType="fitXY"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/asset_repair_out"
+                    android:layout_marginLeft="5dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- end 布局 -->
+
+    </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
+
+    <include layout="@layout/toolbar" />
+
+    <include layout="@layout/toolbar_shadow" />
+
+</FrameLayout>

@@ -12,7 +12,7 @@ import com.unicorn.qingkee.R;
 import butterknife.InjectView;
 
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class ToolbarActivity extends AppCompatActivity {
 
     @InjectView(R.id.toolbar)
     protected Toolbar mToolbar;

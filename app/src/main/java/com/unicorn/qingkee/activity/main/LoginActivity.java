@@ -21,7 +21,7 @@ import com.nineoldandroids.animation.ValueAnimator;
 import com.nineoldandroids.view.ViewHelper;
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
-import com.unicorn.qingkee.activity.base.BaseActivity;
+import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.bean.UserInfo;
 import com.unicorn.qingkee.util.JSONUtils;
 import com.unicorn.qingkee.util.SharedPreferencesUtils;
@@ -37,7 +37,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 
-public class LoginActivity extends BaseActivity implements ObservableScrollViewCallbacks {
+public class LoginActivity extends ToolbarActivity implements ObservableScrollViewCallbacks {
 
     final String SF_LOGIN_CODE = "login_code";
 
@@ -112,7 +112,7 @@ public class LoginActivity extends BaseActivity implements ObservableScrollViewC
                             storeSharedPreferencesInfo();
                             // 全局化 UserInfo
                             MyApplication.getInstance().setUserInfo(UserInfo.parse(JSONUtils.getJSONObject(response, "UserInfo", null)));
-//                            startActivity(SelectActivity.class);
+                            startActivity(SelectActivity.class);
                             finish();
                         }
                     }

@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.main.ModifyServerAddressActivity"/>
+        <activity android:name=".activity.main.SelectActivity"/>
     </application>
 
 </manifest>

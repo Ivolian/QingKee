@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:layout_marginTop="@dimen/toolbar_min_height"
+        android:layout_marginTop="@dimen/toolbar_height"
         android:padding="@dimen/default_activity_padding">
 
         <com.cengalabs.flatui.views.FlatEditText

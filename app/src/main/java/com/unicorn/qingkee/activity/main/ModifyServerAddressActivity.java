@@ -6,7 +6,7 @@ import android.widget.EditText;
 
 import com.gc.materialdesign.widgets.SnackBar;
 import com.unicorn.qingkee.R;
-import com.unicorn.qingkee.activity.base.BaseActivity;
+import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.util.SharedPreferencesUtils;
 import com.unicorn.qingkee.util.ToastUtils;
 import com.unicorn.qingkee.util.UrlUtils;
@@ -16,7 +16,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 
-public class ModifyServerAddressActivity extends BaseActivity {
+public class ModifyServerAddressActivity extends ToolbarActivity {
 
     @InjectView(R.id.et_server_address)
     EditText etServerAddress;
