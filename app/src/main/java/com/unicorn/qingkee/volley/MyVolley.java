@@ -4,9 +4,13 @@ import android.app.ActivityManager;
 import android.content.Context;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.unicorn.qingkee.util.ToastUtils;
 import com.unicorn.qingkee.volley.toolbox.BitmapLruCache;
+import com.unicorn.qingkee.volley.toolbox.VolleyErrorHelper;
 
 
 public class MyVolley {
@@ -43,6 +47,16 @@ public class MyVolley {
         } else {
             throw new IllegalStateException("ImageLoader not initialized");
         }
+    }
+
+    public static Response.ErrorListener getDefaultErrorListener() {
+
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                ToastUtils.show(VolleyErrorHelper.getErrorMessage(volleyError));
+            }
+        };
     }
 
 }

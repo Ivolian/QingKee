@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.unicorn.qingkee.fragment.ArrivalAssetQueryFragment;
 import com.unicorn.qingkee.fragment.TestFragment;
 
 
@@ -22,6 +23,10 @@ public class MainActivityPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+
+        if (position == 0){
+            return new ArrivalAssetQueryFragment();
+        }
 
         return new TestFragment();
     }

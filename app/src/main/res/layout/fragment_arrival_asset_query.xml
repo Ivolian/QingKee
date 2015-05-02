@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_material_light"
+        android:gravity="center_horizontal"
+        android:padding="20dp">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_asset_name"
+            android:hint="资产名称"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight" />
+
+        <com.unicorn.qingkee.my.BetterSpinner
+            android:id="@+id/sp_company"
+            android:hint="使用公司"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight"
+            android:layout_marginTop="10dp" />
+
+        <com.unicorn.qingkee.my.BetterSpinner
+            android:id="@+id/sp_dept"
+            android:hint="使用部门"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight"
+            android:layout_marginTop="10dp" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_employee_name"
+            android:hint="使用人姓名"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight"
+            android:layout_marginTop="10dp" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_address"
+            android:hint="安装地址"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight"
+            android:layout_marginTop="10dp" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_romeNumber"
+            android:hint="房间号"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight"
+            android:layout_marginTop="10dp" />
+
+        <com.unicorn.qingkee.my.BetterSpinner
+            android:id="@+id/sp_asset_sort"
+            android:hint="资产类别"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight"
+            android:layout_marginTop="10dp" />
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <com.cengalabs.flatui.views.FlatButton
+                android:id="@+id/btn_clear_views"
+                android:text="清空输入"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                flatui:fl_theme="@array/orange"
+                flatui:fl_textAppearance="fl_none"
+                flatui:fl_blockButtonEffectHeight="3dp"
+                flatui:fl_touchEffect="fl_ease"
+                android:layout_marginRight="5dp" />
+
+            <com.cengalabs.flatui.views.FlatButton
+                android:id="@+id/btn_query"
+                android:text="查询"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                flatui:fl_theme="@array/grass"
+                flatui:fl_textAppearance="fl_none"
+                flatui:fl_blockButtonEffectHeight="3dp"
+                flatui:fl_touchEffect="fl_ease"
+                android:layout_marginLeft="5dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
