@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.cengalabs.flatui.FlatUI;
 import com.unicorn.qingkee.R;
@@ -16,6 +17,9 @@ public abstract class ToolbarActivity extends AppCompatActivity {
 
     @InjectView(R.id.toolbar)
     protected Toolbar mToolbar;
+
+    @InjectView(R.id.toolbar_shadow)
+    protected View shadow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

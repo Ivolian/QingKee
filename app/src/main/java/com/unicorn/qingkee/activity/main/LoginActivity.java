@@ -4,24 +4,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
-import com.github.ksoichiro.android.observablescrollview.ScrollState;
-import com.nineoldandroids.animation.ValueAnimator;
-import com.nineoldandroids.view.ViewHelper;
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
-import com.unicorn.qingkee.activity.base.ToolbarActivity;
+import com.unicorn.qingkee.activity.base.ScrollableActivity;
 import com.unicorn.qingkee.bean.UserInfo;
 import com.unicorn.qingkee.util.JSONUtils;
 import com.unicorn.qingkee.util.SharedPreferencesUtils;
@@ -37,7 +30,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 
-public class LoginActivity extends ToolbarActivity implements ObservableScrollViewCallbacks {
+public class LoginActivity extends ScrollableActivity {
 
     final String SF_LOGIN_CODE = "login_code";
 
@@ -56,13 +49,6 @@ public class LoginActivity extends ToolbarActivity implements ObservableScrollVi
     @InjectView(R.id.cb_remember_me)
     CheckBox cbRememberMe;
 
-
-    @InjectView(R.id.scroll)
-    ObservableScrollView scrollView;
-
-    @InjectView(R.id.toolbar_shadow)
-    View shadow;
-
     // ========================= onCreate ===========================
 
     @Override
@@ -72,9 +58,9 @@ public class LoginActivity extends ToolbarActivity implements ObservableScrollVi
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
         initToolbar("登录");
+        observableScrollView.setScrollViewCallbacks(this);
 
         restoreSharedPreferencesInfo();
-        scrollView.setScrollViewCallbacks(this);
     }
 
     @Override
@@ -171,68 +157,6 @@ public class LoginActivity extends ToolbarActivity implements ObservableScrollVi
     private void hideProgressDialog() {
 
         progressDialog.dismiss();
-    }
-
-    @Override
-    public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-    }
-
-    @Override
-    public void onDownMotionEvent() {
-    }
-
-    @Override
-    public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-        if (scrollState == ScrollState.UP) {
-            if (toolbarIsShown()) {
-                hideToolbar();
-            }
-        } else if (scrollState == ScrollState.DOWN) {
-            if (toolbarIsHidden()) {
-                showToolbar();
-            }
-        }
-    }
-
-    private boolean toolbarIsShown() {
-        return ViewHelper.getTranslationY(mToolbar) == 0;
-    }
-
-    private boolean toolbarIsHidden() {
-        return ViewHelper.getTranslationY(mToolbar) == -mToolbar.getHeight();
-    }
-
-    private void showToolbar() {
-        moveToolbar(0);
-    }
-
-    private void hideToolbar() {
-        moveToolbar(-mToolbar.getHeight());
-    }
-
-    private void moveToolbar(float toTranslationY) {
-        if (ViewHelper.getTranslationY(mToolbar) == toTranslationY) {
-            return;
-        }
-        ValueAnimator animator = ValueAnimator.ofFloat(ViewHelper.getTranslationY(mToolbar), toTranslationY).setDuration(200);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float translationY = (float) animation.getAnimatedValue();
-                ViewHelper.setTranslationY(mToolbar, translationY);
-                ViewHelper.setTranslationY(scrollView, translationY);
-                ViewHelper.setTranslationY(shadow, translationY);
-
-                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) (scrollView).getLayoutParams();
-                lp.height = (int) -translationY + getScreenHeight() - lp.topMargin;
-                (scrollView).requestLayout();
-            }
-        });
-        animator.start();
-    }
-
-    protected int getScreenHeight() {
-        return findViewById(android.R.id.content).getHeight();
     }
 
 }
