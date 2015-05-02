@@ -21,6 +21,7 @@ public abstract class ScrollableActivity extends ToolbarActivity  implements Obs
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         observableScrollView.setScrollViewCallbacks(this);
     }
@@ -36,7 +37,7 @@ public abstract class ScrollableActivity extends ToolbarActivity  implements Obs
     @Override
     public void onUpOrCancelMotionEvent(ScrollState scrollState) {
 
-        if (!mStickyToolbar){
+        if (mStickyToolbar){
             return;
         }
 

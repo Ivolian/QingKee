@@ -36,8 +36,6 @@ public class ModifyServerAddressActivity extends ToolbarActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_modify_server_address);
-//        ButterKnife.inject(this);
         initToolbar("修改服务器地址", true);
 
         etServerAddress.setText(UrlUtils.getServerAddress());

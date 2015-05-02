@@ -1,8 +1,12 @@
 package com.unicorn.qingkee.activity.main;
 
 import android.os.Bundle;
+
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ScrollableActivity;
+import com.unicorn.qingkee.util.ToastUtils;
+
+import butterknife.OnClick;
 
 
 public class SelectActivity extends ScrollableActivity {
@@ -11,10 +15,8 @@ public class SelectActivity extends ScrollableActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_select);
-//        ButterKnife.inject(this);
         initToolbar("青客资产管理");
-        observableScrollView.setScrollViewCallbacks(this);
+
         mStickyToolbar = false;
     }
 
@@ -24,5 +26,9 @@ public class SelectActivity extends ScrollableActivity {
         return R.layout.activity_select;
     }
 
+    @OnClick(R.id.asset_add)
+    public void onClick(){
+        ToastUtils.show("hehe");
+    }
 
 }
