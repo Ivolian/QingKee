@@ -10,6 +10,7 @@ import android.view.View;
 import com.cengalabs.flatui.FlatUI;
 import com.unicorn.qingkee.R;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
@@ -21,6 +22,8 @@ public abstract class ToolbarActivity extends AppCompatActivity {
     @InjectView(R.id.toolbar_shadow)
     protected View shadow;
 
+    abstract public int getLayoutResourceId();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -28,6 +31,9 @@ public abstract class ToolbarActivity extends AppCompatActivity {
 
         FlatUI.initDefaultValues(this);
         FlatUI.setDefaultTheme(FlatUI.GRASS);
+
+        setContentView(getLayoutResourceId());
+        ButterKnife.inject(this);
     }
 
     protected void initToolbar(String title) {

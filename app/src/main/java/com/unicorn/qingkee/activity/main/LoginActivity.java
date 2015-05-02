@@ -51,14 +51,21 @@ public class LoginActivity extends ScrollableActivity {
 
     // ========================= onCreate ===========================
 
+
+    @Override
+    public int getLayoutResourceId() {
+
+        return R.layout.activity_login;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        ButterKnife.inject(this);
+//        setContentView(R.layout.activity_login);
+//        ButterKnife.inject(this);
         initToolbar("登录");
-        observableScrollView.setScrollViewCallbacks(this);
+//        observableScrollView.setScrollViewCallbacks(this);
 
         restoreSharedPreferencesInfo();
     }

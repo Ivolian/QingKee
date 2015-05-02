@@ -10,15 +10,20 @@ import com.nineoldandroids.animation.ValueAnimator;
 import com.nineoldandroids.view.ViewHelper;
 import com.unicorn.qingkee.R;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 public abstract class ScrollableActivity extends ToolbarActivity  implements ObservableScrollViewCallbacks {
 
-    protected boolean enable = true;
+    protected boolean mStickyToolbar = true;
 
     @InjectView(R.id.scroll)
     protected ObservableScrollView observableScrollView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        observableScrollView.setScrollViewCallbacks(this);
+    }
 
     @Override
     public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
@@ -31,7 +36,7 @@ public abstract class ScrollableActivity extends ToolbarActivity  implements Obs
     @Override
     public void onUpOrCancelMotionEvent(ScrollState scrollState) {
 
-        if (!enable){
+        if (!mStickyToolbar){
             return;
         }
 
