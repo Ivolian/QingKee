@@ -1,86 +1,82 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:flatui="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
-
-    <FrameLayout
+    <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/toolbar_min_height"
+        >
 
-        <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
-            android:id="@+id/scroll"
+        <!-- 布局 start -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fillViewport="true">
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/default_activity_padding"
+            >
 
-            <!-- 布局 start -->
-            <LinearLayout
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:src="@drawable/qingke_logo"
+                android:layout_marginTop="20dp" />
+
+            <com.cengalabs.flatui.views.FlatEditText
+                android:id="@+id/et_login_code"
+                android:hint="输入用户名"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:padding="@dimen/default_activity_padding">
+                android:textSize="@dimen/login_activity_textsize"
+                android:padding="8dp"
+                flatui:fl_fieldStyle="fl_box"
+                flatui:fl_borderWidth="2dp"
+                android:layout_marginTop="20dp" />
 
-                <ImageView
-                    android:id="@+id/iv_logo"
-                    android:layout_width="200dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/qingke_logo"
-                    android:layout_marginTop="20dp" />
+            <com.cengalabs.flatui.views.FlatEditText
+                android:id="@+id/et_login_password"
+                android:hint="输入密码"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/login_activity_textsize"
+                android:padding="8dp"
+                android:inputType="textPassword"
+                flatui:fl_fieldStyle="fl_box"
+                flatui:fl_borderWidth="2dp"
+                android:layout_marginTop="10dp" />
 
-                <com.cengalabs.flatui.views.FlatEditText
-                    android:id="@+id/et_login_code"
-                    android:hint="输入用户名"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/login_activity_textsize"
-                    android:padding="8dp"
-                    flatui:fl_fieldStyle="fl_box"
-                    flatui:fl_borderWidth="2dp"
-                    android:layout_marginTop="20dp" />
+            <CheckBox
+                android:layout_gravity="end"
+                android:id="@+id/cb_remember_me"
+                android:text="记住我"
+                android:textColor="@color/grass_primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" />
 
-                <com.cengalabs.flatui.views.FlatEditText
-                    android:id="@+id/et_login_password"
-                    android:hint="输入密码"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/login_activity_textsize"
-                    android:padding="8dp"
-                    android:inputType="textPassword"
-                    flatui:fl_fieldStyle="fl_box"
-                    flatui:fl_borderWidth="2dp"
-                    android:layout_marginTop="10dp" />
+            <com.cengalabs.flatui.views.FlatButton
+                android:id="@+id/btn_login"
+                android:text="登录"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/login_activity_textsize"
+                flatui:fl_textAppearance="fl_none"
+                flatui:fl_blockButtonEffectHeight="3dp"
+                flatui:fl_touchEffect="fl_ease"
+                android:layout_marginTop="40dp" />
 
-                <CheckBox
-                    android:layout_gravity="end"
-                    android:id="@+id/cb_remember_me"
-                    android:text="记住我"
-                    android:textColor="@color/grass_primary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp" />
+        </LinearLayout>
+        <!-- end 布局 -->
 
-                <com.cengalabs.flatui.views.FlatButton
-                    android:id="@+id/btn_login"
-                    android:text="登录"
-                    android:layout_width="280dp"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/login_activity_textsize"
-                    flatui:fl_textAppearance="fl_none"
-                    flatui:fl_blockButtonEffectHeight="3dp"
-                    flatui:fl_touchEffect="fl_ease"
-                    android:layout_marginTop="40dp" />
+    </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
 
-            </LinearLayout>
-            <!-- end 布局 -->
+    <include layout="@layout/toolbar" />
 
-        </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
+    <include layout="@layout/toolbar_shadow" />
 
-        <include layout="@layout/toolbar_shadow" />
-
-    </FrameLayout>
-
-</LinearLayout>
+</FrameLayout>

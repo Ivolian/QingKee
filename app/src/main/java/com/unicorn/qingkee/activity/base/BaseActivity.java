@@ -15,7 +15,7 @@ import butterknife.InjectView;
 public abstract class BaseActivity extends AppCompatActivity {
 
     @InjectView(R.id.toolbar)
-    Toolbar toolbar;
+    protected Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +33,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void initToolbar(String title, boolean displayHomeAsUpEnable) {
 
-        toolbar.setTitle(title);
-        setSupportActionBar(toolbar);   // 使 toolbar 有效，比如绑定 activity 菜单
+        mToolbar.setTitle(title);
+        setSupportActionBar(mToolbar);   // 使 mToolbar 有效，比如绑定 activity 菜单
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setBackgroundDrawable(FlatUI.getActionBarDrawable(this, FlatUI.GRASS, false));    // 设置 toolbar 背景色
+            getSupportActionBar().setBackgroundDrawable(FlatUI.getActionBarDrawable(this, FlatUI.GRASS, false));    // 设置 mToolbar 背景色
             getSupportActionBar().setDisplayHomeAsUpEnabled(displayHomeAsUpEnable);
         }
     }
