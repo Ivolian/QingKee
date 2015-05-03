@@ -17,3 +17,4 @@
 12. 用 AppCompatActivity 替换掉已过时的 ActionBarActivity。
 13. 添加 [https://github.com/traex/RippleEffect](https://github.com/traex/RippleEffect)。
 14. 添加 [https://github.com/Lesilva/BetterSpinner](https://github.com/Lesilva/BetterSpinner)。
+15. 添加 RecycleView，CardView 以及 [https://github.com/castorflex/SmoothProgressBar](https://github.com/castorflex/SmoothProgressBar)。
