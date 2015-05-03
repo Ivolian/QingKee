@@ -8,6 +8,8 @@ import com.unicorn.qingkee.fragment.asset.ArrivalAssetQueryFragment;
 import com.unicorn.qingkee.fragment.asset.AssetAbandonFragment;
 import com.unicorn.qingkee.fragment.asset.AssetApplyFragment;
 import com.unicorn.qingkee.fragment.TestFragment;
+import com.unicorn.qingkee.fragment.asset.AssetRepairInFragment;
+import com.unicorn.qingkee.fragment.asset.AssetRepairOutFragment;
 import com.unicorn.qingkee.fragment.asset.AssetTransferFragment;
 
 
@@ -31,12 +33,18 @@ public class MainActivityPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 return new ArrivalAssetQueryFragment();
-            case 1:
+            case 3:
                 return new AssetApplyFragment();
+            case 4:
+                return new TestFragment();
             case 5:
                 return new AssetTransferFragment();
             case 6:
                 return new AssetAbandonFragment();
+            case 7:
+                return new AssetRepairOutFragment();
+            case 8:
+                return new AssetRepairInFragment();
             default:
                 return new TestFragment();
         }
