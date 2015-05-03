@@ -49,6 +49,7 @@ public abstract class AssetsFragment extends BaseFragment {
         intent.putExtra("title", getTitle());
         intent.putExtra("assetStatus", getAssetStatus());
         intent.putExtra("assetList", assetList);
+//        http://stackoverflow.com/questions/6147884/onactivityresult-not-being-called-in-fragment
         startActivityForResult(intent, ASSETS_REQUEST_CODE);
     }
 
