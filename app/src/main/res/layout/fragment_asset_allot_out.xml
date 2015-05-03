@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_material_light"
+        android:padding="20dp">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_assets"
+            android:hint="待调拨出库资产"
+            android:editable="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight" />
+
+        <com.unicorn.qingkee.mycode.BetterSpinner
+            android:id="@+id/sp_company"
+            android:hint="使用公司"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight"
+            android:layout_marginTop="10dp" />
+
+        <com.unicorn.qingkee.mycode.BetterSpinner
+            android:id="@+id/sp_dept"
+            android:hint="使用部门"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight"
+            android:layout_marginTop="10dp" />
+
+        <com.unicorn.qingkee.mycode.BetterSpinner
+            android:id="@+id/sp_employee"
+            android:hint="使用人"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight"
+            android:layout_marginTop="10dp" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_note"
+            android:hint="备注"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight"
+            android:layout_marginTop="10dp" />
+
+        <LinearLayout
+            android:layout_marginTop="60dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <com.cengalabs.flatui.views.FlatButton
+                android:id="@+id/btn_clear_views"
+                android:text="清空输入"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                flatui:fl_theme="@array/orange"
+                flatui:fl_textAppearance="fl_none"
+                flatui:fl_blockButtonEffectHeight="3dp"
+                flatui:fl_touchEffect="fl_ease"
+                android:layout_marginRight="5dp" />
+
+            <com.cengalabs.flatui.views.FlatButton
+                android:id="@+id/btn_confirm_allot_out"
+                android:text="确认调拨出库"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                flatui:fl_theme="@array/grass"
+                flatui:fl_textAppearance="fl_none"
+                flatui:fl_blockButtonEffectHeight="3dp"
+                flatui:fl_touchEffect="fl_ease"
+                android:layout_marginLeft="5dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+
