@@ -30,4 +30,9 @@ public abstract class BaseFragment extends Fragment {
         ButterKnife.reset(this);
     }
 
+    public void finishWithActivity(){
+
+        getActivity().finish();
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.unicorn.qingkee.fragment;
+package com.unicorn.qingkee.fragment.asset;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -102,7 +102,7 @@ public class AssetApplyFragment extends AssetsFragment {
                                     ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
                                 } else {
                                     ToastUtils.show("领用成功");
-                                    AssetApplyFragment.this.getActivity().finish();
+                                    finishWithActivity();
                                 }
                             }
                         },

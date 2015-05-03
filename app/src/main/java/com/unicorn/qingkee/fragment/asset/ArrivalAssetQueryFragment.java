@@ -1,4 +1,4 @@
-package com.unicorn.qingkee.fragment;
+package com.unicorn.qingkee.fragment.asset;
 
 import android.content.Intent;
 import android.os.Bundle;
