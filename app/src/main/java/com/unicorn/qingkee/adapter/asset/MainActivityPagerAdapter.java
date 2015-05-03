@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.unicorn.qingkee.fragment.asset.ArrivalAssetQueryFragment;
 import com.unicorn.qingkee.fragment.asset.AssetAbandonFragment;
+import com.unicorn.qingkee.fragment.asset.AssetAllotInFragment;
 import com.unicorn.qingkee.fragment.asset.AssetAllotOutFragment;
 import com.unicorn.qingkee.fragment.asset.AssetApplyFragment;
 import com.unicorn.qingkee.fragment.TestFragment;
@@ -36,6 +37,8 @@ public class MainActivityPagerAdapter extends FragmentPagerAdapter {
                 return new ArrivalAssetQueryFragment();
             case 1:
                 return new AssetAllotOutFragment();
+            case 2:
+                return new AssetAllotInFragment();
             case 3:
                 return new AssetApplyFragment();
             case 4:
