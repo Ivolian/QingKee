@@ -222,12 +222,12 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
 
     private void showLoadMoreBar() {
 
-//        findViewById(R.id.pg_load_more).setVisibility(View.VISIBLE);
+        findViewById(R.id.pg_load_more).setVisibility(View.VISIBLE);
     }
 
     private void hideLoadMoreBar() {
 
-//        findViewById(R.id.pg_load_more).setVisibility(View.GONE);
+        findViewById(R.id.pg_load_more).setVisibility(View.GONE);
     }
 
     private LinearLayoutManager getLinearLayoutManager() {
