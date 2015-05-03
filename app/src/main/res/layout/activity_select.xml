@@ -81,14 +81,23 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp">
 
-                <ImageView
-                    android:id="@+id/iv_asset_apply"
-                    android:scaleType="fitXY"
+                <com.andexert.library.RippleView
+                    android:id="@+id/asset_apply"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:src="@drawable/asset_apply"
-                    android:layout_marginRight="5dp" />
+                    android:layout_marginRight="@dimen/select_activity_half_interval"
+                    ripple:rv_type="rectangle"
+                    ripple:rv_zoom="true">
+
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/asset_apply"
+                        />
+
+                </com.andexert.library.RippleView>
 
                 <ImageView
                     android:id="@+id/iv_asset_inventory"
