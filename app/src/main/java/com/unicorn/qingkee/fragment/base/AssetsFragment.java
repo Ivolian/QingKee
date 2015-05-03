@@ -35,11 +35,10 @@ public abstract class AssetsFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (data == null) {
-            return;
+        if (data != null) {
+            assetList = (ArrayList<Asset>) data.getSerializableExtra("assetList");
+            etAssets.setText(getAssetsText());
         }
-        assetList = (ArrayList<Asset>) data.getSerializableExtra("assetList");
-        etAssets.setText(getAssetsText());
     }
 
     @OnClick(R.id.et_assets)
@@ -49,7 +48,7 @@ public abstract class AssetsFragment extends BaseFragment {
         intent.putExtra("title", getTitle());
         intent.putExtra("assetStatus", getAssetStatus());
         intent.putExtra("assetList", assetList);
-//        http://stackoverflow.com/questions/6147884/onactivityresult-not-being-called-in-fragment
+        // http://stackoverflow.com/questions/6147884/onactivityresult-not-being-called-in-fragment
         startActivityForResult(intent, ASSETS_REQUEST_CODE);
     }
 
