@@ -49,9 +49,9 @@ public class MainActivityPagerAdapter extends FragmentPagerAdapter {
             case 6:
                 return new AssetAbandonFragment();
             case 7:
-                return new AssetRepairOutFragment();
-            case 8:
                 return new AssetRepairInFragment();
+            case 8:
+                return new AssetRepairOutFragment();
             default:
                 return new TestFragment();
         }

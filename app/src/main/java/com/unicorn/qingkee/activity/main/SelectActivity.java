@@ -5,22 +5,23 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
-import com.andexert.library.RippleView;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
-
-import java.util.List;
-
-import butterknife.InjectViews;
-import butterknife.OnClick;
+import com.unicorn.qingkee.util.ToastUtils;
 
 
 public class SelectActivity extends ToolbarActivity {
 
-    @InjectViews({
-            R.id.asset_add, R.id.asset_apply
-    })
-    List<RippleView> rippleViewList;
+    int[] viewIdS = {
+            R.id.asset_add, R.id.asset_allot_out, R.id.asset_allot_in,
+            R.id.asset_apply, R.id.asset_inventory, R.id.asset_transfer,
+            R.id.asset_abandon, R.id.asset_repair_in, R.id.asset_repair_out
+    };
+
+    @Override
+    public int getLayoutResourceId() {
+        return R.layout.activity_select;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,21 +31,17 @@ public class SelectActivity extends ToolbarActivity {
         initViews();
     }
 
-    @Override
-    public int getLayoutResourceId() {
-
-        return R.layout.activity_select;
-    }
-
     private void initViews() {
-        for (final RippleView rippleView : rippleViewList) {
-            rippleView.setOnClickListener(new View.OnClickListener() {
+
+        for (int i = 0, length = viewIdS.length; i != length; i++) {
+            final int index = i;
+            findViewById(viewIdS[index]).setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View view) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            startMainActivity(rippleViewList.indexOf(rippleView));
+                            startMainActivity(index);
                         }
                     }, 800);
                 }
@@ -52,11 +49,25 @@ public class SelectActivity extends ToolbarActivity {
         }
     }
 
-    private void startMainActivity(final int fragmentIndex) {
+    private void startMainActivity(int fragmentIndex) {
 
         Intent intent = new Intent(SelectActivity.this, MainActivity.class);
         intent.putExtra("fragmentIndex", fragmentIndex);
         startActivity(intent);
+    }
+
+    // ==================== 再按一次退出 ====================
+
+    private long exitTime;
+
+    @Override
+    public void onBackPressed() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            ToastUtils.show("再按一次退出");
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+        }
     }
 
 }

@@ -41,6 +41,7 @@
                 android:layout_marginTop="@dimen/select_activity_interval">
 
                 <com.andexert.library.RippleView
+                    android:id="@+id/asset_allot_out"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
@@ -49,7 +50,6 @@
                     ripple:rv_zoom="true">
 
                     <ImageView
-                        android:id="@+id/iv_asset_allot_out"
                         android:scaleType="fitXY"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -57,6 +57,7 @@
                 </com.andexert.library.RippleView>
 
                 <com.andexert.library.RippleView
+                    android:id="@+id/asset_allot_in"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
@@ -65,7 +66,6 @@
                     ripple:rv_zoom="true">
 
                     <ImageView
-                        android:id="@+id/iv_asset_allot_in"
                         android:scaleType="fitXY"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -94,19 +94,25 @@
                         android:scaleType="fitXY"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/asset_apply"
-                        />
+                        android:src="@drawable/asset_apply" />
 
                 </com.andexert.library.RippleView>
 
-                <ImageView
-                    android:id="@+id/iv_asset_inventory"
-                    android:scaleType="fitXY"
+                <com.andexert.library.RippleView
+                    android:id="@+id/asset_inventory"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:src="@drawable/asset_inventory"
-                    android:layout_marginLeft="5dp" />
+                    android:layout_marginLeft="@dimen/select_activity_half_interval"
+                    ripple:rv_type="rectangle"
+                    ripple:rv_zoom="true">
+
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/asset_inventory" />
+                </com.andexert.library.RippleView>
 
             </LinearLayout>
 
@@ -117,23 +123,37 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp">
 
-                <ImageView
-                    android:id="@+id/iv_asset_transfer"
-                    android:scaleType="fitXY"
+                <com.andexert.library.RippleView
+                    android:id="@+id/asset_transfer"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:src="@drawable/asset_transfer"
-                    android:layout_marginRight="5dp" />
+                    android:layout_marginRight="@dimen/select_activity_half_interval"
+                    ripple:rv_type="rectangle"
+                    ripple:rv_zoom="true">
 
-                <ImageView
-                    android:id="@+id/iv_asset_abandon"
-                    android:scaleType="fitXY"
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/asset_transfer" />
+                </com.andexert.library.RippleView>
+
+                <com.andexert.library.RippleView
+                    android:id="@+id/asset_abandon"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:src="@drawable/asset_abandon"
-                    android:layout_marginLeft="5dp" />
+                    android:layout_marginLeft="@dimen/select_activity_half_interval"
+                    ripple:rv_type="rectangle"
+                    ripple:rv_zoom="true">
+
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/asset_abandon" />
+                </com.andexert.library.RippleView>
 
             </LinearLayout>
 
@@ -144,23 +164,37 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp">
 
-                <ImageView
-                    android:id="@+id/iv_asset_repair_in"
-                    android:scaleType="fitXY"
+                <com.andexert.library.RippleView
+                    android:id="@+id/asset_repair_in"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:src="@drawable/asset_repair_in"
-                    android:layout_marginRight="5dp" />
+                    android:layout_marginRight="@dimen/select_activity_half_interval"
+                    ripple:rv_type="rectangle"
+                    ripple:rv_zoom="true">
 
-                <ImageView
-                    android:id="@+id/iv_asset_repair_out"
-                    android:scaleType="fitXY"
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/asset_repair_in" />
+                </com.andexert.library.RippleView>
+
+                <com.andexert.library.RippleView
+                    android:id="@+id/asset_repair_out"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:src="@drawable/asset_repair_out"
-                    android:layout_marginLeft="5dp" />
+                    android:layout_marginLeft="@dimen/select_activity_half_interval"
+                    ripple:rv_type="rectangle"
+                    ripple:rv_zoom="true">
+
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/asset_repair_out" />
+                </com.andexert.library.RippleView>
 
             </LinearLayout>
 

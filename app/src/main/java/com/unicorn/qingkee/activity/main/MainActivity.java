@@ -17,7 +17,7 @@ public class MainActivity extends ToolbarActivity {
 
     final String[] FRAGMENT_TITLES = {
             "到货查询", "调拨出库", "调拨入库", "资产领用", "资产盘点",
-            "资产转移", "资产报废", "维修出库", "维修入库"
+            "资产转移", "资产报废", "维修入库", "维修出库"
     };
 
     @InjectView(R.id.viewpager)
