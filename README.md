@@ -20,3 +20,4 @@
 15. 添加 RecycleView，CardView 以及 [https://github.com/castorflex/SmoothProgressBar](https://github.com/castorflex/SmoothProgressBar)。
 16. 添加 [https://github.com/loopj/android-async-http](https://github.com/loopj/android-async-http)，因为 volley 上传我还不会。
 17. 添加 [https://github.com/journeyapps/zxing-android-embedded](https://github.com/journeyapps/zxing-android-embedded)。
+18. 添加 [https://github.com/linger1216/labelview](https://github.com/linger1216/labelview)。
