@@ -21,3 +21,4 @@
 16. 添加 [https://github.com/loopj/android-async-http](https://github.com/loopj/android-async-http)，因为 volley 上传我还不会。
 17. 添加 [https://github.com/journeyapps/zxing-android-embedded](https://github.com/journeyapps/zxing-android-embedded)。
 18. 添加 [https://github.com/linger1216/labelview](https://github.com/linger1216/labelview)。
+19. 添加 [https://github.com/Clans/FloatingActionButton](https://github.com/Clans/FloatingActionButton)。
