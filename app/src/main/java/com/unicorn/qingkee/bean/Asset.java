@@ -1,6 +1,10 @@
 package com.unicorn.qingkee.bean;
 
 
+import com.unicorn.qingkee.util.JSONUtils;
+
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 public class Asset implements Serializable {
@@ -91,5 +95,21 @@ public class Asset implements Serializable {
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
+    }
+
+    //
+
+    public static Asset parse(JSONObject jsonObject) {
+
+        String assetId = JSONUtils.getString(jsonObject, "ID", "");
+        String assetName = JSONUtils.getString(jsonObject, "Assetname", "");
+        String companyName = JSONUtils.getString(jsonObject, "CommanyName", "");
+        Double assetCost = JSONUtils.getDouble(jsonObject, "Assetcost", 0);
+        String assetSort = JSONUtils.getString(jsonObject, "Assetsort", "");
+        String installPosition = JSONUtils.getString(jsonObject, "Installposition", "");
+        String roomNumber = JSONUtils.getString(jsonObject, "Roomnumber", "");
+        String barcode = JSONUtils.getString(jsonObject, "Barcode", "");
+
+        return new Asset(assetId, assetName, companyName, assetCost, assetSort, installPosition, roomNumber, barcode);
     }
 }

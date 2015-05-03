@@ -28,8 +28,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
+import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 
 public class ArrivalAssetListActivity extends ToolbarActivity {
@@ -44,11 +44,7 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
 
     Boolean allDataLoaded;
 
-    Boolean isLoadingMore;
-
-    // ==================== fields ====================
-
-    AssetQueryInfo assetQueryInfo;
+    // ==================== views ====================
 
     @InjectView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -58,8 +54,10 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
 
     AssetListAdapter assetListAdapter;
 
-    // ==================== onCreate ====================
+    @InjectView(R.id.load_more)
+    SmoothProgressBar loadMore;
 
+    AssetQueryInfo assetQueryInfo;
 
     @Override
     public int getLayoutResourceId() {
@@ -89,14 +87,6 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
         reload();
     }
 
-    private void initPagerData() {
-
-        currentPager = 0;
-        noData = false;
-        allDataLoaded = false;
-        isLoadingMore = false;
-    }
-
     private void initSwipeRefreshLayout() {
 
         swipeRefreshLayout.setColorSchemeResources(R.color.grass_primary);
@@ -118,7 +108,7 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
 
-                if (noData || allDataLoaded || isLoadingMore) {
+                if (noData || allDataLoaded || loadMore.getVisibility() == View.VISIBLE) {
                     return;
                 }
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
@@ -138,7 +128,7 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
 
     private void reload() {
 
-        // swipeRefreshLayout 的一个 bug, https://code.google.com/p/android/issues/detail?id=77712
+        // https://code.google.com/p/android/issues/detail?id=77712
         swipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -147,8 +137,7 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
         });
         initPagerData();
         assetQueryInfo.setPager(1);
-        final String url = UrlUtils.getBaseUrl() + "/GetAssets?" + assetQueryInfo.toUrl();
-        MyVolley.getRequestQueue().add(new JsonObjectRequest(url,
+        MyVolley.getRequestQueue().add(new JsonObjectRequest(UrlUtils.getBaseUrl() + "/GetAssets?" + assetQueryInfo.toUrl(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -181,16 +170,13 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
 
     private void loadMore() {
 
-        showLoadMoreBar();
-        isLoadingMore = true;
+        loadMore.setVisibility(View.VISIBLE);
         assetQueryInfo.setPager(currentPager + 1);
-        String url = UrlUtils.getBaseUrl() + "/GetAssets?" + assetQueryInfo.toUrl();
-        MyVolley.getRequestQueue().add(new JsonObjectRequest(url,
+        MyVolley.getRequestQueue().add(new JsonObjectRequest(UrlUtils.getBaseUrl() + "/GetAssets?" + assetQueryInfo.toUrl(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        hideLoadMoreBar();
-                        isLoadingMore = false;
+                        loadMore.setVisibility(View.GONE);
                         int result = JSONUtils.getInt(response, "Result", 1);
                         if (result != 0) {
                             ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
@@ -211,8 +197,7 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        hideLoadMoreBar();
-                        isLoadingMore = false;
+                        loadMore.setVisibility(View.GONE);
                         ToastUtils.show(VolleyErrorHelper.getErrorMessage(volleyError));
                     }
                 }));
@@ -220,14 +205,11 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
 
     // ============ low level methods ===============
 
-    private void showLoadMoreBar() {
+    private void initPagerData() {
 
-        findViewById(R.id.pg_load_more).setVisibility(View.VISIBLE);
-    }
-
-    private void hideLoadMoreBar() {
-
-        findViewById(R.id.pg_load_more).setVisibility(View.GONE);
+        currentPager = 0;
+        noData = false;
+        allDataLoaded = false;
     }
 
     private LinearLayoutManager getLinearLayoutManager() {
@@ -242,17 +224,8 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
         ArrayList<Asset> assetList = new ArrayList<>();
         for (int i = 0; i != assetJSONArray.length(); i++) {
             JSONObject jsonObject = JSONUtils.getJSONObject(assetJSONArray, i);
-            String assetId = JSONUtils.getString(jsonObject, "ID", "");
-            String assetName = JSONUtils.getString(jsonObject, "Assetname", "");
-            String companyName = JSONUtils.getString(jsonObject,"CommanyName","");
-            Double assetCost = JSONUtils.getDouble(jsonObject, "Assetcost", 0);
-            String assetSort = JSONUtils.getString(jsonObject,"Assetsort","");
-            String installPosition = JSONUtils.getString(jsonObject,"Installposition","");
-            String roomNumber = JSONUtils.getString(jsonObject, "Roomnumber", "");
-            String barcode = JSONUtils.getString(jsonObject, "Barcode", "");
-            assetList.add(new Asset(assetId, assetName, companyName,assetCost,assetSort,installPosition,roomNumber,barcode));
+            assetList.add(Asset.parse(jsonObject));
         }
-
         return assetList;
     }
 

@@ -28,7 +28,7 @@
 
         <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
             android:layout_marginBottom="1dp"
-            android:id="@+id/pg_load_more"
+            android:id="@+id/load_more"
             android:layout_width="match_parent"
             android:layout_height="5dp"
             app:spb_stroke_width="5dp"
