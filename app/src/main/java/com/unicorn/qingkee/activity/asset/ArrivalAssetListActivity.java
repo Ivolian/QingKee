@@ -13,7 +13,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.adapter.asset.ArrivalAssetListAdapter;
-import com.unicorn.qingkee.adapter.base.AssetListAdapter;
 import com.unicorn.qingkee.bean.Asset;
 import com.unicorn.qingkee.bean.AssetQueryInfo;
 import com.unicorn.qingkee.util.JSONUtils;
@@ -52,7 +51,7 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
     @InjectView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    AssetListAdapter assetListAdapter;
+    ArrivalAssetListAdapter arrivalAssetListAdapter;
 
     @InjectView(R.id.load_more)
     SmoothProgressBar loadMore;
@@ -102,8 +101,8 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
 
         final LinearLayoutManager linearLayoutManager = getLinearLayoutManager();
         recyclerView.setLayoutManager(linearLayoutManager);
-        assetListAdapter = new ArrivalAssetListAdapter(this);
-        recyclerView.setAdapter(assetListAdapter);
+        arrivalAssetListAdapter = new ArrivalAssetListAdapter(this);
+        recyclerView.setAdapter(arrivalAssetListAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -147,8 +146,8 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
                             ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
                         } else {
                             JSONArray assetJSONArray = JSONUtils.getJSONArray(response, "lstAsset", null);
-                            assetListAdapter.setAssetList(getListFromJSONArray(assetJSONArray));
-                            assetListAdapter.notifyDataSetChanged();
+                            arrivalAssetListAdapter.setAssetList(getListFromJSONArray(assetJSONArray));
+                            arrivalAssetListAdapter.notifyDataSetChanged();
 
                             noData = (assetJSONArray.length() == 0);
                             if (noData) {
@@ -182,8 +181,8 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
                             ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
                         } else {
                             JSONArray assetJSONArray = JSONUtils.getJSONArray(response, "lstAsset", null);
-                            assetListAdapter.addAssetList(getListFromJSONArray(assetJSONArray));
-                            assetListAdapter.notifyDataSetChanged();
+                            arrivalAssetListAdapter.addAssetList(getListFromJSONArray(assetJSONArray));
+                            arrivalAssetListAdapter.notifyDataSetChanged();
 
                             allDataLoaded = (assetJSONArray.length() == 0);
                             if (allDataLoaded) {

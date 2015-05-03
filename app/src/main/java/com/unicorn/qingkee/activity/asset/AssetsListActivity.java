@@ -1,7 +1,7 @@
 package com.unicorn.qingkee.activity.asset;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,7 +19,6 @@ import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.adapter.asset.ArrivalAssetListAdapter;
 import com.unicorn.qingkee.bean.Asset;
-import com.unicorn.qingkee.bean.AssetInfo;
 import com.unicorn.qingkee.mycode.SwipeableRecyclerViewTouchListener;
 import com.unicorn.qingkee.util.JSONUtils;
 import com.unicorn.qingkee.util.ToastUtils;
@@ -27,27 +26,24 @@ import com.unicorn.qingkee.util.UrlUtils;
 import com.unicorn.qingkee.volley.MyVolley;
 import com.unicorn.qingkee.volley.toolbox.VolleyErrorHelper;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
 
 public class AssetsListActivity extends ToolbarActivity {
 
-    final int RESULT_CODE = 233;
+    @InjectView(R.id.floatingActionButton)
+    FloatingActionButton floatingActionButton;
 
     @InjectView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    ArrivalAssetListAdapter assetListAdapter;
-
-    @InjectView(R.id.floating_action_button)
-    FloatingActionButton floatingActionButton;
+    // todo 写适配器
+    ArrivalAssetListAdapter arrivalAssetListAdapter;
 
     @Override
     public int getLayoutResourceId() {
@@ -67,9 +63,9 @@ public class AssetsListActivity extends ToolbarActivity {
     private void initRecyclerView() {
 
         recyclerView.setLayoutManager(getLinearLayoutManager());
-        assetListAdapter = new ArrivalAssetListAdapter(this);
-        assetListAdapter.setAssetList((ArrayList<Asset>) getIntent().getSerializableExtra("assetList"));
-        recyclerView.setAdapter(assetListAdapter);
+        arrivalAssetListAdapter = new ArrivalAssetListAdapter(this);
+        arrivalAssetListAdapter.setAssetList((ArrayList<Asset>) getIntent().getSerializableExtra("assetList"));
+        recyclerView.setAdapter(arrivalAssetListAdapter);
         SwipeableRecyclerViewTouchListener swipeTouchListener =
                 new SwipeableRecyclerViewTouchListener(recyclerView,
                         new SwipeableRecyclerViewTouchListener.SwipeListener() {
@@ -81,20 +77,20 @@ public class AssetsListActivity extends ToolbarActivity {
                             @Override
                             public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    assetListAdapter.getAssetList().remove(position);
-                                    assetListAdapter.notifyItemRemoved(position);
+                                    arrivalAssetListAdapter.getAssetList().remove(position);
+                                    arrivalAssetListAdapter.notifyItemRemoved(position);
                                 }
-                                assetListAdapter.notifyDataSetChanged();
+                                arrivalAssetListAdapter.notifyDataSetChanged();
                                 floatingActionButton.show(true);
                             }
 
                             @Override
                             public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    assetListAdapter.getAssetList().remove(position);
-                                    assetListAdapter.notifyItemRemoved(position);
+                                    arrivalAssetListAdapter.getAssetList().remove(position);
+                                    arrivalAssetListAdapter.notifyItemRemoved(position);
                                 }
-                                assetListAdapter.notifyDataSetChanged();
+                                arrivalAssetListAdapter.notifyDataSetChanged();
                                 floatingActionButton.show(true);
                             }
                         },
@@ -125,12 +121,12 @@ public class AssetsListActivity extends ToolbarActivity {
         }
     }
 
-    @OnClick(R.id.floating_action_button)
+    @OnClick(R.id.floatingActionButton)
     public void finishWithData() {
 
         Intent intent = new Intent();
-        intent.putExtra("assetList", assetListAdapter.getAssetList());
-        setResult(RESULT_CODE, intent);
+        intent.putExtra("assetList", arrivalAssetListAdapter.getAssetList());
+        setResult(2333, intent);
         finish();
     }
 
@@ -156,32 +152,25 @@ public class AssetsListActivity extends ToolbarActivity {
 
     private void fetchAssetByBarcode(final String barcode) {
 
-        AssetInfo assetInfo = new AssetInfo();
-        assetInfo.setUserId(MyApplication.getInstance().getUserInfo().getUserId());
-        assetInfo.setBarcode(barcode);
-        assetInfo.setAssetStatus(getIntent().getStringExtra("assetStatus"));
-
-        final ProgressDialog progressDialog = ProgressDialog.show(this, "处理中...", "请稍后...", true);
-        String url = UrlUtils.getBaseUrl() + "/GetAssetByBarcode?" + assetInfo.toUrl();
-        MyVolley.getRequestQueue().add(new JsonObjectRequest(url,
+        showProgressDialog();
+        MyVolley.getRequestQueue().add(new JsonObjectRequest(getUrl(barcode),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        progressDialog.dismiss();
+                        hideProgressDialog();
                         int result = JSONUtils.getInt(response, "Result", 1);
                         if (result != 0) {
                             ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
                         } else {
-                            JSONArray jsonArray = JSONUtils.getJSONArray(response, "lstAsset", null);
-                            Asset asset = getAssetFromJSONArray(jsonArray);
-                            for (Asset temp : assetListAdapter.getAssetList()) {
+                            Asset asset = Asset.parse(JSONUtils.getJSONObject(JSONUtils.getJSONArray(response, "lstAsset", null), 0));
+                            for (Asset temp : arrivalAssetListAdapter.getAssetList()) {
                                 if (asset.getId().equals(temp.getId())) {
                                     ToastUtils.show("该资产已在列表中");
                                     return;
                                 }
                             }
-                            assetListAdapter.getAssetList().add(asset);
-                            assetListAdapter.notifyDataSetChanged();
+                            arrivalAssetListAdapter.getAssetList().add(asset);
+                            arrivalAssetListAdapter.notifyDataSetChanged();
                             floatingActionButton.show(true);
                         }
                     }
@@ -189,33 +178,26 @@ public class AssetsListActivity extends ToolbarActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        progressDialog.dismiss();
+                        hideProgressDialog();
                         ToastUtils.show(VolleyErrorHelper.getErrorMessage(volleyError));
                     }
                 }));
     }
 
-    // ============ low level methods ===============
+    private String getUrl(String barcode) {
+
+        Uri.Builder builder = Uri.parse(UrlUtils.getBaseUrl() + "/GetAssetByBarcode?").buildUpon();
+        builder.appendQueryParameter("userid", MyApplication.getInstance().getUserInfo().getUserId());
+        builder.appendQueryParameter("barcode", barcode);
+        builder.appendQueryParameter("assetStatus", getIntent().getStringExtra("assetStatus"));
+        return builder.toString();
+    }
 
     private LinearLayoutManager getLinearLayoutManager() {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         return linearLayoutManager;
-    }
-
-    private Asset getAssetFromJSONArray(JSONArray assetJSONArray) {
-
-        JSONObject jsonObject = JSONUtils.getJSONObject(assetJSONArray, 0);
-        String assetId = JSONUtils.getString(jsonObject, "ID", "");
-        String assetName = JSONUtils.getString(jsonObject, "Assetname", "");
-        String companyName = JSONUtils.getString(jsonObject, "CommanyName", "");
-        Double assetCost = JSONUtils.getDouble(jsonObject, "Assetcost", 0);
-        String assetSort = JSONUtils.getString(jsonObject, "Assetsort", "");
-        String installPosition = JSONUtils.getString(jsonObject, "Installposition", "");
-        String roomNumber = JSONUtils.getString(jsonObject, "Roomnumber", "");
-        String barcode = JSONUtils.getString(jsonObject, "Barcode", "");
-        return new Asset(assetId, assetName, companyName, assetCost, assetSort, installPosition, roomNumber, barcode);
     }
 
 }

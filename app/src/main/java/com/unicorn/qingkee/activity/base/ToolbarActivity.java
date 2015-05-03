@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.cengalabs.flatui.FlatUI;
 import com.unicorn.qingkee.R;
 
@@ -15,6 +17,8 @@ import butterknife.InjectView;
 
 
 public abstract class ToolbarActivity extends AppCompatActivity {
+
+    MaterialDialog progressDialog;
 
     @InjectView(R.id.toolbar)
     protected Toolbar mToolbar;
@@ -65,6 +69,32 @@ public abstract class ToolbarActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void showProgressDialog() {
+
+        showProgressDialog("处理中...");
+    }
+
+    public void showProgressDialog(String title) {
+
+        if (progressDialog == null) {
+            progressDialog = new MaterialDialog.Builder(this)
+                    .theme(Theme.LIGHT)
+                    .title(title)
+                    .content("请稍后...")
+                    .cancelable(false)
+                    .progress(true, 0)
+                    .show();
+        } else {
+            progressDialog.show();
+        }
+    }
+
+    public void hideProgressDialog() {
+
+        progressDialog.dismiss();
     }
 
 }

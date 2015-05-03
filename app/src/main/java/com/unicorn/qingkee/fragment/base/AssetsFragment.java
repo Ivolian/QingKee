@@ -74,7 +74,6 @@ public abstract class AssetsFragment extends BaseFragment {
         return StringUtils.join(barcodeList.toArray(), '|');
     }
 
-
     public void showProgressDialog() {
 
         if (progressDialog == null) {

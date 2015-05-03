@@ -7,8 +7,6 @@ import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.Theme;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -34,8 +32,6 @@ public class LoginActivity extends ToolbarActivity {
     final String SF_LOGIN_CODE = "login_code";
 
     final String SF_REMEMBER_ME = "remember_me";
-
-    MaterialDialog progressDialog;
 
     // ========================= views ===========================
 
@@ -86,8 +82,8 @@ public class LoginActivity extends ToolbarActivity {
 
     @OnClick(R.id.btn_login)
     public void login() {
-        showProgressDialog();
-        MyVolley.getRequestQueue().add(new JsonObjectRequest(getLoginUrl(),
+        showProgressDialog("登录中...");
+        MyVolley.getRequestQueue().add(new JsonObjectRequest(getUrl(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -114,7 +110,7 @@ public class LoginActivity extends ToolbarActivity {
                 }));
     }
 
-    private String getLoginUrl() {
+    private String getUrl() {
 
         Uri.Builder builder = Uri.parse(UrlUtils.getBaseUrl() + "/login?").buildUpon();
         builder.appendQueryParameter("logincode", etLoginCode.getText().toString().trim());
@@ -134,31 +130,8 @@ public class LoginActivity extends ToolbarActivity {
 
     private void storeSharedPreferencesInfo() {
 
-
         SharedPreferencesUtils.putBoolean(SF_REMEMBER_ME, cbRememberMe.isChecked());
         SharedPreferencesUtils.putString(SF_LOGIN_CODE, etLoginCode.getText().toString());
-    }
-
-    // ========================= progress dialog ===========================
-
-    private void showProgressDialog() {
-
-        if (progressDialog == null) {
-            progressDialog = new MaterialDialog.Builder(this)
-                    .theme(Theme.LIGHT)
-                    .title("登录中...")
-                    .content("请稍后...")
-                    .cancelable(false)
-                    .progress(true, 0)
-                    .show();
-        } else {
-            progressDialog.show();
-        }
-    }
-
-    private void hideProgressDialog() {
-
-        progressDialog.dismiss();
     }
 
 }
