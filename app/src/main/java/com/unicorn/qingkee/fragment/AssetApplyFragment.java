@@ -1,6 +1,5 @@
 package com.unicorn.qingkee.fragment;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,20 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.bean.Asset;
-import com.unicorn.qingkee.custom.BetterSpinner;
+import com.unicorn.qingkee.mycode.BetterSpinner;
+import com.unicorn.qingkee.mycode.FetchUtil;
 import com.unicorn.qingkee.util.StringUtils;
 import com.unicorn.qingkee.util.ToastUtils;
 
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -145,67 +139,19 @@ public class AssetApplyFragment extends Fragment {
 //                }));
     }
 
-    private void fetchDeptList(final String companyId) {
-//        String url = Url.getBaseUrl() + "/GetDept?companyid=" + companyId;
-//        MyVolley.getRequestQueue().add(new JsonObjectRequest(url,
-//                        new Response.Listener<JSONObject>() {
-//                            @Override
-//                            public void onResponse(JSONObject response) {
-//                                int result = JSONUtils.getInt(response, "Result", 1);
-//                                if (result != 0) {
-//                                    ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
-//                                } else {
-//                                    JSONArray deptJSONArray = JSONUtils.getJSONArray(response, "lstDept", null);
-//                                    for (int i = 0; i != deptJSONArray.length(); i++) {
-//                                        JSONObject jsonObject = JSONUtils.getJSONObject(deptJSONArray, i);
-//                                        String deptId = JSONUtils.getString(jsonObject, "ID", "");
-//                                        String deptName = JSONUtils.getString(jsonObject, "Deptname", "");
-//                                        spDept.addSpinnerData(new SpinnerData(deptId, deptName));
-//                                    }
-//                                }
-//                            }
-//                        },
-//                        MyVolley.getDefaultErrorListener())
-//        );
-    }
-
-    private void fetchEmployeeList(final String companyId, final String deptId) {
-//        String url = Url.getBaseUrl() + "/GetEmployee?companyid=" + companyId + "&deptid=" + deptId;
-//        MyVolley.getRequestQueue().add(new JsonObjectRequest(url,
-//                        new Response.Listener<JSONObject>() {
-//                            @Override
-//                            public void onResponse(JSONObject response) {
-//                                int result = JSONUtils.getInt(response, "Result", 1);
-//                                if (result != 0) {
-//                                    ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
-//                                } else {
-//                                    JSONArray deptJSONArray = JSONUtils.getJSONArray(response, "lstEmployee", null);
-//                                    for (int i = 0; i != deptJSONArray.length(); i++) {
-//                                        JSONObject jsonObject = JSONUtils.getJSONObject(deptJSONArray, i);
-//                                        String deptId = JSONUtils.getString(jsonObject, "ID", "");
-//                                        String deptName = JSONUtils.getString(jsonObject, "Employeename", "");
-//                                        spEmployee.addSpinnerData(new SpinnerData(deptId, deptName));
-//                                    }
-//                                }
-//                            }
-//                        },
-//                        MyVolley.getDefaultErrorListener())
-//        );
-    }
 
     private void initSpDept() {
 
         final String companyId = MyApplication.getInstance().getUserInfo().getCompanyId();
-        fetchDeptList(companyId);
+        FetchUtil.fetchDeptList(spDept, companyId);
         spDept.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 spEmployee.clear();
-                fetchEmployeeList(companyId, spDept.getSelectedValue());
+                FetchUtil.fetchEmployeeList(spEmployee, companyId, spDept.getSelectedValue());
             }
         });
     }
-
 
     private String assetListToText() {
 
@@ -220,15 +166,14 @@ public class AssetApplyFragment extends Fragment {
         return text;
     }
 
-    private String assetListToBarcode(){
+    private String assetListToBarcode() {
 
         List<String> barcodeList = new ArrayList<>();
-        for (Asset asset:assetList){
+        for (Asset asset : assetList) {
             barcodeList.add(asset.getBarcode());
         }
 
         return StringUtils.join(barcodeList.toArray(), '|');
     }
-
 
 }

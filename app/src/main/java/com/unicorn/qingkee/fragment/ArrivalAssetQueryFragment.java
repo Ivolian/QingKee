@@ -8,23 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.android.volley.Response;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.asset.ArrivalAssetListActivity;
 import com.unicorn.qingkee.bean.AssetQueryInfo;
-import com.unicorn.qingkee.custom.BetterSpinner;
-import com.unicorn.qingkee.custom.SpinnerData;
-import com.unicorn.qingkee.util.JSONUtils;
+import com.unicorn.qingkee.mycode.BetterSpinner;
+import com.unicorn.qingkee.mycode.FetchUtil;
+import com.unicorn.qingkee.mycode.SpinnerData;
 import com.unicorn.qingkee.util.StringUtils;
-import com.unicorn.qingkee.util.ToastUtils;
-import com.unicorn.qingkee.util.UrlUtils;
-import com.unicorn.qingkee.volley.MyVolley;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +62,8 @@ public class ArrivalAssetQueryFragment extends Fragment {
         return view;
     }
 
-    @Override public void onDestroyView() {
+    @Override
+    public void onDestroyView() {
 
         super.onDestroyView();
         ButterKnife.reset(this);
@@ -115,12 +108,12 @@ public class ArrivalAssetQueryFragment extends Fragment {
 
     private void initSpCompany() {
 
-        fetchCompanyList();
+        FetchUtil.fetchCompanyList(spCompany);
         spCompany.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 spDept.clear();
-                fetchDeptList(spCompany.getSelectedValue());
+                FetchUtil.fetchDeptList(spDept, spCompany.getSelectedValue());
             }
         });
     }
@@ -131,57 +124,6 @@ public class ArrivalAssetQueryFragment extends Fragment {
         spinnerDataList.add(new SpinnerData("1", "办公"));
         spinnerDataList.add(new SpinnerData("2", "租赁"));
         spAssetSort.setSpinnerDataList(spinnerDataList);
-    }
-
-    private void fetchCompanyList() {
-
-        MyVolley.getRequestQueue().add(new JsonObjectRequest(UrlUtils.getBaseUrl() + "/GetCompany",
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        int result = JSONUtils.getInt(response, "Result", 1);
-                        if (result != 0) {
-                            ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
-                        } else {
-                            JSONArray companyJSONArray = JSONUtils.getJSONArray(response, "lstCompany", null);
-                            List<SpinnerData> spinnerDataList = new ArrayList<>();
-                            for (int i = 0; i != companyJSONArray.length(); i++) {
-                                JSONObject jsonObject = JSONUtils.getJSONObject(companyJSONArray, i);
-                                String companyId = JSONUtils.getString(jsonObject, "ID", "");
-                                String companyName = JSONUtils.getString(jsonObject, "Commanyname", "");
-                                spinnerDataList.add(new SpinnerData(companyId, companyName));
-                            }
-                            spCompany.setSpinnerDataList(spinnerDataList);
-                        }
-                    }
-                },
-                MyVolley.getDefaultErrorListener()));
-    }
-
-    private void fetchDeptList(final String companyId) {
-
-        String url = UrlUtils.getBaseUrl() + "/GetDept?companyid=" + companyId;
-        MyVolley.getRequestQueue().add(new JsonObjectRequest(url,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        int result = JSONUtils.getInt(response, "Result", 1);
-                        if (result != 0) {
-                            ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
-                        } else {
-                            JSONArray deptJSONArray = JSONUtils.getJSONArray(response, "lstDept", null);
-                            List<SpinnerData> spinnerDataList = new ArrayList<>();
-                            for (int i = 0; i != deptJSONArray.length(); i++) {
-                                JSONObject jsonObject = JSONUtils.getJSONObject(deptJSONArray, i);
-                                String deptId = JSONUtils.getString(jsonObject, "ID", "");
-                                String deptName = JSONUtils.getString(jsonObject, "Deptname", "");
-                                spinnerDataList.add(new SpinnerData(deptId, deptName));
-                            }
-                            spDept.setSpinnerDataList(spinnerDataList);
-                        }
-                    }
-                },
-                MyVolley.getDefaultErrorListener()));
     }
 
 }

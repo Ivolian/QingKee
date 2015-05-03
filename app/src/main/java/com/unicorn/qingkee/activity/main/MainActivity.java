@@ -59,7 +59,6 @@ public class MainActivity extends ToolbarActivity {
     public void changeToolbarTitle(int position) {
 
         mToolbar.setTitle(FRAGMENT_TITLES[position]);
-//        getSupportActionBar().setTitle(FRAGMENT_TITLES[position]);
     }
 
 }

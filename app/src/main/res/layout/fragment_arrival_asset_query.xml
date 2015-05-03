@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             app:met_floatingLabel="highlight" />
 
-        <com.unicorn.qingkee.custom.BetterSpinner
+        <com.unicorn.qingkee.mycode.BetterSpinner
             android:id="@+id/sp_company"
             android:hint="使用公司"
             android:layout_width="match_parent"
@@ -34,7 +34,7 @@
             app:met_floatingLabel="highlight"
             android:layout_marginTop="10dp" />
 
-        <com.unicorn.qingkee.custom.BetterSpinner
+        <com.unicorn.qingkee.mycode.BetterSpinner
             android:id="@+id/sp_dept"
             android:hint="使用部门"
             android:layout_width="match_parent"
@@ -66,7 +66,7 @@
             app:met_floatingLabel="highlight"
             android:layout_marginTop="10dp" />
 
-        <com.unicorn.qingkee.custom.BetterSpinner
+        <com.unicorn.qingkee.mycode.BetterSpinner
             android:id="@+id/sp_asset_sort"
             android:hint="资产类别"
             android:layout_width="match_parent"

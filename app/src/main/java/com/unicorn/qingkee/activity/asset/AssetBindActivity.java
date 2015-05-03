@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.widget.PopupMenu;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -32,8 +31,8 @@ import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.bean.Asset;
 import com.unicorn.qingkee.bean.AssetBindInfo;
-import com.unicorn.qingkee.custom.ImageUtil;
-import com.unicorn.qingkee.custom.MyImageView;
+import com.unicorn.qingkee.mycode.ImageUtil;
+import com.unicorn.qingkee.mycode.MyImageView;
 import com.unicorn.qingkee.util.JSONUtils;
 import com.unicorn.qingkee.util.StringUtils;
 import com.unicorn.qingkee.util.ToastUtils;
@@ -46,11 +45,9 @@ import org.apache.http.Header;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
