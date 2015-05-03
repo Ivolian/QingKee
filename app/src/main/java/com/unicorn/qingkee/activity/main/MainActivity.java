@@ -7,7 +7,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
-import com.unicorn.qingkee.adapter.asset.MainActivityPagerAdapter;
+import com.unicorn.qingkee.adapter.main.MainActivityPagerAdapter;
 
 import butterknife.InjectView;
 import butterknife.OnPageChange;

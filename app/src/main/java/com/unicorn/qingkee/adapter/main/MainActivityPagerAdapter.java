@@ -1,4 +1,4 @@
-package com.unicorn.qingkee.adapter.asset;
+package com.unicorn.qingkee.adapter.main;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
