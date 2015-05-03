@@ -1,4 +1,4 @@
-package com.unicorn.qingkee.my;
+package com.unicorn.qingkee.custom;
 
 
 public class SpinnerData {

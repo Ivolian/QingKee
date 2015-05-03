@@ -11,15 +11,17 @@ import android.widget.AdapterView;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
-import com.unicorn.qingkee.my.BetterSpinner;
-import com.unicorn.qingkee.my.SpinnerData;
+import com.unicorn.qingkee.activity.asset.ArrivalAssetListActivity;
+import com.unicorn.qingkee.bean.AssetQueryInfo;
+import com.unicorn.qingkee.custom.BetterSpinner;
+import com.unicorn.qingkee.custom.SpinnerData;
 import com.unicorn.qingkee.util.JSONUtils;
 import com.unicorn.qingkee.util.StringUtils;
 import com.unicorn.qingkee.util.ToastUtils;
 import com.unicorn.qingkee.util.UrlUtils;
 import com.unicorn.qingkee.volley.MyVolley;
-
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -33,8 +35,6 @@ import butterknife.OnClick;
 
 
 public class ArrivalAssetQueryFragment extends Fragment {
-
-
 
     @InjectView(R.id.et_asset_name)
     MaterialEditText etAssetName;
@@ -70,7 +70,6 @@ public class ArrivalAssetQueryFragment extends Fragment {
         return view;
     }
 
-
     @OnClick(R.id.btn_clear_views)
     public void clearViews() {
 
@@ -83,24 +82,50 @@ public class ArrivalAssetQueryFragment extends Fragment {
         spAssetSort.setText(StringUtils.EMPTY);
     }
 
-//    @OnClick(R.id.btn_query)
-//    public void query() {
-//
-//        AssetQueryInfo assetQueryInfo = new AssetQueryInfo();
-//        assetQueryInfo.setUserId(MyApplication.getInstance().getUserInfo().getUserId());
-//        assetQueryInfo.setAssetName(etAssetName.getText().toString().trim());
-//        assetQueryInfo.setCompanyId(spCompany.getSelectedValue());
-//        assetQueryInfo.setDeptId(spDept.getSelectedValue());
-//        assetQueryInfo.setEmployeeName(etEmployeeName.getText().toString().trim());
-//        assetQueryInfo.setAddress(etAddress.getText().toString().trim());
-//        assetQueryInfo.setRomeNumber(etRomeNumber.getText().toString().trim());
-//        assetQueryInfo.setAssetSort(spAssetSort.getSelectedValue());
-//        assetQueryInfo.setAssetStatus("01");    // 到货状态
-//
-//        Intent intent = new Intent(getActivity(), ArrivalAssetListActivity.class);
-//        intent.putExtra("assetQueryInfo", assetQueryInfo);
-//        startActivity(intent);
-//    }
+    @OnClick(R.id.btn_query)
+    public void query() {
+
+        AssetQueryInfo assetQueryInfo = new AssetQueryInfo();
+        assetQueryInfo.setUserId(MyApplication.getInstance().getUserInfo().getUserId());
+        assetQueryInfo.setAssetName(etAssetName.getText().toString().trim());
+        assetQueryInfo.setCompanyId(spCompany.getSelectedValue());
+        assetQueryInfo.setDeptId(spDept.getSelectedValue());
+        assetQueryInfo.setEmployeeName(etEmployeeName.getText().toString().trim());
+        assetQueryInfo.setAddress(etAddress.getText().toString().trim());
+        assetQueryInfo.setRomeNumber(etRomeNumber.getText().toString().trim());
+        assetQueryInfo.setAssetSort(spAssetSort.getSelectedValue());
+        assetQueryInfo.setAssetStatus("01");    // 到货状态
+
+        Intent intent = new Intent(getActivity(), ArrivalAssetListActivity.class);
+        intent.putExtra("assetQueryInfo", assetQueryInfo);
+        startActivity(intent);
+    }
+
+    private void initViews() {
+
+        initSpCompany();
+        initSpAssetSort();
+    }
+
+    private void initSpCompany() {
+
+        fetchCompanyList();
+        spCompany.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                spDept.clear();
+                fetchDeptList(spCompany.getSelectedValue());
+            }
+        });
+    }
+
+    private void initSpAssetSort() {
+
+        List<SpinnerData> spinnerDataList = new ArrayList<>();
+        spinnerDataList.add(new SpinnerData("1", "办公"));
+        spinnerDataList.add(new SpinnerData("2", "租赁"));
+        spAssetSort.setSpinnerDataList(spinnerDataList);
+    }
 
     private void fetchCompanyList() {
 
@@ -151,32 +176,6 @@ public class ArrivalAssetQueryFragment extends Fragment {
                     }
                 },
                 MyVolley.getDefaultErrorListener()));
-    }
-
-    private void initViews() {
-
-        initSpCompany();
-        initSpAssetSort();
-    }
-
-    private void initSpCompany() {
-
-        fetchCompanyList();
-        spCompany.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                spDept.clear();
-                fetchDeptList(spCompany.getSelectedValue());
-            }
-        });
-    }
-
-    private void initSpAssetSort() {
-
-        List<SpinnerData> spinnerDataList = new ArrayList<>();
-        spinnerDataList.add(new SpinnerData("1", "办公"));
-        spinnerDataList.add(new SpinnerData("2", "租赁"));
-        spAssetSort.setSpinnerDataList(spinnerDataList);
     }
 
 }

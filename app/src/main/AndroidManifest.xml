@@ -22,6 +22,8 @@
         <activity android:name=".activity.main.ModifyServerAddressActivity"/>
         <activity android:name=".activity.main.SelectActivity"/>
         <activity android:name=".activity.main.MainActivity"/>
+        <activity android:name=".activity.asset.ArrivalAssetListActivity"/>
+
     </application>
 
 </manifest>

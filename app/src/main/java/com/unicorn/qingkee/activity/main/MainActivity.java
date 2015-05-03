@@ -7,22 +7,18 @@ import android.support.v7.app.ActionBarDrawerToggle;
 
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
-import com.unicorn.qingkee.adaper.main.MainActivityPagerAdapter;
+import com.unicorn.qingkee.adapter.asset.MainActivityPagerAdapter;
 
 import butterknife.InjectView;
 
 
 public class MainActivity extends ToolbarActivity {
 
-    // ========================= onCreate ===========================
-
     @InjectView(R.id.viewpager)
     ViewPager viewPager;
 
     @InjectView(R.id.drawer)
-     DrawerLayout mDrawerLayout;
-
-
+    DrawerLayout mDrawerLayout;
 
     @Override
     public int getLayoutResourceId() {
@@ -34,7 +30,7 @@ public class MainActivity extends ToolbarActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        initToolbar("青客资产管理", true);
+        initToolbar("青客资产管理");
         initDrawerLayout();
         viewPager.setAdapter(new MainActivityPagerAdapter(getSupportFragmentManager()));
     }

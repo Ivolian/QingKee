@@ -9,18 +9,16 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 
-        <!-- Content -->
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_weight="1" />
+            android:layout_height="match_parent" />
 
-        <!-- Side Drawer -->
+        <!-- 侧滑菜单 -->
         <FrameLayout
             android:id="@+id/drawer_view"
             android:background="@android:color/white"
-            android:layout_width="match_parent"
+            android:layout_width="260dp"
             android:layout_height="match_parent"
             android:layout_gravity="left" />
 
@@ -33,6 +31,6 @@
         android:id="@+id/toolbar_shadow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </FrameLayout>
