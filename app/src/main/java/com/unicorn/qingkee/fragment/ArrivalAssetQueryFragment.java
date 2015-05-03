@@ -70,6 +70,12 @@ public class ArrivalAssetQueryFragment extends Fragment {
         return view;
     }
 
+    @Override public void onDestroyView() {
+
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
+
     @OnClick(R.id.btn_clear_views)
     public void clearViews() {
 

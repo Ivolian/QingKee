@@ -19,6 +19,7 @@ android {
     }
     repositories {
         mavenCentral()
+        jcenter()
     }
 }
 
@@ -34,6 +35,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:22.1.1'
     compile 'com.android.support:cardview-v7:22.1.1'
     compile 'com.github.castorflex.smoothprogressbar:library:1.1.0'
-
-
+    compile 'com.loopj.android:android-async-http:1.4.6'
+    compile(name: 'zxing-android-embedded-2.3.0', ext: 'aar')
+    compile(name: 'zxing-android-integration-2.3.0', ext: 'aar')
+    compile files('libs/zxing-core.jar')
 }
