@@ -13,6 +13,7 @@ import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.asset.ArrivalAssetListActivity;
 import com.unicorn.qingkee.bean.AssetQueryInfo;
+import com.unicorn.qingkee.fragment.base.BaseFragment;
 import com.unicorn.qingkee.mycode.BetterSpinner;
 import com.unicorn.qingkee.mycode.FetchUtil;
 import com.unicorn.qingkee.mycode.SpinnerData;
@@ -26,7 +27,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 
-public class ArrivalAssetQueryFragment extends Fragment {
+public class ArrivalAssetQueryFragment extends BaseFragment {
 
     @InjectView(R.id.et_asset_name)
     MaterialEditText etAssetName;
@@ -51,23 +52,23 @@ public class ArrivalAssetQueryFragment extends Fragment {
 
     // ==================== onCreateView ====================
 
+
+    @Override
+    public int getLayoutResourceId() {
+
+        return R.layout.fragment_arrival_asset_query;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_arrival_asset_query, container, false);
-        ButterKnife.inject(this, view);
+        View view = super.onCreateView(inflater, container, savedInstanceState);
 
         initViews();
-
+        
         return view;
     }
 
-    @Override
-    public void onDestroyView() {
-
-        super.onDestroyView();
-        ButterKnife.reset(this);
-    }
 
     @OnClick(R.id.btn_clear_views)
     public void clearViews() {
