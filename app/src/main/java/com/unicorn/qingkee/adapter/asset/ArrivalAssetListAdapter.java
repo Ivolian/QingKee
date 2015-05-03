@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 
 import com.unicorn.qingkee.R;
+import com.unicorn.qingkee.activity.asset.AssetBindActivity;
 import com.unicorn.qingkee.adapter.base.AssetListAdapter;
 import com.unicorn.qingkee.bean.Asset;
 
@@ -60,13 +61,12 @@ public class ArrivalAssetListAdapter extends AssetListAdapter<ArrivalAssetListAd
             super(v);
             ButterKnife.inject(this, v);
 
-
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent = new Intent(activity, AssetBindActivity.class);
-//                    intent.putExtra("asset", assetList.get(getPosition()));
-//                    activity.startActivity(intent);
+                    Intent intent = new Intent(activity, AssetBindActivity.class);
+                    intent.putExtra("asset", assetList.get(getAdapterPosition()));
+                    activity.startActivity(intent);
                 }
             });
         }

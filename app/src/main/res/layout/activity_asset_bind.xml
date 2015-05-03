@@ -1,0 +1,115 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <!-- 布局 start -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_material_light"
+            android:padding="20dp">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_asset_name"
+                android:hint="资产名称"
+                android:editable="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight" />
+
+            <LinearLayout
+                android:id="@+id/ll_barcode"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_asset_name"
+                android:layout_marginTop="10dp">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/et_barcode"
+                    android:hint="条码"
+                    android:editable="false"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    app:met_floatingLabel="highlight" />
+
+                <Button
+                    android:id="@+id/btn_scan_barcode"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="扫描条码" />
+
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:layout_below="@+id/ll_barcode"
+                android:layout_marginTop="30dp"
+                android:layout_height="200dp"
+                android:layout_width="wrap_content"
+                android:scrollbars="none"
+                android:id="@+id/horizontalScrollView">
+
+                <LinearLayout
+                    android:background="@android:color/black"
+                    android:id="@+id/ll_photo_container"
+                    android:layout_height="200dp"
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+                <com.cengalabs.flatui.views.FlatButton
+                    android:id="@+id/btn_take_photo"
+                    android:text="拍照并上传"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    flatui:fl_theme="@array/orange"
+                    flatui:fl_textAppearance="fl_none"
+                    flatui:fl_blockButtonEffectHeight="3dp"
+                    flatui:fl_touchEffect="fl_ease"
+                    android:layout_marginRight="5dp" />
+
+                <com.cengalabs.flatui.views.FlatButton
+                    android:id="@+id/btn_confirm"
+                    android:text="确认绑定"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    flatui:fl_theme="@array/grass"
+                    flatui:fl_textAppearance="fl_none"
+                    flatui:fl_blockButtonEffectHeight="3dp"
+                    flatui:fl_touchEffect="fl_ease"
+                    android:layout_marginLeft="5dp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+        <!-- end 布局 -->
+
+    </ScrollView>
+
+    <include layout="@layout/toolbar" />
+
+    <include layout="@layout/toolbar_shadow" />
+
+</FrameLayout>

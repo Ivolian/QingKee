@@ -39,4 +39,5 @@ dependencies {
     compile(name: 'zxing-android-embedded-2.3.0', ext: 'aar')
     compile(name: 'zxing-android-integration-2.3.0', ext: 'aar')
     compile files('libs/zxing-core.jar')
+    compile 'com.lid.labelview:lib:0.1.1'
 }
