@@ -34,7 +34,6 @@ import com.unicorn.qingkee.util.StringUtils;
 import com.unicorn.qingkee.util.ToastUtils;
 import com.unicorn.qingkee.util.UrlUtils;
 
-
 import org.apache.http.Header;
 
 import java.io.File;
@@ -44,8 +43,6 @@ import java.util.List;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-
-// todo todo 有待进一步优化
 
 public class AssetBindActivity extends ToolbarActivity {
 
