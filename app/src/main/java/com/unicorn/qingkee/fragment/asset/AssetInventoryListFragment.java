@@ -49,9 +49,13 @@ public class AssetInventoryListFragment extends BaseFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         initRecyclerView();
-        loadData();
 
         return view;
+    }
+
+    @Override
+    public void visibleToUser() {
+        loadData();
     }
 
     private void initRecyclerView() {

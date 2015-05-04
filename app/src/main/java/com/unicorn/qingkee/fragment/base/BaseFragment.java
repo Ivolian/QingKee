@@ -8,10 +8,9 @@ import android.view.ViewGroup;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
-import com.unicorn.qingkee.R;
-import com.unicorn.qingkee.volley.MyVolley;
 
 import butterknife.ButterKnife;
+
 
 public abstract class BaseFragment extends Fragment {
 
@@ -35,7 +34,18 @@ public abstract class BaseFragment extends Fragment {
         ButterKnife.reset(this);
     }
 
-    public void finishWithActivity(){
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            visibleToUser();
+        }
+    }
+
+    public void visibleToUser() {
+
+    }
+
+    public void finishWithActivity() {
 
         getActivity().finish();
     }
