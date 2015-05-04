@@ -1,5 +1,6 @@
 package com.unicorn.qingkee.mycode;
 
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
@@ -8,6 +9,7 @@ import android.os.Environment;
 import com.unicorn.qingkee.util.ToastUtils;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.UUID;
 
 
@@ -45,6 +47,19 @@ public class ImageUtil {
         factoryOptions.inSampleSize = scaleFactor;
 
         return factoryOptions;
+    }
+
+    public static String compressPhoto(String photoPath) {
+
+        String compressPhotoPath = photoPath.substring(0, photoPath.length() - 4) + "_compress.jpg";
+        Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
+        File file = new File(compressPhotoPath);
+        try {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, new FileOutputStream(file));
+        } catch (Exception e) {
+            //
+        }
+        return compressPhotoPath;
     }
 
 }

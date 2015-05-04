@@ -18,7 +18,7 @@
         android:padding="20dp">
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/et_asset_name"
+            android:id="@+id/asset_name"
             android:hint="资产名称"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

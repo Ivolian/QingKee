@@ -2,7 +2,6 @@ package com.unicorn.qingkee.fragment.asset;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +21,13 @@ import com.unicorn.qingkee.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
 
 public class ArrivalAssetQueryFragment extends BaseFragment {
 
-    @InjectView(R.id.et_asset_name)
+    @InjectView(R.id.asset_name)
     MaterialEditText etAssetName;
 
     @InjectView(R.id.sp_company)
