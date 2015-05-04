@@ -222,7 +222,7 @@ public class AssetBindActivity extends ToolbarActivity {
             @Override
             public boolean onLongClick(final View v) {
                 PopupMenu popupMenu = new PopupMenu(AssetBindActivity.this, v);
-                popupMenu.inflate(R.menu.remove_photo_menu);
+                popupMenu.inflate(R.menu.menu_remove_photo);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
