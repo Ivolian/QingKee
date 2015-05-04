@@ -19,8 +19,6 @@ import butterknife.OnClick;
 
 public abstract class AssetsFragment extends BaseFragment {
 
-    MaterialDialog progressDialog;
-
     final int ASSETS_REQUEST_CODE = 2333;
 
     ArrayList<Asset> assetList = new ArrayList<>();
@@ -72,26 +70,6 @@ public abstract class AssetsFragment extends BaseFragment {
             barcodeList.add(asset.getBarcode());
         }
         return StringUtils.join(barcodeList.toArray(), '|');
-    }
-
-    public void showProgressDialog() {
-
-        if (progressDialog == null) {
-            progressDialog = new MaterialDialog.Builder(getActivity())
-                    .theme(Theme.LIGHT)
-                    .title("处理中...")
-                    .content("请稍后...")
-                    .cancelable(false)
-                    .progress(true, 0)
-                    .show();
-        } else {
-            progressDialog.show();
-        }
-    }
-
-    public void hideProgressDialog() {
-
-        progressDialog.dismiss();
     }
 
 }

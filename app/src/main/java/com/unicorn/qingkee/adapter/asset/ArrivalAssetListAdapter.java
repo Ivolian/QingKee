@@ -2,13 +2,10 @@ package com.unicorn.qingkee.adapter.asset;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 
@@ -32,7 +29,7 @@ public class ArrivalAssetListAdapter extends AssetListAdapter<ArrivalAssetListAd
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.arrival_asset_list_item, viewGroup, false);
+                .inflate(R.layout.activity_arrival_asset_list_item, viewGroup, false);
 
         return new ViewHolder(v);
     }
@@ -83,5 +80,7 @@ public class ArrivalAssetListAdapter extends AssetListAdapter<ArrivalAssetListAd
         viewHolder.tvInstallPosition.setText("安装地址： " + asset.getInstallPosition());
         viewHolder.tvRoomNumber.setText("房间号： " + asset.getRoomNumber());
     }
+
+
 
 }

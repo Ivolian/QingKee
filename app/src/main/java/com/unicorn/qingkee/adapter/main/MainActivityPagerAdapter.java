@@ -9,7 +9,7 @@ import com.unicorn.qingkee.fragment.asset.AssetAbandonFragment;
 import com.unicorn.qingkee.fragment.asset.AssetAllotInFragment;
 import com.unicorn.qingkee.fragment.asset.AssetAllotOutFragment;
 import com.unicorn.qingkee.fragment.asset.AssetApplyFragment;
-import com.unicorn.qingkee.fragment.TestFragment;
+import com.unicorn.qingkee.fragment.asset.AssetInventoryListFragment;
 import com.unicorn.qingkee.fragment.asset.AssetRepairInFragment;
 import com.unicorn.qingkee.fragment.asset.AssetRepairOutFragment;
 import com.unicorn.qingkee.fragment.asset.AssetTransferFragment;
@@ -42,8 +42,7 @@ public class MainActivityPagerAdapter extends FragmentPagerAdapter {
             case 3:
                 return new AssetApplyFragment();
             case 4:
-                // todo
-                return new TestFragment();
+                return new AssetInventoryListFragment();
             case 5:
                 return new AssetTransferFragment();
             case 6:
@@ -53,7 +52,7 @@ public class MainActivityPagerAdapter extends FragmentPagerAdapter {
             case 8:
                 return new AssetRepairOutFragment();
             default:
-                return new TestFragment();
+                return null;
         }
     }
 

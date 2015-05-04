@@ -94,7 +94,9 @@ public abstract class ToolbarActivity extends AppCompatActivity {
 
     public void hideProgressDialog() {
 
-        progressDialog.dismiss();
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
 }
