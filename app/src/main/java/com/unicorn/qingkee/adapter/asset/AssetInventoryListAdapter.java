@@ -1,18 +1,17 @@
 package com.unicorn.qingkee.adapter.asset;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.zxing.integration.android.IntentIntegrator;
 import com.unicorn.qingkee.R;
-import com.unicorn.qingkee.activity.asset.AssetBindActivity;
-import com.unicorn.qingkee.adapter.base.AssetListAdapter;
-import com.unicorn.qingkee.bean.Asset;
 import com.unicorn.qingkee.bean.Inventory;
+import com.unicorn.qingkee.fragment.asset.AssetInventoryListFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,12 +23,12 @@ import butterknife.InjectView;
 
 public class AssetInventoryListAdapter extends RecyclerView.Adapter<AssetInventoryListAdapter.ViewHolder> {
 
-    private Activity activity;
+    private AssetInventoryListFragment assetInventoryListFragment;
 
     private List<Inventory> inventoryList = new ArrayList<>();
 
-    public AssetInventoryListAdapter(Activity activity) {
-        this.activity = activity;
+    public AssetInventoryListAdapter(AssetInventoryListFragment assetInventoryListFragment) {
+        this.assetInventoryListFragment = assetInventoryListFragment;
     }
 
     @Override
@@ -61,14 +60,27 @@ public class AssetInventoryListAdapter extends RecyclerView.Adapter<AssetInvento
             super(v);
             ButterKnife.inject(this, v);
 
-//            v.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(activity, AssetBindActivity.class);
-//                    intent.putExtra("asset", assetList.get(getAdapterPosition()));
-//                    activity.startActivity(intent);
-//                }
-//            });
+            v.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(final View v) {
+                    PopupMenu popupMenu = new PopupMenu(assetInventoryListFragment.getActivity(), v);
+                    popupMenu.inflate(R.menu.menu_inventory);
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem menuItem) {
+                            switch (menuItem.getItemId()) {
+                                case R.id.inventory:
+                                    assetInventoryListFragment.currentInventoryBatch = inventoryList.get(getAdapterPosition()).getInventoryBatch();
+                                    IntentIntegrator.forSupportFragment(assetInventoryListFragment).initiateScan();
+                                    return true;
+                            }
+                            return false;
+                        }
+                    });
+                    popupMenu.show();
+                    return true;
+                }
+            });
         }
     }
 

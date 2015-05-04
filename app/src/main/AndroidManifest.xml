@@ -22,11 +22,16 @@
         </activity>
         <activity android:name=".activity.main.ModifyServerAddressActivity" />
         <activity android:name=".activity.main.SelectActivity" />
-        <activity android:name=".activity.main.MainActivity" />
+        <activity
+            android:name=".activity.main.MainActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".activity.asset.ArrivalAssetListActivity" />
-        <activity android:name=".activity.asset.AssetBindActivity" />
+        <activity
+            android:name=".activity.asset.AssetBindActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".activity.asset.AssetsListActivity" />
-        <activity android:name=".activity.other.PhotoPagerActivity" />
+        <activity android:name=".activity.other.PhotoActivity" />
+
 
     </application>
 

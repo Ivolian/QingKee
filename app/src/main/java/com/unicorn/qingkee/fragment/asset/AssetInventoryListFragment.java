@@ -1,5 +1,6 @@
 package com.unicorn.qingkee.fragment.asset;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.adapter.asset.AssetInventoryListAdapter;
@@ -38,6 +41,8 @@ public class AssetInventoryListFragment extends BaseFragment {
 
     AssetInventoryListAdapter assetInventoryListAdapter;
 
+    public String currentInventoryBatch;
+
     @Override
     public int getLayoutResourceId() {
         return R.layout.fragment_asset_inventory_list;
@@ -61,12 +66,47 @@ public class AssetInventoryListFragment extends BaseFragment {
     private void initRecyclerView() {
 
         recyclerView.setLayoutManager(getLinearLayoutManager());
-        assetInventoryListAdapter = new AssetInventoryListAdapter(getActivity());
+        assetInventoryListAdapter = new AssetInventoryListAdapter(this);
         recyclerView.setAdapter(assetInventoryListAdapter);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        // 处理扫描条码返回结果
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null && result.getContents() != null) {
+            inventory(result.getContents());
+        }
+    }
+
+    private void inventory(String barcode) {
+
+        Uri.Builder builder = Uri.parse(UrlUtils.getBaseUrl() + "/InventoryOperation?").buildUpon();
+        builder.appendQueryParameter("userid", MyApplication.getInstance().getUserInfo().getUserId());
+        builder.appendQueryParameter("barcode", barcode);
+        builder.appendQueryParameter("inventorybatch", currentInventoryBatch);
+
+        showProgressDialog();
+        MyVolley.getRequestQueue().add(new JsonObjectRequest(builder.toString(),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        hideProgressDialog();
+                        ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        hideProgressDialog();
+                        ToastUtils.show(VolleyErrorHelper.getErrorMessage(volleyError));
+                    }
+                }));
+    }
+
     private void loadData() {
-        showProgressDialog("加载数据中...");
+        showProgressDialog();
         MyVolley.getRequestQueue().add(new JsonObjectRequest(getUrl(),
                 new Response.Listener<JSONObject>() {
                     @Override

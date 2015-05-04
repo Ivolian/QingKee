@@ -25,7 +25,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
-import com.unicorn.qingkee.activity.other.PhotoPagerActivity;
+import com.unicorn.qingkee.activity.other.PhotoActivity;
 import com.unicorn.qingkee.bean.Asset;
 import com.unicorn.qingkee.bean.AssetBindInfo;
 import com.unicorn.qingkee.mycode.ImageUtil;
@@ -198,21 +198,8 @@ public class AssetBindActivity extends ToolbarActivity {
         ivPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                int photoIndex = -1;
-                ArrayList<String> photoPathList = new ArrayList<>();
-                for (int i = 0; i != llPhotoContainer.getChildCount(); i++) {
-                    FrameLayout frameLayout = (FrameLayout) llPhotoContainer.getChildAt(i);
-                    UploadImageView ivPhoto = (UploadImageView) frameLayout.getChildAt(0);
-                    if (ivPhoto == v) {
-                        photoIndex = i;
-                    }
-                    photoPathList.add(ivPhoto.getCompressedPhotoPath());
-                }
-
-                Intent intent = new Intent(AssetBindActivity.this, PhotoPagerActivity.class);
-                intent.putExtra("photoPathList", photoPathList);
-                intent.putExtra("photoIndex", photoIndex);
+                Intent intent =new Intent(AssetBindActivity.this, PhotoActivity.class);
+                intent.putExtra("photoPath",currentPhotoPath);
                 startActivity(intent);
             }
         });
