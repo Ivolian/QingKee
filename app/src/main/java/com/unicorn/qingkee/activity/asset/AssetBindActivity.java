@@ -25,6 +25,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
+import com.unicorn.qingkee.activity.other.PhotoPagerActivity;
 import com.unicorn.qingkee.bean.Asset;
 import com.unicorn.qingkee.bean.AssetBindInfo;
 import com.unicorn.qingkee.mycode.ImageUtil;
@@ -149,7 +150,7 @@ public class AssetBindActivity extends ToolbarActivity {
         assetBindInfo.setBarcode(etBarcode.getText().toString().trim());
         assetBindInfo.setPictures(StringUtils.join(photoNameList.toArray(), '|'));
 
-            ToastUtils.show(StringUtils.join(photoNameList.toArray(), '|'));
+        ToastUtils.show(StringUtils.join(photoNameList.toArray(), '|'));
 
 //        final ProgressDialog progressDialog = ProgressDialog.show(this, "处理中...", "请稍后...", true);
 //        String url = UrlUtils.getBaseUrl() + "/BindAsset?" + assetBindInfo.toUrl();
@@ -178,7 +179,7 @@ public class AssetBindActivity extends ToolbarActivity {
 
     private void afterTakePhoto() {
 
-        if (currentPhotoPath == null){
+        if (currentPhotoPath == null) {
             return;
         }
 
@@ -197,23 +198,27 @@ public class AssetBindActivity extends ToolbarActivity {
         uploadPhoto(ivPhoto, uploadingView);
 
         // 展示照片
-//        ivPhoto.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//                ArrayList<String> photoPathList = new ArrayList<>();
-//                for (int i = 0; i != llPhotoContainer.getChildCount(); i++) {
-//                    FrameLayout frameLayout = (FrameLayout) llPhotoContainer.getChildAt(i);
-//                    MyImageView ivPhoto = (MyImageView) frameLayout.getChildAt(0);
-//                    photoPathList.add( ivPhoto.getCompressedPhotoPath());
-//                }
-//
-////                Intent intent = new Intent(AssetBindActivity.this, ViewPagerActivity.class);
-////                intent.putExtra("photoPathList", photoPathList);
-////                startActivity(intent);
-//            }
-//        });
+        ivPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int photoIndex = -1;
+                ArrayList<String> photoPathList = new ArrayList<>();
+                for (int i = 0; i != llPhotoContainer.getChildCount(); i++) {
+                    FrameLayout frameLayout = (FrameLayout) llPhotoContainer.getChildAt(i);
+                    UploadImageView ivPhoto = (UploadImageView) frameLayout.getChildAt(0);
+                    if (ivPhoto == v) {
+                        photoIndex = i;
+                    }
+                    photoPathList.add(ivPhoto.getCompressedPhotoPath());
+                }
+
+                Intent intent = new Intent(AssetBindActivity.this, PhotoPagerActivity.class);
+                intent.putExtra("photoPathList", photoPathList);
+                intent.putExtra("photoIndex", photoIndex);
+                startActivity(intent);
+            }
+        });
 
         // 删除照片
         ivPhoto.setOnLongClickListener(new View.OnLongClickListener() {
