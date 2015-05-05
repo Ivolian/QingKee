@@ -33,6 +33,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activity.asset.AssetsListActivity" />
         <activity android:name=".activity.other.PhotoActivity" />
+        <activity android:name=".activity.asset.AssetDetailActivity" />
 
 
     </application>

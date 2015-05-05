@@ -1,0 +1,47 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <!-- 布局 start -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/default_activity_padding"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/asset_name"
+                android:hint="资产名称"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/et_employee_name"
+                android:hint="资产品牌"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight"
+                android:layout_marginTop="10dp" />
+
+        </LinearLayout>
+        <!-- end 布局 -->
+
+    </ScrollView>
+
+    <include layout="@layout/toolbar" />
+
+    <include layout="@layout/toolbar_shadow" />
+
+</FrameLayout>

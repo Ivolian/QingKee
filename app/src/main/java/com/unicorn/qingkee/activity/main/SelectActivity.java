@@ -7,7 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.unicorn.qingkee.R;
+import com.unicorn.qingkee.activity.asset.AssetDetailActivity;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.util.ToastUtils;
 
@@ -59,6 +62,18 @@ public class SelectActivity extends ToolbarActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        // 处理扫描条码返回结果
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null && result.getContents() != null) {
+            Intent intent = new Intent(this, AssetDetailActivity.class);
+            intent.putExtra("barcode", result.getContents());
+            startActivity(intent);
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_select_activity, menu);
@@ -69,8 +84,7 @@ public class SelectActivity extends ToolbarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.asset_detail) {
-            // todo
-            ToastUtils.show("todo");
+            new IntentIntegrator(this).initiateScan();
             return true;
         }
         return super.onOptionsItemSelected(item);
