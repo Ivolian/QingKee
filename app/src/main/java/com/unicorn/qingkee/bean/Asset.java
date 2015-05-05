@@ -6,7 +6,9 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 public class Asset implements Serializable {
@@ -26,6 +28,8 @@ public class Asset implements Serializable {
     String installPosition;
     String roomNumber;
     String barcode;
+    String pictures;
+    List<String> pictureList = new ArrayList<>();
 
     //
 
@@ -93,6 +97,14 @@ public class Asset implements Serializable {
         return barcode;
     }
 
+    public String getPictures() {
+        return pictures;
+    }
+
+    public List<String> getPictureList() {
+        return pictureList;
+    }
+
     //
 
     public static Asset parse(JSONObject jsonObject) {
@@ -119,6 +131,12 @@ public class Asset implements Serializable {
         asset.supplierName = JSONUtils.getString(jsonObject, "SupplierName", "");
         asset.address = JSONUtils.getString(jsonObject, "Address", "");
         asset.assetStatus = JSONUtils.getString(jsonObject, "Assetstatus", "");
+
+        asset.pictures = JSONUtils.getString(jsonObject, "Pictures", "");
+        for (String picture : asset.pictures.split("\\|")) {
+            asset.pictureList.add(picture);
+        }
+
         return asset;
     }
 

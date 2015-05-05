@@ -16,11 +16,11 @@ import java.text.SimpleDateFormat;
 import butterknife.InjectView;
 
 
-public class AssetDetailFragment extends BaseFragment {
+public class AssetDetailFragmentFirst extends BaseFragment {
 
     @Override
     public int getLayoutResourceId() {
-        return R.layout.fragment_asset_detail;
+        return R.layout.fragment_asset_detail_first;
     }
 
     @InjectView(R.id.asset_name)

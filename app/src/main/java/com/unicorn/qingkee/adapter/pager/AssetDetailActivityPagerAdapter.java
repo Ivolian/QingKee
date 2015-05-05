@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.unicorn.qingkee.fragment.TestFragment;
-import com.unicorn.qingkee.fragment.asset.AssetDetailFragment;
+import com.unicorn.qingkee.fragment.asset.AssetDetailFragmentFirst;
+import com.unicorn.qingkee.fragment.asset.AssetDetailFragmentSecond;
 
 
 // todo
@@ -18,11 +18,7 @@ public class AssetDetailActivityPagerAdapter extends FragmentStatePagerAdapter {
 
     public Fragment getItem(int num) {
 
-        if (num == 0) {
-            return new AssetDetailFragment();
-        }
-        // todo
-        return new TestFragment();
+        return num == 0 ? new AssetDetailFragmentFirst() : new AssetDetailFragmentSecond();
     }
 
     @Override
