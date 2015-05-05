@@ -79,7 +79,7 @@ public class AssetApplyFragment extends AssetsFragment {
     @OnClick(R.id.btn_confirm)
     public void confirm() {
 
-        if (etAssets.getText().toString().equals("")) {
+        if (etAssets.getText().toString().equals(StringUtils.EMPTY)) {
             ToastUtils.show("请先添加资产");
             return;
         }
@@ -91,6 +91,11 @@ public class AssetApplyFragment extends AssetsFragment {
             ToastUtils.show("使用人不能为空");
             return;
         }
+        if (etNote.getText().toString().equals("")) {
+            ToastUtils.show("备注不能为空");
+            return;
+        }
+
         showProgressDialog();
         MyVolley.getRequestQueue().add(new JsonObjectRequest(getUrl(),
                         new Response.Listener<JSONObject>() {

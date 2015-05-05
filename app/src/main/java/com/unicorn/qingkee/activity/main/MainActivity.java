@@ -51,6 +51,7 @@ public class MainActivity extends ToolbarActivity {
 
     private void initViewPager() {
 
+        viewPager.setOffscreenPageLimit(9);
         viewPager.setAdapter(new MainActivityPagerAdapter(getSupportFragmentManager(), FRAGMENT_TITLES.length));
         viewPager.setCurrentItem(getIntent().getIntExtra("fragmentIndex", 0));
     }
