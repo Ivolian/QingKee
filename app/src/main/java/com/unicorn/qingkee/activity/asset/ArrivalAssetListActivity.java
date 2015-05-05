@@ -223,7 +223,8 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
         ArrayList<Asset> assetList = new ArrayList<>();
         for (int i = 0; i != assetJSONArray.length(); i++) {
             JSONObject jsonObject = JSONUtils.getJSONObject(assetJSONArray, i);
-            assetList.add(Asset.parse(jsonObject));
+            Asset asset = Asset.parse(jsonObject);
+            assetList.add(asset);
         }
         return assetList;
     }
