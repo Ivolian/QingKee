@@ -76,7 +76,7 @@ public class ArrivalAssetListAdapter extends AssetListAdapter<ArrivalAssetListAd
         viewHolder.tvAssetName.setText("资产名称： " + asset.getAssetName());
         viewHolder.tvCompanyName.setText("所属公司： " + asset.getCompanyName());
         viewHolder.tvAssetCost.setText("购入价格： " + asset.getAssetCost());
-        viewHolder.tvAssetSort.setText("资产分类： " + (asset.getAssetSort().equals("1") ? "办公" : "租聘"));
+        viewHolder.tvAssetSort.setText("资产分类： " + Asset.getAssetSortText(asset.getAssetSort()));
         viewHolder.tvInstallPosition.setText("安装地址： " + asset.getInstallPosition());
         viewHolder.tvRoomNumber.setText("房间号： " + asset.getRoomNumber());
     }

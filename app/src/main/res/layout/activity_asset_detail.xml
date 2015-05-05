@@ -25,15 +25,98 @@
                 android:hint="资产名称"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:met_floatingLabel="highlight" />
+                app:met_floatingLabel="highlight"
+                android:editable="false"/>
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/et_employee_name"
+                android:id="@+id/asset_status"
+                android:hint="资产状态"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight"
+                android:layout_marginTop="10dp"
+                android:editable="false"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/brand"
                 android:hint="资产品牌"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:met_floatingLabel="highlight"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:editable="false"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/models"
+                android:hint="资产型号"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight"
+                android:layout_marginTop="10dp"
+                android:editable="false"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/buy_date"
+                android:hint="购买日期"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight"
+                android:layout_marginTop="10dp"
+                android:editable="false"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/asset_value"
+                android:hint="购入价格"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight"
+                android:layout_marginTop="10dp"
+                android:editable="false"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/supplier_name"
+                android:hint="供应商"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight"
+                android:layout_marginTop="10dp"
+                android:editable="false"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/company_name"
+                android:hint="所属公司"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight"
+                android:layout_marginTop="10dp"
+                android:editable="false"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/asset_sort"
+                android:hint="资产类别"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight"
+                android:layout_marginTop="10dp"
+                android:editable="false"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/address"
+                android:hint="所在地址"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight"
+                android:layout_marginTop="10dp"
+                android:editable="false"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/room_number"
+                android:hint="门牌号"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight"
+                android:layout_marginTop="10dp"
+                android:editable="false"/>
 
         </LinearLayout>
         <!-- end 布局 -->

@@ -2,6 +2,7 @@
   <dictionary name="Administrator">
     <words>
       <w>assetid</w>
+      <w>assetstatus</w>
       <w>assetvalue</w>
       <w>barcodes</w>
       <w>buydate</w>

@@ -13,6 +13,7 @@ public class Asset implements Serializable {
 
     String id;
     String assetName;
+    String assetStatus;
     String brand;
     String models;
     Date buyDate;
@@ -58,6 +59,14 @@ public class Asset implements Serializable {
 
     public String getAddress() {
         return address;
+    }
+
+    public String getAssetStatus() {
+        return assetStatus;
+    }
+
+    public void setAssetStatus(String assetStatus) {
+        this.assetStatus = assetStatus;
     }
 
     public String getCompanyName() {
@@ -109,6 +118,38 @@ public class Asset implements Serializable {
         asset.assetValue = JSONUtils.getString(jsonObject, "Assetvalue", "");
         asset.supplierName = JSONUtils.getString(jsonObject, "SupplierName", "");
         asset.address = JSONUtils.getString(jsonObject, "Address", "");
+        asset.assetStatus = JSONUtils.getString(jsonObject, "Assetstatus", "");
         return asset;
+    }
+
+    public static String getAssetSortText(String assetSort) {
+
+        return assetSort.equals("1") ? "办公" : "租聘";
+    }
+
+    public static String getAssetStatusText(String assetStatus) {
+
+        switch (assetStatus) {
+            case "01":
+                return "到货";
+            case "02":
+                return "未审核";
+            case "03":
+                return "闲置";
+            case "04":
+                return "在用";
+            case "05":
+                return "外借";
+            case "06":
+                return "维修";
+            case "07":
+                return "报废";
+            case "08":
+                return "退货";
+            case "09":
+                return "调拨中";
+            default:
+                return null;
+        }
     }
 }
