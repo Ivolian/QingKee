@@ -8,8 +8,7 @@
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
-        >
+        android:layout_marginTop="?attr/actionBarSize">
 
         <!-- 布局 start -->
         <LinearLayout
@@ -19,8 +18,7 @@
             android:gravity="center_horizontal"
             android:padding="@dimen/default_activity_padding"
             android:focusable="true"
-            android:focusableInTouchMode="true"
-            >
+            android:focusableInTouchMode="true">
 
             <ImageView
                 android:id="@+id/iv_logo"
@@ -39,7 +37,8 @@
                 android:padding="8dp"
                 flatui:fl_fieldStyle="fl_box"
                 flatui:fl_borderWidth="2dp"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="20dp"
+                android:textCursorDrawable="@drawable/cursor" />
 
             <com.cengalabs.flatui.views.FlatEditText
                 android:id="@+id/et_login_password"
@@ -52,7 +51,8 @@
                 android:inputType="textPassword"
                 flatui:fl_fieldStyle="fl_box"
                 flatui:fl_borderWidth="2dp"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:textCursorDrawable="@drawable/cursor" />
 
             <CheckBox
                 android:layout_gravity="end"
