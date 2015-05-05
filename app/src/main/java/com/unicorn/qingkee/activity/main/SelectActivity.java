@@ -3,6 +3,8 @@ package com.unicorn.qingkee.activity.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.unicorn.qingkee.R;
@@ -54,6 +56,24 @@ public class SelectActivity extends ToolbarActivity {
         Intent intent = new Intent(SelectActivity.this, MainActivity.class);
         intent.putExtra("fragmentIndex", fragmentIndex);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_select_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.asset_detail) {
+            // todo
+            ToastUtils.show("todo");
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     // ==================== 再按一次退出 ====================

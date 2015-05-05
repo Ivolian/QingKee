@@ -14,6 +14,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -27,14 +30,17 @@ import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.activity.other.PhotoActivity;
 import com.unicorn.qingkee.bean.Asset;
-import com.unicorn.qingkee.bean.AssetBindInfo;
 import com.unicorn.qingkee.mycode.ImageUtil;
 import com.unicorn.qingkee.mycode.UploadImageView;
+import com.unicorn.qingkee.util.JSONUtils;
 import com.unicorn.qingkee.util.StringUtils;
 import com.unicorn.qingkee.util.ToastUtils;
 import com.unicorn.qingkee.util.UrlUtils;
+import com.unicorn.qingkee.volley.MyVolley;
+import com.unicorn.qingkee.volley.toolbox.VolleyErrorHelper;
 
 import org.apache.http.Header;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -141,37 +147,33 @@ public class AssetBindActivity extends ToolbarActivity {
         }
 
         //
-        AssetBindInfo assetBindInfo = new AssetBindInfo();
-        assetBindInfo.setUserId(MyApplication.getInstance().getUserInfo().getUserId());
-        assetBindInfo.setAssetId(asset.getId());
-        assetBindInfo.setBarcode(etBarcode.getText().toString().trim());
-        assetBindInfo.setPictures(StringUtils.join(photoNameList.toArray(), '|'));
+        Uri.Builder builder = Uri.parse(UrlUtils.getBaseUrl() + "/BindAsset?").buildUpon();
+        builder.appendQueryParameter("userid", MyApplication.getInstance().getUserInfo().getUserId());
+        builder.appendQueryParameter("assetid", asset.getId());
+        builder.appendQueryParameter("barcode",etBarcode.getText().toString().trim() );
+        builder.appendQueryParameter("pictures",StringUtils.join(photoNameList.toArray(), '|') );
 
-        ToastUtils.show(StringUtils.join(photoNameList.toArray(), '|'));
-
-//        final ProgressDialog progressDialog = ProgressDialog.show(this, "处理中...", "请稍后...", true);
-//        String url = UrlUtils.getBaseUrl() + "/BindAsset?" + assetBindInfo.toUrl();
-//        MyVolley.getRequestQueue().add(new JsonObjectRequest(url,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        progressDialog.dismiss();
-//                        int result = JSONUtils.getInt(response, "Result", 1);
-//                        if (result != 0) {
-//                            ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
-//                        } else {
-//                            ToastUtils.show("绑定成功");
-//                            startActivity(ArrivalAssetListActivity.class);
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError volleyError) {
-//                        progressDialog.dismiss();
-//                        ToastUtils.show(VolleyErrorHelper.getErrorMessage(volleyError));
-//                    }
-//                }));
+        MyVolley.getRequestQueue().add(new JsonObjectRequest(builder.toString(),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        hideProgressDialog();
+                        int result = JSONUtils.getInt(response, "Result", 1);
+                        if (result != 0) {
+                            ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
+                        } else {
+                            ToastUtils.show("绑定成功");
+                            startActivity(ArrivalAssetListActivity.class);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                    hideProgressDialog();
+                        ToastUtils.show(VolleyErrorHelper.getErrorMessage(volleyError));
+                    }
+                }));
     }
 
     private void afterTakePhoto() {
