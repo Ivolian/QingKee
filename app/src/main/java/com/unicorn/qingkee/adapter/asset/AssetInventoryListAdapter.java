@@ -92,7 +92,7 @@ public class AssetInventoryListAdapter extends RecyclerView.Adapter<AssetInvento
         viewHolder.tvDescription.setText("描述： " + inventory.getDescription());
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-m-d hh:mm:ss");
-        viewHolder.tvPublishDate.setText("出版日期： " + simpleDateFormat.format(inventory.getPublishDate()));
+        viewHolder.tvPublishDate.setText("发布日期： " + simpleDateFormat.format(inventory.getPublishDate()));
     }
 
     public List<Inventory> getInventoryList() {

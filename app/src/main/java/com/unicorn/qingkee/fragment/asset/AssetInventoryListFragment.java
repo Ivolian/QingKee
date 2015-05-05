@@ -3,6 +3,7 @@ package com.unicorn.qingkee.fragment.asset;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.unicorn.qingkee.MyApplication;
@@ -43,6 +45,9 @@ public class AssetInventoryListFragment extends BaseFragment {
 
     public String currentInventoryBatch;
 
+    @InjectView(R.id.progressBar)
+    ProgressBarCircularIndeterminate progressBar;
+
     @Override
     public int getLayoutResourceId() {
         return R.layout.fragment_asset_inventory_list;
@@ -54,13 +59,9 @@ public class AssetInventoryListFragment extends BaseFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         initRecyclerView();
+        reload();
 
         return view;
-    }
-
-    @Override
-    public void visibleToUser() {
-        loadData();
     }
 
     private void initRecyclerView() {
@@ -105,8 +106,21 @@ public class AssetInventoryListFragment extends BaseFragment {
                 }));
     }
 
-    private void loadData() {
+    private void reload() {
+        assetInventoryListAdapter.setInventoryList(new ArrayList<Inventory>());
+        assetInventoryListAdapter.notifyDataSetChanged();
         showProgressDialog();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+               sendRequest();
+            }
+        },3000);
+
+    }
+
+    private void sendRequest(){
         MyVolley.getRequestQueue().add(new JsonObjectRequest(getUrl(),
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -151,4 +165,21 @@ public class AssetInventoryListFragment extends BaseFragment {
         return linearLayoutManager;
     }
 
+    //
+
+    @Override
+    public void showProgressDialog() {
+
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void hideProgressDialog() {
+
+        if (progressBar != null) {
+            progressBar.setVisibility(View.INVISIBLE);
+        }
+    }
 }
