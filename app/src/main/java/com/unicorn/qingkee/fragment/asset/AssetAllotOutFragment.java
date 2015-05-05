@@ -91,6 +91,10 @@ public class AssetAllotOutFragment extends AssetsFragment {
             ToastUtils.show("使用人不能为空");
             return;
         }
+        if (etNote.getText().toString().equals("")) {
+            ToastUtils.show("备注不能为空");
+            return;
+        }
         showProgressDialog();
         MyVolley.getRequestQueue().add(new JsonObjectRequest(getUrl(),
                 new Response.Listener<JSONObject>() {

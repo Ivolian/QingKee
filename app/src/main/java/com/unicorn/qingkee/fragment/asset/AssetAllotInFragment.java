@@ -59,6 +59,10 @@ public class AssetAllotInFragment extends AssetsFragment {
             ToastUtils.show("请先添加资产");
             return;
         }
+        if (etNote.getText().toString().equals("")) {
+            ToastUtils.show("备注不能为空");
+            return;
+        }
         showProgressDialog();
         MyVolley.getRequestQueue().add(new JsonObjectRequest(getUrl(),
                 new Response.Listener<JSONObject>() {
@@ -70,6 +74,7 @@ public class AssetAllotInFragment extends AssetsFragment {
                             ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
                         } else {
                             ToastUtils.show("调拨入库成功");
+                            finishWithActivity();
                         }
                     }
                 },
