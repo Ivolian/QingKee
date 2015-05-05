@@ -60,9 +60,9 @@ public class AssetInventoryListAdapter extends RecyclerView.Adapter<AssetInvento
             super(v);
             ButterKnife.inject(this, v);
 
-            v.setOnLongClickListener(new View.OnLongClickListener() {
+            v.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onLongClick(final View v) {
+                public void onClick(final View v) {
                     PopupMenu popupMenu = new PopupMenu(assetInventoryListFragment.getActivity(), v);
                     popupMenu.inflate(R.menu.menu_inventory);
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -78,7 +78,6 @@ public class AssetInventoryListAdapter extends RecyclerView.Adapter<AssetInvento
                         }
                     });
                     popupMenu.show();
-                    return true;
                 }
             });
         }
