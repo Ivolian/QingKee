@@ -12,7 +12,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
-import com.unicorn.qingkee.adapter.asset.ArrivalAssetListAdapter;
+import com.unicorn.qingkee.adapter.list.ArrivalAssetListAdapter;
 import com.unicorn.qingkee.bean.Asset;
 import com.unicorn.qingkee.bean.AssetQueryInfo;
 import com.unicorn.qingkee.util.JSONUtils;

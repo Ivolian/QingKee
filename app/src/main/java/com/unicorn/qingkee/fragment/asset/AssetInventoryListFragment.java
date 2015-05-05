@@ -18,7 +18,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
-import com.unicorn.qingkee.adapter.asset.AssetInventoryListAdapter;
+import com.unicorn.qingkee.adapter.list.AssetInventoryListAdapter;
 import com.unicorn.qingkee.bean.Inventory;
 import com.unicorn.qingkee.fragment.base.BaseFragment;
 import com.unicorn.qingkee.util.JSONUtils;

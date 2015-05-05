@@ -17,7 +17,7 @@ import com.google.zxing.integration.android.IntentResult;
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
-import com.unicorn.qingkee.adapter.asset.ArrivalAssetListAdapter;
+import com.unicorn.qingkee.adapter.list.ArrivalAssetListAdapter;
 import com.unicorn.qingkee.bean.Asset;
 import com.unicorn.qingkee.mycode.SwipeableRecyclerViewTouchListener;
 import com.unicorn.qingkee.util.JSONUtils;

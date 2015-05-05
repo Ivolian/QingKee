@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
         <it.neokree.materialtabs.MaterialTabHost
-            android:id="@+id/tabHost"
+            android:id="@+id/materialTabHost"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             app:primaryColor="@color/grass_dark"

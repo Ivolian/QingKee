@@ -1,4 +1,4 @@
-package com.unicorn.qingkee.adapter.asset;
+package com.unicorn.qingkee.adapter.list;
 
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;

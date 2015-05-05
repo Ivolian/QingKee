@@ -1,4 +1,4 @@
-package com.unicorn.qingkee.adapter.asset;
+package com.unicorn.qingkee.adapter.list;
 
 import android.app.Activity;
 import android.content.Intent;
