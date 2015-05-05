@@ -58,6 +58,10 @@ public class AssetRepairOutFragment extends AssetsFragment {
             ToastUtils.show("请先添加资产");
             return;
         }
+        if (etNote.getText().toString().equals("")) {
+            ToastUtils.show("备注不能为空");
+            return;
+        }
         showProgressDialog();
         MyVolley.getRequestQueue().add(new JsonObjectRequest(getUrl(),
                 new Response.Listener<JSONObject>() {
