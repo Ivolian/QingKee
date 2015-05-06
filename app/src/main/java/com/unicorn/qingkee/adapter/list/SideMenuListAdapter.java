@@ -14,27 +14,23 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
+public class SideMenuListAdapter extends RecyclerView.Adapter<SideMenuListAdapter.ViewHolder> {
 
     private MainActivity mainActivity;
 
-
-    public MenuAdapter(MainActivity mainActivity) {
+    public SideMenuListAdapter(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
 
     @Override
     public int getItemCount() {
-        return mainActivity.FRAGMENT_TITLES
-                .length;
+        return mainActivity.FRAGMENT_TITLES.length;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.side_menu_item, viewGroup, false);
-
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.side_menu_item, viewGroup, false);
         return new ViewHolder(v);
     }
 
@@ -43,11 +39,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         @InjectView(R.id.textView)
         TextView textView;
 
-
         public ViewHolder(View v) {
             super(v);
             ButterKnife.inject(this, v);
-
 
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -55,18 +49,17 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            mainActivity.mDrawerLayout.closeDrawers();
-                            mainActivity.viewPager.setCurrentItem(getAdapterPosition(),false);
+                            mainActivity.onSideMenuItemClick(getAdapterPosition());
                         }
-                    },600);
+                    }, 600);
                 }
             });
-
         }
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+
         viewHolder.textView.setText(mainActivity.FRAGMENT_TITLES[position]);
     }
 

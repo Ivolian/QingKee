@@ -9,13 +9,13 @@ import android.view.ViewGroup;
 
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.main.MainActivity;
-import com.unicorn.qingkee.adapter.list.MenuAdapter;
+import com.unicorn.qingkee.adapter.list.SideMenuListAdapter;
 import com.unicorn.qingkee.fragment.base.BaseFragment;
 
 import butterknife.InjectView;
 
 
-public class MenuFragment extends BaseFragment {
+public class SideMenuFragment extends BaseFragment {
 
     @InjectView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -37,10 +37,8 @@ public class MenuFragment extends BaseFragment {
 
     private void initRecyclerView() {
 
-        MainActivity mainActivity = (MainActivity)getActivity();
-
         recyclerView.setLayoutManager(getLinearLayoutManager());
-        recyclerView.setAdapter(new MenuAdapter((MainActivity)getActivity()));
+        recyclerView.setAdapter(new SideMenuListAdapter((MainActivity) getActivity()));
     }
 
     private LinearLayoutManager getLinearLayoutManager() {

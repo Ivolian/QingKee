@@ -21,7 +21,7 @@ public class MainActivity extends ToolbarActivity {
     };
 
     @InjectView(R.id.viewpager)
-   public ViewPager viewPager;
+    public ViewPager viewPager;
 
     @InjectView(R.id.drawer)
     public DrawerLayout mDrawerLayout;
@@ -60,6 +60,12 @@ public class MainActivity extends ToolbarActivity {
     public void changeToolbarTitle(int position) {
 
         mToolbar.setTitle(FRAGMENT_TITLES[position]);
+    }
+
+    public void onSideMenuItemClick(int position) {
+
+        mDrawerLayout.closeDrawers();
+        viewPager.setCurrentItem(position, false);
     }
 
 }
