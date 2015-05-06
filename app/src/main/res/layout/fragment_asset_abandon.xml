@@ -13,13 +13,49 @@
         android:background="@color/background_material_light"
         android:padding="20dp">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/et_assets"
-            android:hint="待报废资产"
-            android:editable="false"
+        <LinearLayout
+            android:id="@+id/ll_barcode"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight" />
+            android:layout_marginTop="10dp">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/barcode"
+                android:hint="条码"
+                android:editable="false"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight" />
+
+            <Button
+                android:id="@+id/btn_scan_barcode"
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="扫描条码" />
+
+        </LinearLayout>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_aband_value"
+            android:hint="报废收入"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight"
+            app:met_autoValidate="true"
+            android:layout_marginTop="10dp"
+            />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/et_aband_cost"
+            android:hint="报废成本"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:met_floatingLabel="highlight"
+            app:met_autoValidate="true"
+            android:layout_marginTop="10dp" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/et_note"
