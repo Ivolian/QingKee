@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.adapter.pager.MainActivityPagerAdapter;
 import com.unicorn.qingkee.fragment.other.SideMenuFragment;
+import com.unicorn.qingkee.util.ToastUtils;
 
 import butterknife.InjectView;
 import butterknife.OnPageChange;
@@ -27,6 +29,8 @@ public class MainActivity extends ToolbarActivity {
     @InjectView(R.id.drawer)
     public DrawerLayout drawerLayout;
 
+    SideMenuFragment sideMenuFragment;
+
     public int currentItem;
 
     @Override
@@ -37,13 +41,18 @@ public class MainActivity extends ToolbarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        Log.e("result", getClass().getName() + currentItem);
+
+
         super.onCreate(savedInstanceState);
+        Log.e("result", getClass().getName() + currentItem);
+
         initToolbar(FRAGMENT_TITLES[getIntent().getIntExtra("fragmentIndex", 0)]);
 
         currentItem = getIntent().getIntExtra("fragmentIndex", 0);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().add(R.id.side_menu_fragment, new SideMenuFragment()).commit();
-        }
+            sideMenuFragment = new SideMenuFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.side_menu_fragment, sideMenuFragment).commit();
+
         initDrawerLayout();
         initViewPager();
     }
@@ -67,6 +76,7 @@ public class MainActivity extends ToolbarActivity {
 
         toolbar.setTitle(FRAGMENT_TITLES[position]);
         currentItem = position;
+        sideMenuFragment.notifyDataSetChanged();
     }
 
     public void onSideMenuItemClick(int position) {

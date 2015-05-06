@@ -51,7 +51,6 @@ public class SideMenuListAdapter extends RecyclerView.Adapter<SideMenuListAdapte
                         @Override
                         public void run() {
                             mainActivity.onSideMenuItemClick(getAdapterPosition());
-                            notifyDataSetChanged();
                         }
                     }, 600);
                 }

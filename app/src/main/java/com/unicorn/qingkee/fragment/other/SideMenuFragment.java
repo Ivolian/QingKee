@@ -20,6 +20,8 @@ public class SideMenuFragment extends BaseFragment {
     @InjectView(R.id.recyclerView)
     RecyclerView recyclerView;
 
+    SideMenuListAdapter sideMenuListAdapter;
+
     @Override
     public int getLayoutResourceId() {
         return R.layout.fragment_side_menu;
@@ -38,7 +40,8 @@ public class SideMenuFragment extends BaseFragment {
     private void initRecyclerView() {
 
         recyclerView.setLayoutManager(getLinearLayoutManager());
-        recyclerView.setAdapter(new SideMenuListAdapter((MainActivity) getActivity()));
+        sideMenuListAdapter = new SideMenuListAdapter((MainActivity) getActivity());
+        recyclerView.setAdapter(sideMenuListAdapter);
     }
 
     private LinearLayoutManager getLinearLayoutManager() {
@@ -46,6 +49,11 @@ public class SideMenuFragment extends BaseFragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         return linearLayoutManager;
+    }
+
+    public void notifyDataSetChanged() {
+
+        sideMenuListAdapter.notifyDataSetChanged();
     }
 
 }
