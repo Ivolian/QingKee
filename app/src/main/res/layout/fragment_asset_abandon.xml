@@ -68,7 +68,8 @@
         <com.cengalabs.flatui.views.FlatButton
             android:layout_marginTop="60dp"
             android:id="@+id/btn_confirm"
-            android:text="确认报废"
+            android:text="确认"
+            android:textSize="@dimen/bigger_textsize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             flatui:fl_theme="@array/grass"

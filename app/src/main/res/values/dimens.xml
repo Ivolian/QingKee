@@ -1,6 +1,6 @@
 <resources>
     <dimen name="default_activity_padding">16dp</dimen>
-    <dimen name="login_activity_textsize">20sp</dimen>
+    <dimen name="bigger_textsize">20sp</dimen>
     <dimen name="select_activity_interval">10dp</dimen>
     <dimen name="select_activity_half_interval">5dp</dimen>
 </resources>
