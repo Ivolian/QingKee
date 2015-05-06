@@ -4,21 +4,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.unicorn.qingkee.fragment.asset.AssetDetailFragmentFirst;
-import com.unicorn.qingkee.fragment.asset.AssetDetailFragmentSecond;
+import com.unicorn.qingkee.fragment.asset.AssetDetailInfoFragment;
+import com.unicorn.qingkee.fragment.asset.AssetDetailPhotoFragment;
 
 
 // todo
 public class AssetDetailActivityPagerAdapter extends FragmentStatePagerAdapter {
 
     public AssetDetailActivityPagerAdapter(FragmentManager fm) {
-        super(fm);
 
+        super(fm);
     }
 
     public Fragment getItem(int num) {
 
-        return num == 0 ? new AssetDetailFragmentFirst() : new AssetDetailFragmentSecond();
+        return num == 0 ? new AssetDetailInfoFragment() : new AssetDetailPhotoFragment();
     }
 
     @Override

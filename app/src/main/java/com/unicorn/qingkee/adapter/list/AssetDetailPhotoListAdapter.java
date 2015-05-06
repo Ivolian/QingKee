@@ -17,11 +17,11 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class AssetDetailListAdapter extends RecyclerView.Adapter<AssetDetailListAdapter.ViewHolder> {
+public class AssetDetailPhotoListAdapter extends RecyclerView.Adapter<AssetDetailPhotoListAdapter.ViewHolder> {
 
     private List<String> photoList;
 
-    public AssetDetailListAdapter(List<String> photoList) {
+    public AssetDetailPhotoListAdapter(List<String> photoList) {
         this.photoList = photoList;
     }
 
@@ -33,9 +33,7 @@ public class AssetDetailListAdapter extends RecyclerView.Adapter<AssetDetailList
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.asset_detail_list_item, viewGroup, false);
-
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.asset_detail_photo_list_item, viewGroup, false);
         return new ViewHolder(v);
     }
 
@@ -53,7 +51,7 @@ public class AssetDetailListAdapter extends RecyclerView.Adapter<AssetDetailList
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
-        // todo
+        // todo 选择占位和错误图片
         viewHolder.networkImageView.setDefaultImageResId(R.drawable.ic_launcher);
         viewHolder.networkImageView.setErrorImageResId(R.drawable.ic_launcher);
         String photoUrl = UrlUtils.getUploadImagesUrl() + File.separator + photoList.get(position);

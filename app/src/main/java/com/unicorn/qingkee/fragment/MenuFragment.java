@@ -8,15 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.unicorn.qingkee.R;
-import com.unicorn.qingkee.activity.asset.AssetDetailActivity;
 import com.unicorn.qingkee.activity.main.MainActivity;
-import com.unicorn.qingkee.adapter.list.AssetDetailListAdapter;
 import com.unicorn.qingkee.adapter.list.MenuAdapter;
-import com.unicorn.qingkee.bean.Asset;
 import com.unicorn.qingkee.fragment.base.BaseFragment;
-
-import java.util.Arrays;
-import java.util.List;
 
 import butterknife.InjectView;
 

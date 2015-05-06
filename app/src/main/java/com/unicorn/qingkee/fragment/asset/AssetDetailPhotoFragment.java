@@ -8,41 +8,41 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.unicorn.qingkee.R;
-import com.unicorn.qingkee.activity.asset.AssetDetailActivity;
-import com.unicorn.qingkee.adapter.list.AssetDetailListAdapter;
+import com.unicorn.qingkee.adapter.list.AssetDetailPhotoListAdapter;
 import com.unicorn.qingkee.bean.Asset;
 import com.unicorn.qingkee.fragment.base.BaseFragment;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import butterknife.InjectView;
 
 
-public class AssetDetailFragmentSecond extends BaseFragment {
+// 资产详情照片
+public class AssetDetailPhotoFragment extends BaseFragment {
+
+    @InjectView(R.id.recyclerView)
+    RecyclerView recyclerView;
 
     @Override
     public int getLayoutResourceId() {
         return R.layout.fragment_asset_detail_second;
     }
 
-    @InjectView(R.id.recyclerView)
-    RecyclerView recyclerView;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        Asset asset = ((AssetDetailActivity) getActivity()).asset;
-        initRecyclerView(asset.getPictureList());
+        initRecyclerView();
 
         return view;
     }
 
-    private void initRecyclerView(List<String> photoList) {
+    private void initRecyclerView() {
 
         recyclerView.setLayoutManager(getLinearLayoutManager());
-        recyclerView.setAdapter(new AssetDetailListAdapter(photoList));
+        Asset asset = (Asset) getActivity().getIntent().getSerializableExtra("asset");
+        recyclerView.setAdapter(new AssetDetailPhotoListAdapter(asset == null ? new ArrayList<String>() : asset.getPictureList()));
     }
 
     private LinearLayoutManager getLinearLayoutManager() {

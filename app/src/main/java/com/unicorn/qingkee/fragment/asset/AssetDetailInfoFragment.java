@@ -7,21 +7,15 @@ import android.view.ViewGroup;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.unicorn.qingkee.R;
-import com.unicorn.qingkee.activity.asset.AssetDetailActivity;
 import com.unicorn.qingkee.bean.Asset;
 import com.unicorn.qingkee.fragment.base.BaseFragment;
-
-import java.text.SimpleDateFormat;
+import com.unicorn.qingkee.util.TimeUtils;
 
 import butterknife.InjectView;
 
 
-public class AssetDetailFragmentFirst extends BaseFragment {
-
-    @Override
-    public int getLayoutResourceId() {
-        return R.layout.fragment_asset_detail_first;
-    }
+// 资产详情基本信息
+public class AssetDetailInfoFragment extends BaseFragment {
 
     @InjectView(R.id.asset_name)
     MaterialEditText etAssetName;
@@ -57,19 +51,30 @@ public class AssetDetailFragmentFirst extends BaseFragment {
     MaterialEditText etRoomnumber;
 
     @Override
+    public int getLayoutResourceId() {
+        return R.layout.fragment_asset_detail_info;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        Asset asset = ((AssetDetailActivity) getActivity()).asset;
+        initViews();
+
+        return view;
+    }
+
+    private void initViews() {
+
+        Asset asset = (Asset) getActivity().getIntent().getSerializableExtra("asset");
         if (asset != null) {
             etAssetName.setText(asset.getAssetName());
             etAssetStatus.setText(Asset.getAssetStatusText(asset.getAssetStatus()));
             etBrand.setText(asset.getBrand());
             etModels.setText(asset.getModels());
             etModels.setText(asset.getModels());
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-m-d hh:mm:ss");
-            etBuyDate.setText(simpleDateFormat.format(asset.getBuyDate()));
+            etBuyDate.setText(TimeUtils.getTime(asset.getBuyDate().getTime()));
             etAssetValue.setText(asset.getAssetValue());
             etSupplierName.setText(asset.getSupplierName());
             etCompanyName.setText(asset.getCompanyName());
@@ -77,9 +82,6 @@ public class AssetDetailFragmentFirst extends BaseFragment {
             etAddress.setText(asset.getAddress());
             etRoomnumber.setText(asset.getRoomNumber());
         }
-
-        return view;
     }
-
 
 }

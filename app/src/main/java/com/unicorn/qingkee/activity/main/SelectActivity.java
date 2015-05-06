@@ -29,7 +29,7 @@ import org.json.JSONObject;
 
 public class SelectActivity extends ToolbarActivity {
 
-    int[] viewIdS = {
+    int[] ids = {
             R.id.asset_add, R.id.asset_allot_out, R.id.asset_allot_in,
             R.id.asset_apply, R.id.asset_inventory, R.id.asset_transfer,
             R.id.asset_abandon, R.id.asset_repair_in, R.id.asset_repair_out
@@ -50,9 +50,9 @@ public class SelectActivity extends ToolbarActivity {
 
     private void initViews() {
 
-        for (int i = 0, length = viewIdS.length; i != length; i++) {
+        for (int i = 0, length = ids.length; i != length; i++) {
             final int index = i;
-            findViewById(viewIdS[index]).setOnClickListener(new View.OnClickListener() {
+            findViewById(ids[index]).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     new Handler().postDelayed(new Runnable() {
@@ -74,16 +74,6 @@ public class SelectActivity extends ToolbarActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        // 处理扫描条码返回结果
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null && result.getContents() != null) {
-            fetchAssetByBarcode(result.getContents());
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_select_activity, menu);
@@ -98,6 +88,16 @@ public class SelectActivity extends ToolbarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        // 处理扫描条码返回结果
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null && result.getContents() != null) {
+            fetchAssetByBarcode(result.getContents());
+        }
     }
 
     private void fetchAssetByBarcode(final String barcode) {
