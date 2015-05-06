@@ -22,3 +22,4 @@
 17. 添加 [https://github.com/journeyapps/zxing-android-embedded](https://github.com/journeyapps/zxing-android-embedded)。
 18. 添加 [https://github.com/linger1216/labelview](https://github.com/linger1216/labelview)。
 19. 添加 [https://github.com/Clans/FloatingActionButton](https://github.com/Clans/FloatingActionButton)。
+20. 添加 [https://github.com/neokree/MaterialTabs](https://github.com/neokree/MaterialTabs)。
