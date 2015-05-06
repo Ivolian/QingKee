@@ -34,6 +34,7 @@
             flatui:fl_textAppearance="fl_none"
             flatui:fl_blockButtonEffectHeight="3dp"
             flatui:fl_touchEffect="fl_ease"
+            android:textCursorDrawable="@drawable/grass_cursor"
             android:layout_marginTop="40dp" />
 
     </LinearLayout>
