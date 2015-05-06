@@ -1,5 +1,6 @@
 package com.unicorn.qingkee.adapter.list;
 
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -50,6 +51,7 @@ public class SideMenuListAdapter extends RecyclerView.Adapter<SideMenuListAdapte
                         @Override
                         public void run() {
                             mainActivity.onSideMenuItemClick(getAdapterPosition());
+                            notifyDataSetChanged();
                         }
                     }, 600);
                 }
@@ -61,6 +63,13 @@ public class SideMenuListAdapter extends RecyclerView.Adapter<SideMenuListAdapte
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
         viewHolder.textView.setText(mainActivity.FRAGMENT_TITLES[position]);
+        if (position == mainActivity.currentItem){
+            viewHolder.textView.setBackgroundColor(Color.parseColor("#66CDAA"));
+            viewHolder.textView.setTextColor(Color.parseColor("#ffffff"));
+        }else {
+            viewHolder.textView.setBackgroundColor(Color.parseColor("#ffffff"));
+            viewHolder.textView.setTextColor(Color.parseColor("#888888"));
+        }
     }
 
 }

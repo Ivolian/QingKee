@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.adapter.pager.MainActivityPagerAdapter;
+import com.unicorn.qingkee.fragment.other.SideMenuFragment;
 
 import butterknife.InjectView;
 import butterknife.OnPageChange;
@@ -26,6 +27,8 @@ public class MainActivity extends ToolbarActivity {
     @InjectView(R.id.drawer)
     public DrawerLayout drawerLayout;
 
+    public int currentItem;
+
     @Override
     public int getLayoutResourceId() {
         return R.layout.activity_main;
@@ -36,6 +39,11 @@ public class MainActivity extends ToolbarActivity {
 
         super.onCreate(savedInstanceState);
         initToolbar(FRAGMENT_TITLES[getIntent().getIntExtra("fragmentIndex", 0)]);
+
+        currentItem = getIntent().getIntExtra("fragmentIndex", 0);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().add(R.id.side_menu_fragment, new SideMenuFragment()).commit();
+        }
         initDrawerLayout();
         initViewPager();
     }
@@ -51,13 +59,14 @@ public class MainActivity extends ToolbarActivity {
 
         viewPager.setOffscreenPageLimit(FRAGMENT_TITLES.length);
         viewPager.setAdapter(new MainActivityPagerAdapter(getSupportFragmentManager(), FRAGMENT_TITLES.length));
-        viewPager.setCurrentItem(getIntent().getIntExtra("fragmentIndex", 0));
+        viewPager.setCurrentItem(currentItem);
     }
 
     @OnPageChange(value = R.id.viewpager, callback = OnPageChange.Callback.PAGE_SELECTED)
     public void changeToolbarTitle(int position) {
 
         toolbar.setTitle(FRAGMENT_TITLES[position]);
+        currentItem = position;
     }
 
     public void onSideMenuItemClick(int position) {

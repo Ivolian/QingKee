@@ -14,10 +14,8 @@
             android:layout_height="match_parent" />
 
         <!-- 侧滑菜单 -->
-        <fragment
-            android:id="@+id/menu_fragment"
-            android:name="com.unicorn.qingkee.fragment.other.SideMenuFragment"
-            android:background="@android:color/white"
+        <FrameLayout
+            android:id="@+id/side_menu_fragment"
             android:layout_width="220dp"
             android:layout_height="match_parent"
             android:layout_gravity="left" />
