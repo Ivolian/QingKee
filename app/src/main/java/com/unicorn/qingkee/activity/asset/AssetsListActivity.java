@@ -17,7 +17,7 @@ import com.google.zxing.integration.android.IntentResult;
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
-import com.unicorn.qingkee.adapter.list.ArrivalAssetListAdapter;
+import com.unicorn.qingkee.adapter.list.AssetsListAdapter;
 import com.unicorn.qingkee.bean.Asset;
 import com.unicorn.qingkee.mycode.SwipeableRecyclerViewTouchListener;
 import com.unicorn.qingkee.util.JSONUtils;
@@ -42,13 +42,11 @@ public class AssetsListActivity extends ToolbarActivity {
     @InjectView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    // todo 写适配器
-    ArrivalAssetListAdapter arrivalAssetListAdapter;
+    AssetsListAdapter assetsListAdapter;
 
     @Override
     public int getLayoutResourceId() {
-
-        return R.layout.activity_assets_list_activity;
+        return R.layout.activity_assets_list;
     }
 
     @Override
@@ -63,9 +61,9 @@ public class AssetsListActivity extends ToolbarActivity {
     private void initRecyclerView() {
 
         recyclerView.setLayoutManager(getLinearLayoutManager());
-        arrivalAssetListAdapter = new ArrivalAssetListAdapter(this);
-        arrivalAssetListAdapter.setAssetList((ArrayList<Asset>) getIntent().getSerializableExtra("assetList"));
-        recyclerView.setAdapter(arrivalAssetListAdapter);
+        assetsListAdapter = new AssetsListAdapter(this);
+        assetsListAdapter.setAssetList((ArrayList<Asset>) getIntent().getSerializableExtra("assetList"));
+        recyclerView.setAdapter(assetsListAdapter);
         SwipeableRecyclerViewTouchListener swipeTouchListener =
                 new SwipeableRecyclerViewTouchListener(recyclerView,
                         new SwipeableRecyclerViewTouchListener.SwipeListener() {
@@ -77,20 +75,20 @@ public class AssetsListActivity extends ToolbarActivity {
                             @Override
                             public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    arrivalAssetListAdapter.getAssetList().remove(position);
-                                    arrivalAssetListAdapter.notifyItemRemoved(position);
+                                    assetsListAdapter.getAssetList().remove(position);
+                                    assetsListAdapter.notifyItemRemoved(position);
                                 }
-                                arrivalAssetListAdapter.notifyDataSetChanged();
+                                assetsListAdapter.notifyDataSetChanged();
                                 floatingActionButton.show(true);
                             }
 
                             @Override
                             public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    arrivalAssetListAdapter.getAssetList().remove(position);
-                                    arrivalAssetListAdapter.notifyItemRemoved(position);
+                                    assetsListAdapter.getAssetList().remove(position);
+                                    assetsListAdapter.notifyItemRemoved(position);
                                 }
-                                arrivalAssetListAdapter.notifyDataSetChanged();
+                                assetsListAdapter.notifyDataSetChanged();
                                 floatingActionButton.show(true);
                             }
                         },
@@ -109,8 +107,6 @@ public class AssetsListActivity extends ToolbarActivity {
         recyclerView.addOnItemTouchListener(swipeTouchListener);
     }
 
-    // ==================== onActivityResult ====================
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -122,15 +118,13 @@ public class AssetsListActivity extends ToolbarActivity {
     }
 
     @OnClick(R.id.floatingActionButton)
-    public void finishWithData() {
+    public void finishAfterSetResult() {
 
         Intent intent = new Intent();
-        intent.putExtra("assetList", arrivalAssetListAdapter.getAssetList());
+        intent.putExtra("assetList", assetsListAdapter.getAssetList());
         setResult(2333, intent);
         finish();
     }
-
-    // ========================= menu ===========================
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -163,14 +157,14 @@ public class AssetsListActivity extends ToolbarActivity {
                             ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
                         } else {
                             Asset asset = Asset.parse(JSONUtils.getJSONObject(JSONUtils.getJSONArray(response, "lstAsset", null), 0));
-                            for (Asset temp : arrivalAssetListAdapter.getAssetList()) {
+                            for (Asset temp : assetsListAdapter.getAssetList()) {
                                 if (asset.getId().equals(temp.getId())) {
-                                    ToastUtils.show("该资产已在列表中");
+                                    ToastUtils.show("资产已在列表中");
                                     return;
                                 }
                             }
-                            arrivalAssetListAdapter.getAssetList().add(asset);
-                            arrivalAssetListAdapter.notifyDataSetChanged();
+                            assetsListAdapter.getAssetList().add(asset);
+                            assetsListAdapter.notifyDataSetChanged();
                             floatingActionButton.show(true);
                         }
                     }
