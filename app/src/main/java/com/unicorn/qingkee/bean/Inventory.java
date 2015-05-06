@@ -5,7 +5,6 @@ import com.unicorn.qingkee.util.JSONUtils;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,19 +12,30 @@ import java.util.Date;
 public class Inventory implements Serializable {
 
 
+    String id;
     String inventoryBatch;
     String description;
     Date publishDate;
 
     //
 
-    public Inventory(String inventoryBatch, String description, Date publishDate) {
+    public Inventory(String id, String inventoryBatch, String description, Date publishDate) {
+        this.id = id;
         this.inventoryBatch = inventoryBatch;
         this.description = description;
         this.publishDate = publishDate;
     }
 
     //
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getInventoryBatch() {
         return inventoryBatch;
@@ -57,6 +67,7 @@ public class Inventory implements Serializable {
 
     public static Inventory parse(JSONObject jsonObject) {
 
+        String id = JSONUtils.getString(jsonObject, "ID", "");
         String inventoryBatch = JSONUtils.getString(jsonObject, "Inventorybatch", "");
         String description = JSONUtils.getString(jsonObject, "Descr", "");
         String dateString = JSONUtils.getString(jsonObject, "Publishdate", "");
@@ -66,6 +77,6 @@ public class Inventory implements Serializable {
         } catch (Exception e) {
             //
         }
-        return new Inventory(inventoryBatch, description, publishDate);
+        return new Inventory(id, inventoryBatch, description, publishDate);
     }
 }

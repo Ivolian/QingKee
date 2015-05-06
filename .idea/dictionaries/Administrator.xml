@@ -14,6 +14,7 @@
       <w>descr</w>
       <w>employeeid</w>
       <w>inventorybatch</w>
+      <w>inventoryid</w>
       <w>loginpwd</w>
       <w>onactivityresult</w>
       <w>publishdate</w>

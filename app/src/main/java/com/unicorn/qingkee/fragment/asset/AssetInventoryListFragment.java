@@ -43,7 +43,7 @@ public class AssetInventoryListFragment extends BaseFragment {
 
     AssetInventoryListAdapter assetInventoryListAdapter;
 
-    public String currentInventoryBatch;
+    public String currentInventoryId;
 
     @InjectView(R.id.progressBar)
     ProgressBarCircularIndeterminate progressBar;
@@ -86,7 +86,7 @@ public class AssetInventoryListFragment extends BaseFragment {
         Uri.Builder builder = Uri.parse(UrlUtils.getBaseUrl() + "/InventoryOperation?").buildUpon();
         builder.appendQueryParameter("userid", MyApplication.getInstance().getUserInfo().getUserId());
         builder.appendQueryParameter("barcode", barcode);
-        builder.appendQueryParameter("inventorybatch", currentInventoryBatch);
+        builder.appendQueryParameter("inventoryid", currentInventoryId);
 
         showProgressDialog();
         MyVolley.getRequestQueue().add(new JsonObjectRequest(builder.toString(),

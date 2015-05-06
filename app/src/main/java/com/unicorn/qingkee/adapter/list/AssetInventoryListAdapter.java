@@ -70,7 +70,7 @@ public class AssetInventoryListAdapter extends RecyclerView.Adapter<AssetInvento
                         public boolean onMenuItemClick(MenuItem menuItem) {
                             switch (menuItem.getItemId()) {
                                 case R.id.inventory:
-                                    assetInventoryListFragment.currentInventoryBatch = inventoryList.get(getAdapterPosition()).getInventoryBatch();
+                                    assetInventoryListFragment.currentInventoryId = inventoryList.get(getAdapterPosition()).getId();
                                     IntentIntegrator.forSupportFragment(assetInventoryListFragment).initiateScan();
                                     return true;
                             }
