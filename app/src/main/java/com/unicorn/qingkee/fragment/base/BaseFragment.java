@@ -45,7 +45,7 @@ public abstract class BaseFragment extends Fragment {
 
     }
 
-    public void finishWithActivity() {
+    public void finishActivity() {
 
         getActivity().finish();
     }

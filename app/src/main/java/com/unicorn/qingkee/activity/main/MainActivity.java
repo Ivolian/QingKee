@@ -24,11 +24,10 @@ public class MainActivity extends ToolbarActivity {
     public ViewPager viewPager;
 
     @InjectView(R.id.drawer)
-    public DrawerLayout mDrawerLayout;
+    public DrawerLayout drawerLayout;
 
     @Override
     public int getLayoutResourceId() {
-
         return R.layout.activity_main;
     }
 
@@ -37,21 +36,20 @@ public class MainActivity extends ToolbarActivity {
 
         super.onCreate(savedInstanceState);
         initToolbar(FRAGMENT_TITLES[getIntent().getIntExtra("fragmentIndex", 0)]);
-
         initDrawerLayout();
         initViewPager();
     }
 
     private void initDrawerLayout() {
 
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         actionBarDrawerToggle.syncState();
-        mDrawerLayout.setDrawerListener(actionBarDrawerToggle);
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
     }
 
     private void initViewPager() {
 
-        viewPager.setOffscreenPageLimit(9);
+        viewPager.setOffscreenPageLimit(FRAGMENT_TITLES.length);
         viewPager.setAdapter(new MainActivityPagerAdapter(getSupportFragmentManager(), FRAGMENT_TITLES.length));
         viewPager.setCurrentItem(getIntent().getIntExtra("fragmentIndex", 0));
     }
@@ -59,12 +57,12 @@ public class MainActivity extends ToolbarActivity {
     @OnPageChange(value = R.id.viewpager, callback = OnPageChange.Callback.PAGE_SELECTED)
     public void changeToolbarTitle(int position) {
 
-        mToolbar.setTitle(FRAGMENT_TITLES[position]);
+        toolbar.setTitle(FRAGMENT_TITLES[position]);
     }
 
     public void onSideMenuItemClick(int position) {
 
-        mDrawerLayout.closeDrawers();
+        drawerLayout.closeDrawers();
         viewPager.setCurrentItem(position, false);
     }
 

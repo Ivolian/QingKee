@@ -37,11 +37,6 @@ public class AssetRepairInFragment extends AssetsFragment {
     }
 
     @Override
-    public String getTitle() {
-        return "待维修入库资产";
-    }
-
-    @Override
     public int getLayoutResourceId() {
         return R.layout.fragment_asset_repair_in;
     }

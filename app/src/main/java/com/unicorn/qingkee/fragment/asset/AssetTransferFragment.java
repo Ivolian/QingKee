@@ -48,10 +48,6 @@ public class AssetTransferFragment extends AssetsFragment {
         return "04";
     }
 
-    @Override
-    public String getTitle() {
-        return "待转移资产";
-    }
 
     @Override
     public int getLayoutResourceId() {
@@ -108,7 +104,7 @@ public class AssetTransferFragment extends AssetsFragment {
                         } else {
                             // 可以本人转移到本人
                             ToastUtils.show("转移成功");
-                           finishWithActivity();
+                           finishActivity();
                         }
                     }
                 },

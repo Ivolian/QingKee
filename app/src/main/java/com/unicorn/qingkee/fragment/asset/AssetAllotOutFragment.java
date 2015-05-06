@@ -14,6 +14,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
+import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.fragment.base.AssetsFragment;
 import com.unicorn.qingkee.mycode.BetterSpinner;
 import com.unicorn.qingkee.mycode.FetchUtil;
@@ -50,11 +51,6 @@ public class AssetAllotOutFragment extends AssetsFragment {
     }
 
     @Override
-    public String getTitle() {
-        return "待调拨出库资产";
-    }
-
-    @Override
     public int getLayoutResourceId() {
         return R.layout.fragment_asset_allot_out;
     }
@@ -70,13 +66,11 @@ public class AssetAllotOutFragment extends AssetsFragment {
         return view;
     }
 
-    // ====================== 确认调拨出库 ======================
-
-    @OnClick(R.id.btn_confirm_allot_out)
+    @OnClick(R.id.btn_confirm)
     public void confirm() {
 
         if (etAssets.getText().toString().equals(StringUtils.EMPTY)) {
-            ToastUtils.show("请先添加资产");
+            ToastUtils.show("资产不能为空");
             return;
         }
         if (spCompany.getSelectedValue().equals(StringUtils.EMPTY)) {
@@ -91,7 +85,7 @@ public class AssetAllotOutFragment extends AssetsFragment {
             ToastUtils.show("使用人不能为空");
             return;
         }
-        if (etNote.getText().toString().equals("")) {
+        if (etNote.getText().toString().equals(StringUtils.EMPTY)) {
             ToastUtils.show("备注不能为空");
             return;
         }
@@ -106,8 +100,9 @@ public class AssetAllotOutFragment extends AssetsFragment {
                             ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
                         } else {
                             // 调拨出库成功后，资产状态变为调拨中
-                            ToastUtils.show("调拨出库成功");
-                            finishWithActivity();
+                            String toolbarTitle = ((ToolbarActivity) getActivity()).getToolbarTitle();
+                            ToastUtils.show(toolbarTitle + "成功");
+                            finishActivity();
                         }
                     }
                 },
@@ -136,8 +131,8 @@ public class AssetAllotOutFragment extends AssetsFragment {
     public void clearViews() {
 
         spCompany.setText(StringUtils.EMPTY);
-        spDept.setText(StringUtils.EMPTY);
-        spEmployee.setText(StringUtils.EMPTY);
+        spDept.clear();
+        spEmployee.clear();
         etNote.setText(StringUtils.EMPTY);
     }
 

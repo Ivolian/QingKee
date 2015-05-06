@@ -36,11 +36,6 @@ public class AssetRepairOutFragment extends AssetsFragment {
     }
 
     @Override
-    public String getTitle() {
-        return "待维修出库资产";
-    }
-
-    @Override
     public int getLayoutResourceId() {
         return R.layout.fragment_asset_repair_out;
     }
@@ -74,7 +69,7 @@ public class AssetRepairOutFragment extends AssetsFragment {
                         } else {
                             // todo
                             ToastUtils.show("维修出库成功");
-                            finishWithActivity();
+                            finishActivity();
                         }
                     }
                 },

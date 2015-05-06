@@ -15,7 +15,7 @@
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/et_assets"
-            android:hint="待调拨出库资产"
+            android:hint="资产"
             android:editable="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,8 +72,8 @@
                 android:layout_marginRight="5dp" />
 
             <com.cengalabs.flatui.views.FlatButton
-                android:id="@+id/btn_confirm_allot_out"
-                android:text="确认调拨出库"
+                android:id="@+id/btn_confirm"
+                android:text="确认"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"

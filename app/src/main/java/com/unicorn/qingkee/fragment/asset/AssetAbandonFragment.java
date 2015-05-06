@@ -129,7 +129,7 @@ public class AssetAbandonFragment extends BaseFragment {
                             ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
                         } else {
                             ToastUtils.show("报废成功");
-                            finishWithActivity();
+                            finishActivity();
                         }
                     }
                 },

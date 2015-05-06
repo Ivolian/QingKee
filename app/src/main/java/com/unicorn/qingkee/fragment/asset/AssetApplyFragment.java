@@ -53,12 +53,6 @@ public class AssetApplyFragment extends AssetsFragment {
     }
 
     @Override
-    public String getTitle() {
-
-        return "待领用资产";
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = super.onCreateView(inflater, container, savedInstanceState);
@@ -107,7 +101,7 @@ public class AssetApplyFragment extends AssetsFragment {
                                     ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
                                 } else {
                                     ToastUtils.show("领用成功");
-                                    finishWithActivity();
+                                    finishActivity();
                                 }
                             }
                         },

@@ -21,7 +21,7 @@ public abstract class ToolbarActivity extends AppCompatActivity {
     MaterialDialog progressDialog;
 
     @InjectView(R.id.toolbar)
-    protected Toolbar mToolbar;
+    protected Toolbar toolbar;
 
     @InjectView(R.id.toolbar_shadow)
     protected View shadow;
@@ -47,10 +47,10 @@ public abstract class ToolbarActivity extends AppCompatActivity {
 
     protected void initToolbar(String title, boolean displayHomeAsUpEnable) {
 
-        mToolbar.setTitle(title);
-        setSupportActionBar(mToolbar);   // 使 mToolbar 有效，比如绑定 activity 菜单
+        toolbar.setTitle(title);
+        setSupportActionBar(toolbar);   // 使 toolbar 有效，比如绑定 activity 菜单
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setBackgroundDrawable(FlatUI.getActionBarDrawable(this, FlatUI.GRASS, false));    // 设置 mToolbar 背景色
+            getSupportActionBar().setBackgroundDrawable(FlatUI.getActionBarDrawable(this, FlatUI.GRASS, false));    // 设置 toolbar 背景色
             getSupportActionBar().setDisplayHomeAsUpEnabled(displayHomeAsUpEnable);
         }
     }
@@ -97,6 +97,11 @@ public abstract class ToolbarActivity extends AppCompatActivity {
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
+    }
+
+    public String getToolbarTitle(){
+
+        return toolbar.getTitle().toString();
     }
 
 }
