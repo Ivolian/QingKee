@@ -7,16 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.NetworkImageView;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.main.MainActivity;
-import com.unicorn.qingkee.util.UrlUtils;
-import com.unicorn.qingkee.volley.MyVolley;
-
-import org.w3c.dom.Text;
-
-import java.io.File;
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -41,7 +33,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.menu_item, viewGroup, false);
+                .inflate(R.layout.side_menu_item, viewGroup, false);
 
         return new ViewHolder(v);
     }
@@ -66,7 +58,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                             mainActivity.mDrawerLayout.closeDrawers();
                             mainActivity.viewPager.setCurrentItem(getAdapterPosition(),false);
                         }
-                    },500);
+                    },600);
                 }
             });
 

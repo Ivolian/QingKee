@@ -1,4 +1,4 @@
-package com.unicorn.qingkee.fragment;
+package com.unicorn.qingkee.fragment.other;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

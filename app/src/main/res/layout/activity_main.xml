@@ -16,9 +16,9 @@
         <!-- 侧滑菜单 -->
         <fragment
             android:id="@+id/menu_fragment"
-            android:name="com.unicorn.qingkee.fragment.MenuFragment"
+            android:name="com.unicorn.qingkee.fragment.other.MenuFragment"
             android:background="@android:color/white"
-            android:layout_width="240dp"
+            android:layout_width="220dp"
             android:layout_height="match_parent"
             android:layout_gravity="left" />
 

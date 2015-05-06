@@ -3,7 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:rv_color="@color/grass_primary"
-    app:rv_centered="true">
+    app:rv_type="rectangle">
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
@@ -11,5 +12,6 @@
         android:gravity="center"
         android:background="@android:color/white"
         android:textColor="#888888"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        />
 </com.andexert.library.RippleView>

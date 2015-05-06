@@ -1,4 +1,4 @@
-package com.unicorn.qingkee.fragment;
+package com.unicorn.qingkee.fragment.other;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,13 +17,13 @@ import butterknife.InjectView;
 
 public class MenuFragment extends BaseFragment {
 
-    @Override
-    public int getLayoutResourceId() {
-        return R.layout.fragment_menu;
-    }
-
     @InjectView(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @Override
+    public int getLayoutResourceId() {
+        return R.layout.fragment_side_menu;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
