@@ -48,12 +48,8 @@ public class ArrivalAssetQueryFragment extends BaseFragment {
     @InjectView(R.id.sp_asset_sort)
     BetterSpinner spAssetSort;
 
-    // ==================== onCreateView ====================
-
-
     @Override
     public int getLayoutResourceId() {
-
         return R.layout.fragment_arrival_asset_query;
     }
 
@@ -63,21 +59,20 @@ public class ArrivalAssetQueryFragment extends BaseFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         initViews();
-        
+
         return view;
     }
-
 
     @OnClick(R.id.btn_clear_views)
     public void clearViews() {
 
-        etAssetName.setText(StringUtils.EMPTY);
         spCompany.setText(StringUtils.EMPTY);
-        spDept.setText(StringUtils.EMPTY);
+        spDept.clear();
+        spAssetSort.setText(StringUtils.EMPTY);
+        etAssetName.setText(StringUtils.EMPTY);
         etEmployeeName.setText(StringUtils.EMPTY);
         etAddress.setText(StringUtils.EMPTY);
         etRomeNumber.setText(StringUtils.EMPTY);
-        spAssetSort.setText(StringUtils.EMPTY);
     }
 
     @OnClick(R.id.btn_query)
@@ -92,7 +87,7 @@ public class ArrivalAssetQueryFragment extends BaseFragment {
         assetQueryInfo.setAddress(etAddress.getText().toString().trim());
         assetQueryInfo.setRomeNumber(etRomeNumber.getText().toString().trim());
         assetQueryInfo.setAssetSort(spAssetSort.getSelectedValue());
-        assetQueryInfo.setAssetStatus("01");    // 到货状态
+        assetQueryInfo.setAssetStatus("01");    // 到货
 
         Intent intent = new Intent(getActivity(), ArrivalAssetListActivity.class);
         intent.putExtra("assetQueryInfo", assetQueryInfo);
