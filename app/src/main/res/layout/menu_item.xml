@@ -1,0 +1,15 @@
+<com.andexert.library.RippleView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:rv_color="@color/grass_primary"
+    app:rv_centered="true">
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:background="@android:color/white"
+        android:textColor="#888888"
+        android:textSize="18sp" />
+</com.andexert.library.RippleView>

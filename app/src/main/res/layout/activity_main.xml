@@ -1,7 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <android.support.v4.widget.DrawerLayout
         android:layout_marginTop="?attr/actionBarSize"
@@ -15,19 +14,19 @@
             android:layout_height="match_parent" />
 
         <!-- 侧滑菜单 -->
-        <FrameLayout
-            android:id="@+id/drawer_view"
+        <fragment
+            android:id="@+id/menu_fragment"
+            android:name="com.unicorn.qingkee.fragment.MenuFragment"
             android:background="@android:color/white"
-            android:layout_width="260dp"
+            android:layout_width="240dp"
             android:layout_height="match_parent"
             android:layout_gravity="left" />
 
     </android.support.v4.widget.DrawerLayout>
 
     <include layout="@layout/toolbar" />
-
     <!-- 隐藏 toolbar 阴影 -->
-    <View xmlns:android="http://schemas.android.com/apk/res/android"
+    <View
         android:id="@+id/toolbar_shadow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
