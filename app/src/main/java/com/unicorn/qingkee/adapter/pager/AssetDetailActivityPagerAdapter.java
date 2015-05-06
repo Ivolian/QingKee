@@ -2,14 +2,13 @@ package com.unicorn.qingkee.adapter.pager;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 
 import com.unicorn.qingkee.fragment.asset.AssetDetailInfoFragment;
 import com.unicorn.qingkee.fragment.asset.AssetDetailPhotoFragment;
 
 
-// todo
-public class AssetDetailActivityPagerAdapter extends FragmentStatePagerAdapter {
+public class AssetDetailActivityPagerAdapter extends FragmentPagerAdapter {
 
     public AssetDetailActivityPagerAdapter(FragmentManager fm) {
 
