@@ -66,7 +66,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
                             mainActivity.mDrawerLayout.closeDrawers();
                             mainActivity.viewPager.setCurrentItem(getAdapterPosition(),false);
                         }
-                    },600);
+                    },500);
                 }
             });
 
