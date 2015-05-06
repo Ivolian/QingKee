@@ -13,6 +13,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
+import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.fragment.base.AssetsFragment;
 import com.unicorn.qingkee.mycode.BetterSpinner;
 import com.unicorn.qingkee.mycode.FetchUtil;
@@ -30,8 +31,6 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 
-// 同公司走转移流程
-// todo 转移有问题
 public class AssetTransferFragment extends AssetsFragment {
 
     @InjectView(R.id.sp_dept)
@@ -47,7 +46,6 @@ public class AssetTransferFragment extends AssetsFragment {
     public String getAssetStatus() {
         return "04";
     }
-
 
     @Override
     public int getLayoutResourceId() {
@@ -68,15 +66,15 @@ public class AssetTransferFragment extends AssetsFragment {
     public void clearViews() {
 
         spDept.setText(StringUtils.EMPTY);
-        spEmployee.setText(StringUtils.EMPTY);
+        spEmployee.clear();
         etNote.setText(StringUtils.EMPTY);
     }
 
     @OnClick(R.id.btn_confirm)
     public void confirm() {
 
-        if (etAssets.getText().toString().equals("")) {
-            ToastUtils.show("请先添加资产");
+        if (etAssets.getText().toString().equals(StringUtils.EMPTY)) {
+            ToastUtils.show("资产不能为空");
             return;
         }
         if (spDept.getSelectedValue().equals(StringUtils.EMPTY)) {
@@ -87,24 +85,24 @@ public class AssetTransferFragment extends AssetsFragment {
             ToastUtils.show("使用人不能为空");
             return;
         }
-        if (etNote.getText().toString().equals("")) {
+        if (etNote.getText().toString().equals(StringUtils.EMPTY)) {
             ToastUtils.show("备注不能为空");
             return;
         }
-
         showProgressDialog();
         MyVolley.getRequestQueue().add(new JsonObjectRequest(getUrl(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                    hideProgressDialog();
+                        hideProgressDialog();
                         int result = JSONUtils.getInt(response, "Result", 1);
                         if (result != 0) {
                             ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
                         } else {
                             // 可以本人转移到本人
-                            ToastUtils.show("转移成功");
-                           finishActivity();
+                            String toolbarTitle = ((ToolbarActivity) getActivity()).getToolbarTitle();
+                            ToastUtils.show(toolbarTitle + "成功");
+                            finishActivity();
                         }
                     }
                 },
@@ -131,7 +129,7 @@ public class AssetTransferFragment extends AssetsFragment {
     private void initSpDept() {
 
         final String companyId = MyApplication.getInstance().getUserInfo().getCompanyId();
-        FetchUtil.fetchDeptList(spDept, companyId);
+        FetchUtil.fetchDeptList(spDept, MyApplication.getInstance().getUserInfo().getCompanyId());
         spDept.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

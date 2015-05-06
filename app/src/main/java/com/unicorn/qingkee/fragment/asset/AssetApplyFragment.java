@@ -13,6 +13,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
+import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.fragment.base.AssetsFragment;
 import com.unicorn.qingkee.mycode.BetterSpinner;
 import com.unicorn.qingkee.mycode.FetchUtil;
@@ -42,13 +43,11 @@ public class AssetApplyFragment extends AssetsFragment {
 
     @Override
     public int getLayoutResourceId() {
-
         return R.layout.fragment_asset_apply;
     }
 
     @Override
     public String getAssetStatus() {
-
         return "03";
     }
 
@@ -66,7 +65,7 @@ public class AssetApplyFragment extends AssetsFragment {
     public void clearViews() {
 
         spDept.setText(StringUtils.EMPTY);
-        spEmployee.setText(StringUtils.EMPTY);
+        spEmployee.clear();
         etNote.setText(StringUtils.EMPTY);
     }
 
@@ -74,7 +73,7 @@ public class AssetApplyFragment extends AssetsFragment {
     public void confirm() {
 
         if (etAssets.getText().toString().equals(StringUtils.EMPTY)) {
-            ToastUtils.show("请先添加资产");
+            ToastUtils.show("资产不能为空");
             return;
         }
         if (spDept.getSelectedValue().equals(StringUtils.EMPTY)) {
@@ -89,7 +88,6 @@ public class AssetApplyFragment extends AssetsFragment {
             ToastUtils.show("备注不能为空");
             return;
         }
-
         showProgressDialog();
         MyVolley.getRequestQueue().add(new JsonObjectRequest(getUrl(),
                         new Response.Listener<JSONObject>() {
@@ -100,7 +98,8 @@ public class AssetApplyFragment extends AssetsFragment {
                                 if (result != 0) {
                                     ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
                                 } else {
-                                    ToastUtils.show("领用成功");
+                                    String toolbarTitle = ((ToolbarActivity) getActivity()).getToolbarTitle();
+                                    ToastUtils.show(toolbarTitle + "成功");
                                     finishActivity();
                                 }
                             }
