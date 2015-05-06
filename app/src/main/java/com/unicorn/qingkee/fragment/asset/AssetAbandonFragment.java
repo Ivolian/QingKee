@@ -83,7 +83,7 @@ public class AssetAbandonFragment extends BaseFragment {
 
     private void initViews() {
 
-        RegexpValidator regexpValidator = new RegexpValidator("请输入两位正小数", "^[0-9]+.[0-9]{2}?$");
+        RegexpValidator regexpValidator = new RegexpValidator("请输入两位正小数", "^[\\s]{0,}$|^[0-9]+.[0-9]{2}?$");
         etAbandValue.addValidator(regexpValidator);
         etAbandCost.addValidator(regexpValidator);
     }
@@ -91,6 +91,12 @@ public class AssetAbandonFragment extends BaseFragment {
 
     @OnClick(R.id.btn_confirm)
     public void confirm() {
+
+        if (!etAbandValue.validate()) {
+//            ToastUtils.show("两位小数");
+            return;
+        }
+
         // todo
         if (!etAbandValue.validate()) {
             ToastUtils.show("两位小数");
