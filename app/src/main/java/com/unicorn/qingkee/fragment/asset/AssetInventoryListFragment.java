@@ -38,15 +38,15 @@ import butterknife.InjectView;
 
 public class AssetInventoryListFragment extends BaseFragment {
 
+    @InjectView(R.id.progressBar)
+    ProgressBarCircularIndeterminate progressBar;
+
     @InjectView(R.id.recyclerView)
     RecyclerView recyclerView;
 
     AssetInventoryListAdapter assetInventoryListAdapter;
 
     public String currentInventoryId;
-
-    @InjectView(R.id.progressBar)
-    ProgressBarCircularIndeterminate progressBar;
 
     @Override
     public int getLayoutResourceId() {
@@ -59,7 +59,13 @@ public class AssetInventoryListFragment extends BaseFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         initRecyclerView();
-        reload();
+        showProgressDialog();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                fetchList();
+            }
+        }, 3000);
 
         return view;
     }
@@ -106,21 +112,7 @@ public class AssetInventoryListFragment extends BaseFragment {
                 }));
     }
 
-    private void reload() {
-        assetInventoryListAdapter.setInventoryList(new ArrayList<Inventory>());
-        assetInventoryListAdapter.notifyDataSetChanged();
-        showProgressDialog();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-               sendRequest();
-            }
-        },3000);
-
-    }
-
-    private void sendRequest(){
+    private void fetchList(){
         MyVolley.getRequestQueue().add(new JsonObjectRequest(getUrl(),
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -163,6 +155,12 @@ public class AssetInventoryListFragment extends BaseFragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         return linearLayoutManager;
+    }
+
+    public void onInventoryListItemClicked(String clickedInventoryId){
+
+        currentInventoryId = clickedInventoryId;
+        IntentIntegrator.forSupportFragment(this).initiateScan();
     }
 
     //

@@ -8,12 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.zxing.integration.android.IntentIntegrator;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.bean.Inventory;
 import com.unicorn.qingkee.fragment.asset.AssetInventoryListFragment;
+import com.unicorn.qingkee.util.TimeUtils;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,8 +69,7 @@ public class AssetInventoryListAdapter extends RecyclerView.Adapter<AssetInvento
                         public boolean onMenuItemClick(MenuItem menuItem) {
                             switch (menuItem.getItemId()) {
                                 case R.id.inventory:
-                                    assetInventoryListFragment.currentInventoryId = inventoryList.get(getAdapterPosition()).getId();
-                                    IntentIntegrator.forSupportFragment(assetInventoryListFragment).initiateScan();
+                                    assetInventoryListFragment.onInventoryListItemClicked(inventoryList.get(getAdapterPosition()).getId());
                                     return true;
                             }
                             return false;
@@ -89,13 +87,7 @@ public class AssetInventoryListAdapter extends RecyclerView.Adapter<AssetInvento
         Inventory inventory = inventoryList.get(position);
         viewHolder.tvInventoryBatch.setText("盘点批次号： " + inventory.getInventoryBatch());
         viewHolder.tvDescription.setText("描述： " + inventory.getDescription());
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-m-d hh:mm:ss");
-        viewHolder.tvPublishDate.setText("发布日期： " + simpleDateFormat.format(inventory.getPublishDate()));
-    }
-
-    public List<Inventory> getInventoryList() {
-        return inventoryList;
+        viewHolder.tvPublishDate.setText("发布日期： " + TimeUtils.getTime(inventory.getPublishDate().getTime()));
     }
 
     public void setInventoryList(List<Inventory> inventoryList) {
