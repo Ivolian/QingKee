@@ -23,11 +23,7 @@
     </android.support.v4.widget.DrawerLayout>
 
     <include layout="@layout/toolbar" />
-    <!-- 隐藏 toolbar 阴影 -->
-    <View
-        android:id="@+id/toolbar_shadow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+
+    <include layout="@layout/toolbar_shadow" />
 
 </FrameLayout>
