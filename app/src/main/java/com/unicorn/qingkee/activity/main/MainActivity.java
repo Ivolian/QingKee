@@ -5,6 +5,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.Gravity;
 
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
@@ -27,6 +28,8 @@ public class MainActivity extends ToolbarActivity {
     @InjectView(R.id.drawer)
     public DrawerLayout drawerLayout;
 
+    ActionBarDrawerToggle actionBarDrawerToggle;
+
     @Override
     public int getLayoutResourceId() {
         return R.layout.activity_main;
@@ -47,8 +50,7 @@ public class MainActivity extends ToolbarActivity {
 
     private void initDrawerLayout() {
 
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
-        actionBarDrawerToggle.syncState();
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
     }
@@ -82,6 +84,22 @@ public class MainActivity extends ToolbarActivity {
 
         drawerLayout.closeDrawers();
         viewPager.setCurrentItem(position, false);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+
+        super.onPostCreate(savedInstanceState);
+        actionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            drawerLayout.closeDrawers();
+            return;
+        }
+        super.onBackPressed();
     }
 
 }
