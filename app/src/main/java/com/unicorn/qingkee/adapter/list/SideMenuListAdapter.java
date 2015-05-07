@@ -62,10 +62,10 @@ public class SideMenuListAdapter extends RecyclerView.Adapter<SideMenuListAdapte
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
         viewHolder.textView.setText(mainActivity.FRAGMENT_TITLES[position]);
-        if (position == mainActivity.currentItem){
+        if (position == mainActivity.viewPager.getCurrentItem()) {
             viewHolder.textView.setBackgroundColor(Color.parseColor("#66CDAA"));
             viewHolder.textView.setTextColor(Color.parseColor("#ffffff"));
-        }else {
+        } else {
             viewHolder.textView.setBackgroundColor(Color.parseColor("#ffffff"));
             viewHolder.textView.setTextColor(Color.parseColor("#888888"));
         }

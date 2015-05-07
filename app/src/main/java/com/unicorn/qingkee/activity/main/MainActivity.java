@@ -4,16 +4,13 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.adapter.pager.MainActivityPagerAdapter;
 import com.unicorn.qingkee.fragment.other.SideMenuFragment;
-import com.unicorn.qingkee.util.ToastUtils;
 
 import butterknife.InjectView;
-import butterknife.OnPageChange;
 
 
 public class MainActivity extends ToolbarActivity {
@@ -29,10 +26,6 @@ public class MainActivity extends ToolbarActivity {
     @InjectView(R.id.drawer)
     public DrawerLayout drawerLayout;
 
-    SideMenuFragment sideMenuFragment;
-
-    public int currentItem;
-
     @Override
     public int getLayoutResourceId() {
         return R.layout.activity_main;
@@ -41,18 +34,12 @@ public class MainActivity extends ToolbarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Log.e("result", getClass().getName() + currentItem);
-
-
         super.onCreate(savedInstanceState);
-        Log.e("result", getClass().getName() + currentItem);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().add(R.id.side_menu_fragment, new SideMenuFragment()).commit();
+        }
 
-        initToolbar(FRAGMENT_TITLES[getIntent().getIntExtra("fragmentIndex", 0)]);
-
-        currentItem = getIntent().getIntExtra("fragmentIndex", 0);
-            sideMenuFragment = new SideMenuFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.side_menu_fragment, sideMenuFragment).commit();
-
+        initToolbar(FRAGMENT_TITLES[getIntent().getIntExtra("position", 0)]);
         initDrawerLayout();
         initViewPager();
     }
@@ -68,15 +55,25 @@ public class MainActivity extends ToolbarActivity {
 
         viewPager.setOffscreenPageLimit(FRAGMENT_TITLES.length);
         viewPager.setAdapter(new MainActivityPagerAdapter(getSupportFragmentManager(), FRAGMENT_TITLES.length));
-        viewPager.setCurrentItem(currentItem);
-    }
+        viewPager.setCurrentItem(getIntent().getIntExtra("position", 0));
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-    @OnPageChange(value = R.id.viewpager, callback = OnPageChange.Callback.PAGE_SELECTED)
-    public void changeToolbarTitle(int position) {
+            }
 
-        toolbar.setTitle(FRAGMENT_TITLES[position]);
-        currentItem = position;
-        sideMenuFragment.notifyDataSetChanged();
+            @Override
+            public void onPageSelected(int position) {
+
+                toolbar.setTitle(FRAGMENT_TITLES[position]);
+                ((SideMenuFragment) getSupportFragmentManager().findFragmentById(R.id.side_menu_fragment)).notifyDataSetChanged();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     public void onSideMenuItemClick(int position) {

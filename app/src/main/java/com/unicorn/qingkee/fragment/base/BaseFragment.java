@@ -1,7 +1,9 @@
 package com.unicorn.qingkee.fragment.base;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,20 @@ public abstract class BaseFragment extends Fragment {
     MaterialDialog progressDialog;
 
     abstract public int getLayoutResourceId();
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+
+        Log.e("result", getClass().getName() + "onCreate");
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.e("result", getClass().getName() + "onDestroy");
+        super.onDestroy();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

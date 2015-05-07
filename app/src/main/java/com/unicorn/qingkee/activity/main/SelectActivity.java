@@ -51,14 +51,14 @@ public class SelectActivity extends ToolbarActivity {
     private void initViews() {
 
         for (int i = 0, length = ids.length; i != length; i++) {
-            final int index = i;
-            findViewById(ids[index]).setOnClickListener(new View.OnClickListener() {
+            final int position = i;
+            findViewById(ids[position]).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            startMainActivity(index);
+                            startMainActivity(position);
                         }
                     }, 800);
                 }
@@ -66,10 +66,10 @@ public class SelectActivity extends ToolbarActivity {
         }
     }
 
-    private void startMainActivity(int fragmentIndex) {
+    private void startMainActivity(int position) {
 
         Intent intent = new Intent(SelectActivity.this, MainActivity.class);
-        intent.putExtra("fragmentIndex", fragmentIndex);
+        intent.putExtra("position", position);
         startActivity(intent);
     }
 
