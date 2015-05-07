@@ -15,11 +15,11 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class SideMenuListAdapter extends RecyclerView.Adapter<SideMenuListAdapter.ViewHolder> {
+public class SideMenuAdapter extends RecyclerView.Adapter<SideMenuAdapter.ViewHolder> {
 
     private MainActivity mainActivity;
 
-    public SideMenuListAdapter(MainActivity mainActivity) {
+    public SideMenuAdapter(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
 
@@ -70,5 +70,4 @@ public class SideMenuListAdapter extends RecyclerView.Adapter<SideMenuListAdapte
             viewHolder.textView.setTextColor(Color.parseColor("#888888"));
         }
     }
-
 }

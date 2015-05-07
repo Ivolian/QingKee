@@ -14,8 +14,9 @@
             android:layout_height="match_parent" />
 
         <!-- 侧滑菜单 -->
-        <FrameLayout
-            android:id="@+id/side_menu_fragment"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/side_menu"
+            android:scrollbars="none"
             android:layout_width="220dp"
             android:layout_height="match_parent"
             android:layout_gravity="left" />

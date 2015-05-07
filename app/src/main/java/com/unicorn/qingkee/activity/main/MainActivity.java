@@ -6,13 +6,14 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
-import android.view.MenuItem;
 
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
+import com.unicorn.qingkee.adapter.list.SideMenuAdapter;
 import com.unicorn.qingkee.adapter.pager.MainActivityPagerAdapter;
-import com.unicorn.qingkee.fragment.other.SideMenuFragment;
 
 import butterknife.InjectView;
 
@@ -32,6 +33,11 @@ public class MainActivity extends ToolbarActivity {
 
     ActionBarDrawerToggle actionBarDrawerToggle;
 
+    @InjectView(R.id.side_menu)
+    RecyclerView sideMenu;
+
+    SideMenuAdapter sideMenuAdapter;
+
     @Override
     public int getLayoutResourceId() {
         return R.layout.activity_main;
@@ -41,13 +47,11 @@ public class MainActivity extends ToolbarActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().add(R.id.side_menu_fragment, new SideMenuFragment()).commit();
-        }
-
         initToolbar(FRAGMENT_TITLES[getIntent().getIntExtra("position", 0)]);
+
         initDrawerLayout();
         initViewPager();
+        initSideMenu();
     }
 
     private void initDrawerLayout() {
@@ -72,7 +76,7 @@ public class MainActivity extends ToolbarActivity {
             public void onPageSelected(int position) {
 
                 toolbar.setTitle(FRAGMENT_TITLES[position]);
-                ((SideMenuFragment) getSupportFragmentManager().findFragmentById(R.id.side_menu_fragment)).notifyDataSetChanged();
+                sideMenuAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -80,6 +84,13 @@ public class MainActivity extends ToolbarActivity {
 
             }
         });
+    }
+
+    private void initSideMenu() {
+
+        sideMenu.setLayoutManager(getLinearLayoutManager());
+        sideMenuAdapter = new SideMenuAdapter(this);
+        sideMenu.setAdapter(sideMenuAdapter);
     }
 
     public void onSideMenuItemClick(int position) {
@@ -97,24 +108,19 @@ public class MainActivity extends ToolbarActivity {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        actionBarDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        return actionBarDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
             drawerLayout.closeDrawers();
             return;
         }
         super.onBackPressed();
+    }
+
+    private LinearLayoutManager getLinearLayoutManager() {
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        return linearLayoutManager;
     }
 
 }
