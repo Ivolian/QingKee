@@ -51,9 +51,8 @@ public class AssetDetailPhotoListAdapter extends RecyclerView.Adapter<AssetDetai
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
-        // todo 选择占位和错误图片
-        viewHolder.networkImageView.setDefaultImageResId(R.drawable.ic_launcher);
-        viewHolder.networkImageView.setErrorImageResId(R.drawable.ic_launcher);
+        viewHolder.networkImageView.setDefaultImageResId(R.drawable.aio_image_default);
+        viewHolder.networkImageView.setErrorImageResId(R.drawable.aio_image_fail);
         String photoUrl = UrlUtils.getUploadImagesUrl() + File.separator + photoList.get(position);
         viewHolder.networkImageView.setImageUrl(photoUrl, MyVolley.getImageLoader());
     }
