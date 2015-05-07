@@ -16,8 +16,10 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import com.rengwuxian.materialedittext.validation.RegexpValidator;
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
+import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.fragment.base.BaseFragment;
 import com.unicorn.qingkee.util.JSONUtils;
+import com.unicorn.qingkee.util.StringUtils;
 import com.unicorn.qingkee.util.ToastUtils;
 import com.unicorn.qingkee.util.UrlUtils;
 import com.unicorn.qingkee.volley.MyVolley;
@@ -43,31 +45,6 @@ public class AssetAbandonFragment extends BaseFragment {
     @InjectView(R.id.et_note)
     MaterialEditText etNote;
 
-    @OnClick(R.id.btn_scan_barcode)
-    public void scanBarcode() {
-
-        IntentIntegrator.forSupportFragment(this).initiateScan();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        // 处理扫描条码返回结果
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null && result.getContents() != null) {
-            etBarcode.setText(result.getContents());
-        }
-    }
-//    @Override
-//    public String getAssetStatus() {
-//        return "04";
-//    }
-//
-//    @Override
-//    public String getTitle() {
-//        return "待报废资产";
-//    }
-
     @Override
     public int getLayoutResourceId() {
         return R.layout.fragment_asset_abandon;
@@ -88,34 +65,47 @@ public class AssetAbandonFragment extends BaseFragment {
         etAbandCost.addValidator(regexpValidator);
     }
 
+    @OnClick(R.id.btn_scan_barcode)
+    public void scanBarcode() {
+
+        IntentIntegrator.forSupportFragment(this).initiateScan();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        // 处理扫描条码返回结果
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null && result.getContents() != null) {
+            etBarcode.setText(result.getContents());
+        }
+    }
 
     @OnClick(R.id.btn_confirm)
     public void confirm() {
 
-        if (!etAbandValue.validate()) {
-//            ToastUtils.show("两位小数");
-            return;
-        }
-
-        // todo
-        if (!etAbandValue.validate()) {
-            ToastUtils.show("两位小数");
-            return;
-        }
-        if (etBarcode.getText().toString().equals("")) {
+        if (etBarcode.getText().toString().equals(StringUtils.EMPTY)) {
             ToastUtils.show("条码不能为空");
             return;
         }
-        if (etAbandValue.getText().toString().equals("")) {
+        if (etAbandValue.getText().toString().equals(StringUtils.EMPTY)) {
             ToastUtils.show("报废收入不能为空");
             return;
         }
-        if (etAbandCost.getText().toString().equals("")) {
+        if (etAbandCost.getText().toString().equals(StringUtils.EMPTY)) {
             ToastUtils.show("报废成本不能为空");
             return;
         }
-        if (etNote.getText().toString().equals("")) {
+        if (etNote.getText().toString().equals(StringUtils.EMPTY)) {
             ToastUtils.show("备注不能为空");
+            return;
+        }
+        if (!etAbandValue.validate()){
+            ToastUtils.show("报废收入必须是两位正小数");
+            return;
+        }
+        if (!etAbandCost.validate()){
+            ToastUtils.show("报废成本必须是两位正小数");
             return;
         }
         showProgressDialog();
@@ -128,7 +118,8 @@ public class AssetAbandonFragment extends BaseFragment {
                         if (result != 0) {
                             ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
                         } else {
-                            ToastUtils.show("报废成功");
+                            String toolbarTitle = ((ToolbarActivity) getActivity()).getToolbarTitle();
+                            ToastUtils.show(toolbarTitle + "成功");
                             finishActivity();
                         }
                     }
