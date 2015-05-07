@@ -73,7 +73,6 @@ public class AssetBindActivity extends ToolbarActivity {
 
     @Override
     public int getLayoutResourceId() {
-
         return R.layout.activity_asset_bind;
     }
 

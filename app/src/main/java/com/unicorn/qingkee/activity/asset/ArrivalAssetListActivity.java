@@ -60,7 +60,6 @@ public class ArrivalAssetListActivity extends ToolbarActivity {
 
     @Override
     public int getLayoutResourceId() {
-
         return R.layout.activity_arrival_asset_list;
     }
 
