@@ -34,22 +34,10 @@ public abstract class BaseFragment extends Fragment {
         ButterKnife.reset(this);
     }
 
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            visibleToUser();
-        }
-    }
-
-    public void visibleToUser() {
-
-    }
-
     public void finishActivity() {
 
         getActivity().finish();
     }
-
 
     public void showProgressDialog() {
 
@@ -76,5 +64,20 @@ public abstract class BaseFragment extends Fragment {
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            isVisibleToUser();
+        } else {
+            //相当于Fragment的onPause
+        }
+    }
+
+    public void isVisibleToUser() {
+
     }
 }

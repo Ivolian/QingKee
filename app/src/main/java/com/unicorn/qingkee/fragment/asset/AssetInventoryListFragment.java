@@ -59,13 +59,6 @@ public class AssetInventoryListFragment extends BaseFragment {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         initRecyclerView();
-        showProgressDialog();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                fetchList();
-            }
-        }, 3000);
 
         return view;
     }
@@ -112,7 +105,14 @@ public class AssetInventoryListFragment extends BaseFragment {
                 }));
     }
 
+    @Override
+    public void isVisibleToUser() {
+
+        fetchList();
+    }
+
     private void fetchList(){
+        showProgressDialog();
         MyVolley.getRequestQueue().add(new JsonObjectRequest(getUrl(),
                 new Response.Listener<JSONObject>() {
                     @Override
