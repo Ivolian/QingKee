@@ -18,6 +18,7 @@ import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.fragment.base.AssetsFragment;
 import com.unicorn.qingkee.mycode.BetterSpinner;
 import com.unicorn.qingkee.mycode.FetchUtil;
+import com.unicorn.qingkee.mycode.SpinnerData;
 import com.unicorn.qingkee.util.JSONUtils;
 import com.unicorn.qingkee.util.StringUtils;
 import com.unicorn.qingkee.util.ToastUtils;
@@ -25,7 +26,11 @@ import com.unicorn.qingkee.util.UrlUtils;
 import com.unicorn.qingkee.volley.MyVolley;
 import com.unicorn.qingkee.volley.toolbox.VolleyErrorHelper;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -138,7 +143,7 @@ public class AssetAllotOutFragment extends AssetsFragment {
 
     private void initSpCompany() {
 
-        FetchUtil.fetchCompanyList(spCompany);
+        fetchCompanyList();
         spCompany.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -158,6 +163,35 @@ public class AssetAllotOutFragment extends AssetsFragment {
                 FetchUtil.fetchEmployeeList(spEmployee, spCompany.getSelectedValue(), spDept.getSelectedValue());
             }
         });
+    }
+
+    private void fetchCompanyList() {
+
+        MyVolley.getRequestQueue().add(new JsonObjectRequest(UrlUtils.getBaseUrl() + "/GetCompany",
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        int result = JSONUtils.getInt(response, "Result", 1);
+                        if (result != 0) {
+                            ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
+                        } else {
+                            JSONArray companyJSONArray = JSONUtils.getJSONArray(response, "lstCompany", null);
+                            List<SpinnerData> spinnerDataList = new ArrayList<>();
+                            for (int i = 0; i != companyJSONArray.length(); i++) {
+                                JSONObject jsonObject = JSONUtils.getJSONObject(companyJSONArray, i);
+                                String companyId = JSONUtils.getString(jsonObject, "ID", "");
+                                // 过滤管理员所在公司
+                                if (companyId.equals(MyApplication.getInstance().getUserInfo().getCompanyId())) {
+                                    continue;
+                                }
+                                String companyName = JSONUtils.getString(jsonObject, "Commanyname", "");
+                                spinnerDataList.add(new SpinnerData(companyId, companyName));
+                            }
+                            spCompany.setSpinnerDataList(spinnerDataList);
+                        }
+                    }
+                },
+                MyVolley.getDefaultErrorListener()));
     }
 
 }
