@@ -1,6 +1,5 @@
 package com.unicorn.qingkee.volley;
 
-import android.app.ActivityManager;
 import android.content.Context;
 
 import com.android.volley.RequestQueue;
@@ -25,10 +24,8 @@ public class MyVolley {
     static public void init(Context context) {
         mRequestQueue = Volley.newRequestQueue(context);
 
-        int memClass = ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE))
-                .getMemoryClass();
-        // Use 1/8th of the available memory for this memory cache.
-        int cacheSize = 1024 * 1024 * memClass / 8;
+        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+        final int cacheSize = maxMemory / 8;
         mImageLoader = new ImageLoader(mRequestQueue, new BitmapLruCache(cacheSize));
     }
 
@@ -42,6 +39,7 @@ public class MyVolley {
     }
 
     public static ImageLoader getImageLoader() {
+        getRequestQueue();
         if (mImageLoader != null) {
             return mImageLoader;
         } else {
