@@ -28,7 +28,6 @@
         <activity
             android:name=".activity.main.SelectActivity"
             android:screenOrientation="portrait" />
-        />
         <activity
             android:name=".activity.main.MainActivity"
             android:launchMode="singleTask"
