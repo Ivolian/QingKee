@@ -7,7 +7,9 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -83,9 +85,13 @@ public class SelectActivity extends ToolbarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.asset_detail) {
-            new IntentIntegrator(this).initiateScan();
-            return true;
+        switch (item.getItemId()) {
+            case R.id.scan:
+                new IntentIntegrator(this).initiateScan();
+                return true;
+            case R.id.manual:
+                showManualBarcodeDialog();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -137,6 +143,26 @@ public class SelectActivity extends ToolbarActivity {
         return builder.toString();
     }
 
+    private void showManualBarcodeDialog() {
+
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title("请输入条码")
+                .customView(R.layout.dialog_manual_barcode, true)
+                .positiveText("确定")
+                .negativeText("取消")
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        EditText etBarcode = (EditText) dialog.getCustomView().findViewById(R.id.barcode);
+                        fetchAssetByBarcode(etBarcode.getText().toString().trim());
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                    }
+                }).build();
+        dialog.show();
+    }
 
     // ==================== 再按一次退出 ====================
 

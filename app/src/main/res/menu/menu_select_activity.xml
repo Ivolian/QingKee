@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
     <item
-        android:id="@+id/asset_detail"
-        android:icon="@drawable/ic_photo_camera_white_36dp"
-        android:title="资产详情"
-        app:showAsAction="always"/>
+        android:id="@+id/scan"
+        android:title="扫描二维码"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/manual"
+        android:title="手动输入条码"
+        app:showAsAction="never"/>
 </menu>
