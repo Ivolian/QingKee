@@ -7,7 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -137,11 +139,37 @@ public class AssetsListActivity extends ToolbarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.add_asset:
+            case R.id.scan:
                 new IntentIntegrator(this).initiateScan();
+                return true;
+            case R.id.manual:
+                showManualBarcodeDialog();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showManualBarcodeDialog() {
+
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title("请输入条码")
+                .customView(R.layout.dialog_manual_barcode, true)
+                .positiveText("确定")
+                .negativeText("取消")
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        if (dialog.getCustomView() != null) {
+                            EditText etBarcode = (EditText) dialog.getCustomView().findViewById(R.id.barcode);
+                            fetchAssetByBarcode(etBarcode.getText().toString().trim());
+                        }
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                    }
+                }).build();
+        dialog.show();
     }
 
     private void fetchAssetByBarcode(final String barcode) {

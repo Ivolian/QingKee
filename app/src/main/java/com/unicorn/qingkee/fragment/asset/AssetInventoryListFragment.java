@@ -3,13 +3,14 @@ package com.unicorn.qingkee.fragment.asset;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -80,6 +81,29 @@ public class AssetInventoryListFragment extends BaseFragment {
         }
     }
 
+    private void showManualBarcodeDialog() {
+
+        MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                .title("请输入条码")
+                .customView(R.layout.dialog_manual_barcode, true)
+                .positiveText("确定")
+                .negativeText("取消")
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        if (dialog.getCustomView() != null) {
+                            EditText etBarcode = (EditText) dialog.getCustomView().findViewById(R.id.barcode);
+                            inventory(etBarcode.getText().toString().trim());
+                        }
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                    }
+                }).build();
+        dialog.show();
+    }
+
     private void inventory(String barcode) {
 
         Uri.Builder builder = Uri.parse(UrlUtils.getBaseUrl() + "/InventoryOperation?").buildUpon();
@@ -111,7 +135,7 @@ public class AssetInventoryListFragment extends BaseFragment {
         fetchList();
     }
 
-    private void fetchList(){
+    private void fetchList() {
         showProgressDialog();
         MyVolley.getRequestQueue().add(new JsonObjectRequest(getUrl(),
                 new Response.Listener<JSONObject>() {
@@ -157,10 +181,14 @@ public class AssetInventoryListFragment extends BaseFragment {
         return linearLayoutManager;
     }
 
-    public void onInventoryListItemClicked(String clickedInventoryId){
+    public void onInventoryListItemClicked(String clickedInventoryId, boolean manual) {
 
         currentInventoryId = clickedInventoryId;
-        IntentIntegrator.forSupportFragment(this).initiateScan();
+        if (manual) {
+            showManualBarcodeDialog();
+        } else {
+            IntentIntegrator.forSupportFragment(this).initiateScan();
+        }
     }
 
     //

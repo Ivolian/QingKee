@@ -106,6 +106,29 @@ public class SelectActivity extends ToolbarActivity {
         }
     }
 
+    private void showManualBarcodeDialog() {
+
+        MaterialDialog dialog = new MaterialDialog.Builder(this)
+                .title("请输入条码")
+                .customView(R.layout.dialog_manual_barcode, true)
+                .positiveText("确定")
+                .negativeText("取消")
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        if (dialog.getCustomView() != null) {
+                            EditText etBarcode = (EditText) dialog.getCustomView().findViewById(R.id.barcode);
+                            fetchAssetByBarcode(etBarcode.getText().toString().trim());
+                        }
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                    }
+                }).build();
+        dialog.show();
+    }
+
     private void fetchAssetByBarcode(final String barcode) {
 
         showProgressDialog();
@@ -141,27 +164,6 @@ public class SelectActivity extends ToolbarActivity {
         builder.appendQueryParameter("userid", MyApplication.getInstance().getUserInfo().getUserId());
         builder.appendQueryParameter("barcode", barcode);
         return builder.toString();
-    }
-
-    private void showManualBarcodeDialog() {
-
-        MaterialDialog dialog = new MaterialDialog.Builder(this)
-                .title("请输入条码")
-                .customView(R.layout.dialog_manual_barcode, true)
-                .positiveText("确定")
-                .negativeText("取消")
-                .callback(new MaterialDialog.ButtonCallback() {
-                    @Override
-                    public void onPositive(MaterialDialog dialog) {
-                        EditText etBarcode = (EditText) dialog.getCustomView().findViewById(R.id.barcode);
-                        fetchAssetByBarcode(etBarcode.getText().toString().trim());
-                    }
-
-                    @Override
-                    public void onNegative(MaterialDialog dialog) {
-                    }
-                }).build();
-        dialog.show();
     }
 
     // ==================== 再按一次退出 ====================

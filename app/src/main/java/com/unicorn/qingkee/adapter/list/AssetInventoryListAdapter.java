@@ -68,8 +68,11 @@ public class AssetInventoryListAdapter extends RecyclerView.Adapter<AssetInvento
                         @Override
                         public boolean onMenuItemClick(MenuItem menuItem) {
                             switch (menuItem.getItemId()) {
-                                case R.id.inventory:
-                                    assetInventoryListFragment.onInventoryListItemClicked(inventoryList.get(getAdapterPosition()).getId());
+                                case R.id.scan:
+                                    assetInventoryListFragment.onInventoryListItemClicked(inventoryList.get(getAdapterPosition()).getId(),false);
+                                    return true;
+                                case R.id.manual:
+                                    assetInventoryListFragment.onInventoryListItemClicked(inventoryList.get(getAdapterPosition()).getId(),true);
                                     return true;
                             }
                             return false;

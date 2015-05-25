@@ -1,12 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/add_asset"
-        android:title="添加资产"
-        android:icon="@drawable/ic_add_white_36dp"
-        app:showAsAction="always" />
-
-</menu>  
+        android:id="@+id/scan"
+        android:title="扫描二维码"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/manual"
+        android:title="手动输入条码"
+        app:showAsAction="never" />
+</menu>
