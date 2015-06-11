@@ -34,6 +34,7 @@ import com.unicorn.qingkee.mycode.ImageUtil;
 import com.unicorn.qingkee.mycode.UploadImageView;
 import com.unicorn.qingkee.util.JSONUtils;
 import com.unicorn.qingkee.util.StringUtils;
+import com.unicorn.qingkee.util.TimeUtils;
 import com.unicorn.qingkee.util.ToastUtils;
 import com.unicorn.qingkee.util.UrlUtils;
 import com.unicorn.qingkee.volley.MyVolley;
@@ -65,6 +66,15 @@ public class AssetBindActivity extends ToolbarActivity {
     @InjectView(R.id.asset_name)
     MaterialEditText etAssetName;
 
+    @InjectView(R.id.asset_brand)
+    MaterialEditText etAssetBrand;
+
+    @InjectView(R.id.asset_models)
+    MaterialEditText etAssetModels;
+
+    @InjectView(R.id.asset_factory_date)
+    MaterialEditText etAssetFactoryDate;
+
     @InjectView(R.id.barcode)
     MaterialEditText etBarcode;
 
@@ -84,6 +94,9 @@ public class AssetBindActivity extends ToolbarActivity {
 
         initToolbar("资产绑定", true);
         etAssetName.setText(asset.getAssetName());
+        etAssetBrand.setText(asset.getBrand());
+        etAssetModels.setText(asset.getModels());
+        etAssetFactoryDate.setText(TimeUtils.getTime(asset.getFactoryDate().getTime()));
     }
 
     @OnClick(R.id.btn_scan_barcode)
@@ -140,17 +153,20 @@ public class AssetBindActivity extends ToolbarActivity {
             String photoName = photoPath.substring(photoPath.lastIndexOf("/") + 1, photoPath.length());
             photoNameList.add(photoName);
         }
-        if (photoNameList.size() == 0) {
-            ToastUtils.show("请先上传照片");
+        if (photoNameList.size() == 0 && asset.getAssetSort().equals("2")) {
+            ToastUtils.show("租赁类资产至少拍摄一张照片");
             return;
         }
 
         //
         Uri.Builder builder = Uri.parse(UrlUtils.getBaseUrl() + "/BindAsset?").buildUpon();
-        builder.appendQueryParameter("userid", MyApplication.getInstance().getUserInfo().getUserId());
         builder.appendQueryParameter("assetid", asset.getId());
-        builder.appendQueryParameter("barcode",etBarcode.getText().toString().trim() );
-        builder.appendQueryParameter("pictures",StringUtils.join(photoNameList.toArray(), '|') );
+        builder.appendQueryParameter("barcode", etBarcode.getText().toString().trim());
+        builder.appendQueryParameter("pictures", StringUtils.join(photoNameList.toArray(), '|'));
+        builder.appendQueryParameter("userid", MyApplication.getInstance().getUserInfo().getUserId());
+        builder.appendQueryParameter("models", asset.getModels());
+        builder.appendQueryParameter("factorydate", etAssetFactoryDate.getText().toString());
+        builder.appendQueryParameter("brand", asset.getBrand());
 
         MyVolley.getRequestQueue().add(new JsonObjectRequest(builder.toString(),
                 new Response.Listener<JSONObject>() {
@@ -169,7 +185,7 @@ public class AssetBindActivity extends ToolbarActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                    hideProgressDialog();
+                        hideProgressDialog();
                         ToastUtils.show(VolleyErrorHelper.getErrorMessage(volleyError));
                     }
                 }));
@@ -199,8 +215,8 @@ public class AssetBindActivity extends ToolbarActivity {
         ivPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(AssetBindActivity.this, PhotoActivity.class);
-                intent.putExtra("photoPath",currentPhotoPath);
+                Intent intent = new Intent(AssetBindActivity.this, PhotoActivity.class);
+                intent.putExtra("photoPath", currentPhotoPath);
                 startActivity(intent);
             }
         });

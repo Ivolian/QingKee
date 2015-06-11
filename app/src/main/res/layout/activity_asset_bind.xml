@@ -28,6 +28,33 @@
                 android:layout_height="wrap_content"
                 app:met_floatingLabel="highlight" />
 
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/asset_brand"
+                android:hint="资产品牌"
+                android:editable="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight"
+                android:layout_marginTop="10dp"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/asset_models"
+                android:hint="资产型号"
+                android:editable="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight"
+                android:layout_marginTop="10dp"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/asset_factory_date"
+                android:hint="出厂日期"
+                android:editable="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:met_floatingLabel="highlight"
+                android:layout_marginTop="10dp"/>
+
             <LinearLayout
                 android:id="@+id/ll_barcode"
                 android:orientation="horizontal"

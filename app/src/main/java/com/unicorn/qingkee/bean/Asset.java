@@ -19,6 +19,7 @@ public class Asset implements Serializable {
     String brand;
     String models;
     Date buyDate;
+    Date factoryDate;
     String assetValue;
     String supplierName;
     String address;
@@ -53,6 +54,10 @@ public class Asset implements Serializable {
 
     public Date getBuyDate() {
         return buyDate;
+    }
+
+    public Date getFactoryDate() {
+        return factoryDate;
     }
 
     public String getAssetValue() {
@@ -139,6 +144,13 @@ public class Asset implements Serializable {
         } catch (Exception e) {
             //
         }
+        String factoryDateString = JSONUtils.getString(jsonObject, "Factorydate", "");
+        try {
+            asset.factoryDate = simpleDateFormat.parse(factoryDateString);
+        } catch (Exception e) {
+            //
+        }
+
         asset.assetValue = JSONUtils.getString(jsonObject, "Assetvalue", "");
         asset.supplierName = JSONUtils.getString(jsonObject, "SupplierName", "");
         asset.address = JSONUtils.getString(jsonObject, "Address", "");

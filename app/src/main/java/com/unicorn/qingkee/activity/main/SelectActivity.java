@@ -32,7 +32,7 @@ import org.json.JSONObject;
 public class SelectActivity extends ToolbarActivity {
 
     int[] ids = {
-            R.id.asset_add, R.id.asset_allot_out, R.id.asset_allot_in,
+            R.id.asset_bind, R.id.asset_allot_out, R.id.asset_allot_in,
             R.id.asset_apply, R.id.asset_inventory, R.id.asset_transfer,
             R.id.asset_abandon, R.id.asset_repair_in, R.id.asset_repair_out
     };
