@@ -8,109 +8,132 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:padding="@dimen/default_activity_padding"
         android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/default_activity_padding">
 
+        <!-- 资产名称，资产品牌，资产型号,购买日期，购入价格-->
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/asset_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:editable="false"
             android:hint="资产名称"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
-            android:editable="false" />
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/asset_status"
-            android:hint="资产状态"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
-            android:layout_marginTop="10dp"
-            android:editable="false" />
+            app:met_floatingLabel="highlight" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/brand"
-            android:hint="资产品牌"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
             android:layout_marginTop="10dp"
-            android:editable="false" />
+            android:editable="false"
+            android:hint="资产品牌"
+            app:met_floatingLabel="highlight" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/models"
-            android:hint="资产型号"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
             android:layout_marginTop="10dp"
-            android:editable="false" />
+            android:editable="false"
+            android:hint="资产型号"
+            app:met_floatingLabel="highlight" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/buy_date"
-            android:hint="购买日期"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
             android:layout_marginTop="10dp"
-            android:editable="false" />
+            android:editable="false"
+            android:hint="购买日期"
+            app:met_floatingLabel="highlight" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/asset_value"
-            android:hint="购入价格"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
             android:layout_marginTop="10dp"
-            android:editable="false" />
+            android:editable="false"
+            android:hint="购入价格"
+            app:met_floatingLabel="highlight" />
+
+        <!-- 供应商，资产状态，资产类别，所在地址，门牌号-->
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/supplier_name"
-            android:hint="供应商"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
             android:layout_marginTop="10dp"
-            android:editable="false" />
+            android:editable="false"
+            android:hint="供应商"
+            app:met_floatingLabel="highlight" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/company_name"
-            android:hint="所属公司"
+            android:id="@+id/asset_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
             android:layout_marginTop="10dp"
-            android:editable="false" />
+            android:editable="false"
+            android:hint="资产状态"
+            app:met_floatingLabel="highlight" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/asset_sort"
-            android:hint="资产类别"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
             android:layout_marginTop="10dp"
-            android:editable="false" />
+            android:editable="false"
+            android:hint="资产类别"
+            app:met_floatingLabel="highlight" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/address"
-            android:hint="所在地址"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
             android:layout_marginTop="10dp"
-            android:editable="false" />
+            android:editable="false"
+            android:hint="所在地址"
+            app:met_floatingLabel="highlight" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/room_number"
-            android:hint="门牌号"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
             android:layout_marginTop="10dp"
-            android:editable="false" />
+            android:editable="false"
+            android:hint="门牌号"
+            app:met_floatingLabel="highlight" />
+
+        <!-- 所属公司，所属部门，使用人-->
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/company_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:editable="false"
+            android:hint="所属公司"
+            app:met_floatingLabel="highlight" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/dept_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:editable="false"
+            android:hint="所属部门"
+            app:met_floatingLabel="highlight" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/employee_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:editable="false"
+            android:hint="使用人"
+            app:met_floatingLabel="highlight" />
 
     </LinearLayout>
     <!-- end 布局 -->

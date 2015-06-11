@@ -23,6 +23,8 @@ public class Asset implements Serializable {
     String supplierName;
     String address;
     String companyName;
+    String deptName;
+    String employeeName;
     Double assetCost;
     String assetSort;
     String installPosition;
@@ -77,6 +79,14 @@ public class Asset implements Serializable {
         return companyName;
     }
 
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
     public Double getAssetCost() {
         return assetCost;
     }
@@ -113,6 +123,8 @@ public class Asset implements Serializable {
         asset.id = JSONUtils.getString(jsonObject, "ID", "");
         asset.assetName = JSONUtils.getString(jsonObject, "Assetname", "");
         asset.companyName = JSONUtils.getString(jsonObject, "CommanyName", "");
+        asset.deptName = JSONUtils.getString(jsonObject, "DeptName", "");
+        asset.employeeName = JSONUtils.getString(jsonObject, "EmployeeName", "");
         asset.assetCost = JSONUtils.getDouble(jsonObject, "Assetcost", 0);
         asset.assetSort = JSONUtils.getString(jsonObject, "Assetsort", "");
         asset.installPosition = JSONUtils.getString(jsonObject, "Installposition", "");

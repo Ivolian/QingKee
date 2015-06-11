@@ -41,6 +41,12 @@ public class AssetDetailInfoFragment extends BaseFragment {
     @InjectView(R.id.company_name)
     MaterialEditText etCompanyName;
 
+    @InjectView(R.id.dept_name)
+    MaterialEditText etDeptName;
+
+    @InjectView(R.id.employee_name)
+    MaterialEditText etEmployeeName;
+
     @InjectView(R.id.asset_sort)
     MaterialEditText etAssetSort;
 
@@ -78,6 +84,8 @@ public class AssetDetailInfoFragment extends BaseFragment {
             etAssetValue.setText(asset.getAssetValue());
             etSupplierName.setText(asset.getSupplierName());
             etCompanyName.setText(asset.getCompanyName());
+            etDeptName.setText(asset.getDeptName());
+            etEmployeeName.setText(asset.getEmployeeName());
             etAssetSort.setText(Asset.getAssetSortText(asset.getAssetSort()));
             etAddress.setText(asset.getAddress());
             etRoomnumber.setText(asset.getRoomNumber());
