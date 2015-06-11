@@ -86,10 +86,10 @@ public class AssetAllotOutFragment extends AssetsFragment {
             ToastUtils.show("使用部门不能为空");
             return;
         }
-        if (spEmployee.getSelectedValue().equals(StringUtils.EMPTY)) {
-            ToastUtils.show("使用人不能为空");
-            return;
-        }
+//        if (spEmployee.getSelectedValue().equals(StringUtils.EMPTY)) {
+//            ToastUtils.show("使用人不能为空");
+//            return;
+//        }
         if (etNote.getText().toString().equals(StringUtils.EMPTY)) {
             ToastUtils.show("备注不能为空");
             return;
