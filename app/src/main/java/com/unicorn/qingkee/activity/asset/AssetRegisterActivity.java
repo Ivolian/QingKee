@@ -28,8 +28,10 @@ import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.activity.other.PhotoActivity;
-import com.unicorn.qingkee.bean.Asset;
+import com.unicorn.qingkee.mycode.BetterSpinner;
+import com.unicorn.qingkee.mycode.FetchUtil;
 import com.unicorn.qingkee.mycode.ImageUtil;
+import com.unicorn.qingkee.mycode.SpinnerData;
 import com.unicorn.qingkee.mycode.UploadImageView;
 import com.unicorn.qingkee.util.JSONUtils;
 import com.unicorn.qingkee.util.StringUtils;
@@ -46,6 +48,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.InjectView;
@@ -61,8 +64,6 @@ public class AssetRegisterActivity extends ToolbarActivity {
 
     final int PHOTO_HEIGHT = dpToPx(200);
 
-    private Asset asset;
-
     private String currentPhotoPath;
 
     @InjectView(R.id.asset_name)
@@ -77,28 +78,43 @@ public class AssetRegisterActivity extends ToolbarActivity {
     @InjectView(R.id.asset_factory_date)
     MaterialEditText etAssetFactoryDate;
 
+    Date factoryDate = new Date();
+
+    @InjectView(R.id.asset_address)
+    MaterialEditText etAssetAddress;
+
+    @InjectView(R.id.asset_room_number)
+    MaterialEditText etAssetRoomNumber;
+
+    @InjectView(R.id.asset_install_position)
+    MaterialEditText etAssetInstallPosition;
+
+    @InjectView(R.id.asset_notes)
+    MaterialEditText etAssetNotes;
+
     @InjectView(R.id.barcode)
     MaterialEditText etBarcode;
 
     @InjectView(R.id.photo_container)
     LinearLayout llPhotoContainer;
 
+    @InjectView(R.id.sp_dept)
+    BetterSpinner spDept;
+
+    @InjectView(R.id.sp_asset_sort)
+    BetterSpinner spAssetSort;
+
     @Override
     public int getLayoutResourceId() {
-        return R.layout.activity_asset_bind;
+        return R.layout.activity_asset_register;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        asset = (Asset) getIntent().getSerializableExtra("asset");
-
-        initToolbar("资产绑定", true);
-        etAssetName.setText(asset.getAssetName());
-        etAssetBrand.setText(asset.getBrand());
-        etAssetModels.setText(asset.getModels());
-        etAssetFactoryDate.setText(TimeUtils.getTime(asset.getFactoryDate().getTime(), TimeUtils.DATE_FORMAT_DATE));
+        initToolbar("资产登记", true);
+        initViews();
     }
 
     @OnClick(R.id.btn_scan_barcode)
@@ -141,12 +157,34 @@ public class AssetRegisterActivity extends ToolbarActivity {
             ToastUtils.show("请先扫描条码");
             return;
         }
+        if (spAssetSort.getSelectedValue().equals(StringUtils.EMPTY)) {
+            ToastUtils.show("资产类别不能为空");
+            return;
+        }
+        if (etAssetName.getText().toString().equals(StringUtils.EMPTY)) {
+            ToastUtils.show("资产名称不能为空");
+            return;
+        }
         if (etAssetBrand.getText().toString().equals(StringUtils.EMPTY)) {
             ToastUtils.show("资产品牌不能为空");
             return;
         }
         if (etAssetModels.getText().toString().equals(StringUtils.EMPTY)) {
             ToastUtils.show("资产型号不能为空");
+            return;
+        }
+        if (etAssetAddress.getText().toString().equals(StringUtils.EMPTY)
+                && spAssetSort.getSelectedValue().equals("2")) {
+            ToastUtils.show("租赁类资产地址不能为空");
+            return;
+        }
+        if (etAssetRoomNumber.getText().toString().equals(StringUtils.EMPTY)
+                && spAssetSort.getSelectedValue().equals("2")) {
+            ToastUtils.show("租赁类资产门牌号不能为空");
+            return;
+        }
+        if (spDept.getSelectedValue().equals(StringUtils.EMPTY)) {
+            ToastUtils.show("使用部门不能为空");
             return;
         }
 
@@ -163,20 +201,27 @@ public class AssetRegisterActivity extends ToolbarActivity {
             String photoName = photoPath.substring(photoPath.lastIndexOf("/") + 1, photoPath.length());
             photoNameList.add(photoName);
         }
-        if (photoNameList.size() == 0 && asset.getAssetSort().equals("2")) {
+        if (photoNameList.size() == 0 && spAssetSort.getSelectedValue().equals("2")) {
             ToastUtils.show("租赁类资产至少拍摄一张照片");
             return;
         }
 
         //
-        Uri.Builder builder = Uri.parse(UrlUtils.getBaseUrl() + "/BindAsset?").buildUpon();
-        builder.appendQueryParameter("assetid", asset.getId());
+        Uri.Builder builder = Uri.parse(UrlUtils.getBaseUrl() + "/RegisterAsset?").buildUpon();
+        builder.appendQueryParameter("assetname", etAssetName.getText().toString().trim());
         builder.appendQueryParameter("barcode", etBarcode.getText().toString().trim());
+        builder.appendQueryParameter("brand", etAssetBrand.getText().toString().trim());
+        builder.appendQueryParameter("models", etAssetModels.getText().toString().trim());
+        builder.appendQueryParameter("factorydate", TimeUtils.getTime(factoryDate.getTime(), TimeUtils.DATE_FORMAT_DATE));
         builder.appendQueryParameter("pictures", StringUtils.join(photoNameList.toArray(), '|'));
+        builder.appendQueryParameter("address", etAssetAddress.getText().toString().trim());
+        builder.appendQueryParameter("roomnumber", etAssetRoomNumber.getText().toString().trim());
+        builder.appendQueryParameter("installposition", etAssetInstallPosition.getText().toString().trim());
+        builder.appendQueryParameter("assetsort", spAssetSort.getSelectedValue());
+        builder.appendQueryParameter("deptid", spDept.getSelectedValue());
+        builder.appendQueryParameter("companyid",MyApplication.getInstance().getUserInfo().getCompanyId());
+        builder.appendQueryParameter("notes", etAssetNotes.getText().toString().trim());
         builder.appendQueryParameter("userid", MyApplication.getInstance().getUserInfo().getUserId());
-        builder.appendQueryParameter("models", asset.getModels());
-        builder.appendQueryParameter("factorydate", TimeUtils.getTime(asset.getFactoryDate().getTime(), TimeUtils.DATE_FORMAT_DATE));
-        builder.appendQueryParameter("brand", asset.getBrand());
 
         MyVolley.getRequestQueue().add(new JsonObjectRequest(builder.toString(),
                 new Response.Listener<JSONObject>() {
@@ -187,8 +232,8 @@ public class AssetRegisterActivity extends ToolbarActivity {
                         if (result != 0) {
                             ToastUtils.show(JSONUtils.getString(response, "Msg", ""));
                         } else {
-                            ToastUtils.show("绑定成功");
-                            startActivity(ArrivalAssetListActivity.class);
+                            ToastUtils.show("登记成功");
+                            finish();
                         }
                     }
                 },
@@ -316,6 +361,26 @@ public class AssetRegisterActivity extends ToolbarActivity {
         label.setTargetView(ivPhoto, 10, LabelView.Gravity.LEFT_TOP);
     }
 
+    private void initViews() {
+
+        etAssetFactoryDate.setText(TimeUtils.getTime(factoryDate.getTime(), TimeUtils.DATE_FORMAT_DATE));
+        initSpDept();
+        initSpAssetSort();
+    }
+
+    private void initSpDept() {
+
+        FetchUtil.fetchDeptList(spDept, MyApplication.getInstance().getUserInfo().getCompanyId());
+    }
+
+    private void initSpAssetSort() {
+
+        List<SpinnerData> spinnerDataList = new ArrayList<>();
+        spinnerDataList.add(new SpinnerData("1", "办公"));
+        spinnerDataList.add(new SpinnerData("2", "租赁"));
+        spAssetSort.setSpinnerDataList(spinnerDataList);
+    }
+
     //
 
 
@@ -334,14 +399,14 @@ public class AssetRegisterActivity extends ToolbarActivity {
     private void showDatePickerDialog() {
 
         final Calendar calendar = Calendar.getInstance();
-        calendar.setTime(asset.getFactoryDate());
+        calendar.setTime(factoryDate);
         DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePickerDialog datePickerDialog, int year, int monthOfYear, int dayOfMonth) {
                         calendar.set(year, monthOfYear, dayOfMonth);
-                        asset.getFactoryDate().setTime(calendar.getTimeInMillis());
-                        etAssetFactoryDate.setText(TimeUtils.getTime(asset.getFactoryDate().getTime(), TimeUtils.DATE_FORMAT_DATE));
+                        factoryDate.setTime(calendar.getTimeInMillis());
+                        etAssetFactoryDate.setText(TimeUtils.getTime(factoryDate.getTime(), TimeUtils.DATE_FORMAT_DATE));
                     }
                 },
                 calendar.get(Calendar.YEAR),
