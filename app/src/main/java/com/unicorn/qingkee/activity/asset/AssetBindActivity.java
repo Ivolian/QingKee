@@ -19,7 +19,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
 import com.lid.lib.LabelView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -39,16 +38,19 @@ import com.unicorn.qingkee.util.ToastUtils;
 import com.unicorn.qingkee.util.UrlUtils;
 import com.unicorn.qingkee.volley.MyVolley;
 import com.unicorn.qingkee.volley.toolbox.VolleyErrorHelper;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
+import butterknife.OnFocusChange;
 
 
 public class AssetBindActivity extends ToolbarActivity {
@@ -96,7 +98,7 @@ public class AssetBindActivity extends ToolbarActivity {
         etAssetName.setText(asset.getAssetName());
         etAssetBrand.setText(asset.getBrand());
         etAssetModels.setText(asset.getModels());
-        etAssetFactoryDate.setText(TimeUtils.getTime(asset.getFactoryDate().getTime()));
+        etAssetFactoryDate.setText(TimeUtils.getTime(asset.getFactoryDate().getTime(), TimeUtils.DATE_FORMAT_DATE));
     }
 
     @OnClick(R.id.btn_scan_barcode)
@@ -135,8 +137,16 @@ public class AssetBindActivity extends ToolbarActivity {
     @OnClick(R.id.btn_confirm)
     public void confirm() {
 
-        if (etBarcode.getText().toString().equals("")) {
+        if (etBarcode.getText().toString().equals(StringUtils.EMPTY)) {
             ToastUtils.show("请先扫描条码");
+            return;
+        }
+        if (etAssetBrand.getText().toString().equals(StringUtils.EMPTY)) {
+            ToastUtils.show("资产品牌不能为空");
+            return;
+        }
+        if (etAssetModels.getText().toString().equals(StringUtils.EMPTY)) {
+            ToastUtils.show("资产型号不能为空");
             return;
         }
 
@@ -165,7 +175,7 @@ public class AssetBindActivity extends ToolbarActivity {
         builder.appendQueryParameter("pictures", StringUtils.join(photoNameList.toArray(), '|'));
         builder.appendQueryParameter("userid", MyApplication.getInstance().getUserInfo().getUserId());
         builder.appendQueryParameter("models", asset.getModels());
-        builder.appendQueryParameter("factorydate", etAssetFactoryDate.getText().toString());
+        builder.appendQueryParameter("factorydate", TimeUtils.getTime(asset.getFactoryDate().getTime(), TimeUtils.DATE_FORMAT_DATE));
         builder.appendQueryParameter("brand", asset.getBrand());
 
         MyVolley.getRequestQueue().add(new JsonObjectRequest(builder.toString(),
@@ -306,4 +316,37 @@ public class AssetBindActivity extends ToolbarActivity {
         label.setTargetView(ivPhoto, 10, LabelView.Gravity.LEFT_TOP);
     }
 
+    //
+
+
+    @OnFocusChange(R.id.asset_factory_date)
+    public void etFactoryDateOnFocused(boolean focused) {
+        if (focused) {
+            showDatePickerDialog();
+        }
+    }
+
+    @OnClick(R.id.asset_factory_date)
+    public void etFactoryDateOnClick() {
+        showDatePickerDialog();
+    }
+
+    private void showDatePickerDialog() {
+
+        final Calendar calendar = Calendar.getInstance();
+        calendar.setTime(asset.getFactoryDate());
+        DatePickerDialog datePickerDialog = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
+                new com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog datePickerDialog, int year, int monthOfYear, int dayOfMonth) {
+                        calendar.set(year, monthOfYear, dayOfMonth);
+                        asset.getFactoryDate().setTime(calendar.getTimeInMillis());
+                        etAssetFactoryDate.setText(TimeUtils.getTime(asset.getFactoryDate().getTime(), TimeUtils.DATE_FORMAT_DATE));
+                    }
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show(getFragmentManager(), "FactoryDate");
+    }
 }
