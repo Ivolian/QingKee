@@ -48,6 +48,9 @@
         <activity
             android:name=".activity.asset.AssetDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.asset.AssetRegisterActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

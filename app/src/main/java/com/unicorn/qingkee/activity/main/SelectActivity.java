@@ -18,6 +18,7 @@ import com.google.zxing.integration.android.IntentResult;
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
 import com.unicorn.qingkee.activity.asset.AssetDetailActivity;
+import com.unicorn.qingkee.activity.asset.AssetRegisterActivity;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.bean.Asset;
 import com.unicorn.qingkee.util.JSONUtils;
@@ -27,6 +28,8 @@ import com.unicorn.qingkee.volley.MyVolley;
 import com.unicorn.qingkee.volley.toolbox.VolleyErrorHelper;
 
 import org.json.JSONObject;
+
+import butterknife.OnClick;
 
 
 public class SelectActivity extends ToolbarActivity {
@@ -66,6 +69,17 @@ public class SelectActivity extends ToolbarActivity {
                 }
             });
         }
+    }
+
+    @OnClick(R.id.asset_register)
+    public void startRegisterActivity() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(SelectActivity.this, AssetRegisterActivity.class);
+                startActivity(intent);
+            }
+        }, 800);
     }
 
     private void startMainActivity(int position) {
