@@ -174,9 +174,9 @@ public class AssetBindActivity extends ToolbarActivity {
         builder.appendQueryParameter("barcode", etBarcode.getText().toString().trim());
         builder.appendQueryParameter("pictures", StringUtils.join(photoNameList.toArray(), '|'));
         builder.appendQueryParameter("userid", MyApplication.getInstance().getUserInfo().getUserId());
-        builder.appendQueryParameter("models", asset.getModels());
+        builder.appendQueryParameter("models", etAssetModels.getText().toString().trim());
         builder.appendQueryParameter("factorydate", TimeUtils.getTime(asset.getFactoryDate().getTime(), TimeUtils.DATE_FORMAT_DATE));
-        builder.appendQueryParameter("brand", asset.getBrand());
+        builder.appendQueryParameter("brand", etAssetBrand.getText().toString().trim());
 
         MyVolley.getRequestQueue().add(new JsonObjectRequest(builder.toString(),
                 new Response.Listener<JSONObject>() {
