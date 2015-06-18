@@ -77,6 +77,9 @@ public class AssetBindActivity extends ToolbarActivity {
     @InjectView(R.id.asset_factory_date)
     MaterialEditText etAssetFactoryDate;
 
+    @InjectView(R.id.asset_install_position)
+    MaterialEditText etAssetInstallPosition;
+
     @InjectView(R.id.barcode)
     MaterialEditText etBarcode;
 
@@ -99,6 +102,7 @@ public class AssetBindActivity extends ToolbarActivity {
         etAssetBrand.setText(asset.getBrand());
         etAssetModels.setText(asset.getModels());
         etAssetFactoryDate.setText(TimeUtils.getTime(asset.getFactoryDate().getTime(), TimeUtils.DATE_FORMAT_DATE));
+        etAssetInstallPosition.setText(asset.getInstallPosition());
     }
 
     @OnClick(R.id.btn_scan_barcode)
@@ -177,6 +181,7 @@ public class AssetBindActivity extends ToolbarActivity {
         builder.appendQueryParameter("models", etAssetModels.getText().toString().trim());
         builder.appendQueryParameter("factorydate", TimeUtils.getTime(asset.getFactoryDate().getTime(), TimeUtils.DATE_FORMAT_DATE));
         builder.appendQueryParameter("brand", etAssetBrand.getText().toString().trim());
+        builder.appendQueryParameter("installposition", etAssetInstallPosition.getText().toString().trim());
 
         MyVolley.getRequestQueue().add(new JsonObjectRequest(builder.toString(),
                 new Response.Listener<JSONObject>() {

@@ -22,7 +22,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/tv_company_name"
+            android:id="@+id/tv_dept_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"/>

@@ -39,8 +39,8 @@ public class ArrivalAssetListAdapter extends AssetListAdapter<ArrivalAssetListAd
         @InjectView(R.id.tv_asset_name)
         TextView tvAssetName;
 
-        @InjectView(R.id.tv_company_name)
-        TextView tvCompanyName;
+        @InjectView(R.id.tv_dept_name)
+        TextView tvDeptName;
 
         @InjectView(R.id.tv_asset_cost)
         TextView tvAssetCost;
@@ -74,13 +74,11 @@ public class ArrivalAssetListAdapter extends AssetListAdapter<ArrivalAssetListAd
 
         Asset asset = assetList.get(position);
         viewHolder.tvAssetName.setText("资产名称： " + asset.getAssetName());
-        viewHolder.tvCompanyName.setText("所属公司： " + asset.getCompanyName());
+        viewHolder.tvDeptName.setText("所属部门： " + asset.getDeptName());
         viewHolder.tvAssetCost.setText("购入价格： " + asset.getAssetCost());
         viewHolder.tvAssetSort.setText("资产分类： " + Asset.getAssetSortText(asset.getAssetSort()));
         viewHolder.tvInstallPosition.setText("安装地址： " + asset.getInstallPosition());
         viewHolder.tvRoomNumber.setText("房间号： " + asset.getRoomNumber());
     }
-
-
 
 }
