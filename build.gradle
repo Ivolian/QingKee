@@ -19,5 +19,6 @@ allprojects {
             dirs 'libs' //this way we can find the .aar file in libs folder
         }
         mavenCentral()
+        maven { url 'http://raw.github.com/wada811/Android-Material-Design-Colors/master/repository/' }
     }
 }

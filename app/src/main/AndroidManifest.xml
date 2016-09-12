@@ -52,6 +52,11 @@
             android:name=".activity.asset.AssetRegisterActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".activity.address.AddressSearchActivity"
+            android:screenOrientation="portrait">
+
+</activity>
     </application>
 
 </manifest>
