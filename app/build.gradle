@@ -52,5 +52,6 @@ dependencies {
     compile 'com.wada811:android-material-design-colors:2.0.0'
     compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
     compile 'com.google.code.gson:gson:2.7'
+    compile 'org.greenrobot:eventbus:3.0.0'
 
 }

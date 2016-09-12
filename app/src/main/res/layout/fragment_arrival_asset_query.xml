@@ -4,103 +4,104 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:flatui="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scroll"
-    android:scrollbars="none"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background_material_light"
         android:gravity="center_horizontal"
+        android:orientation="vertical"
         android:padding="20dp">
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/asset_name"
-            android:hint="资产名称"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="资产名称"
             app:met_floatingLabel="highlight" />
 
         <com.unicorn.qingkee.mycode.BetterSpinner
             android:id="@+id/sp_company"
-            android:hint="使用公司"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:hint="使用公司"
+            app:met_floatingLabel="highlight" />
 
         <com.unicorn.qingkee.mycode.BetterSpinner
             android:id="@+id/sp_dept"
-            android:hint="使用部门"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:hint="使用部门"
+            app:met_floatingLabel="highlight" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/et_employee_name"
-            android:hint="使用人姓名"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:hint="使用人姓名"
+            app:met_floatingLabel="highlight" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/et_address"
-            android:hint="安装地址"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:editable="false"
+            android:hint="安装地址"
+            app:met_floatingLabel="highlight" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/et_romeNumber"
-            android:hint="房间号"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:hint="房间号"
+            app:met_floatingLabel="highlight" />
 
         <com.unicorn.qingkee.mycode.BetterSpinner
             android:id="@+id/sp_asset_sort"
-            android:hint="资产类别"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:met_floatingLabel="highlight"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:hint="资产类别"
+            app:met_floatingLabel="highlight" />
 
         <LinearLayout
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="60dp"
+            android:orientation="horizontal">
 
             <com.cengalabs.flatui.views.FlatButton
                 android:id="@+id/btn_clear_views"
-                android:text="清空输入"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                flatui:fl_theme="@array/orange"
-                flatui:fl_textAppearance="fl_none"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="清空输入"
                 flatui:fl_blockButtonEffectHeight="3dp"
-                flatui:fl_touchEffect="fl_ease"
-                android:layout_marginRight="5dp" />
+                flatui:fl_textAppearance="fl_none"
+                flatui:fl_theme="@array/orange"
+                flatui:fl_touchEffect="fl_ease" />
 
             <com.cengalabs.flatui.views.FlatButton
                 android:id="@+id/btn_query"
-                android:text="查询"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                flatui:fl_theme="@array/grass"
-                flatui:fl_textAppearance="fl_none"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:text="查询"
                 flatui:fl_blockButtonEffectHeight="3dp"
-                flatui:fl_touchEffect="fl_ease"
-                android:layout_marginLeft="5dp" />
+                flatui:fl_textAppearance="fl_none"
+                flatui:fl_theme="@array/grass"
+                flatui:fl_touchEffect="fl_ease" />
 
         </LinearLayout>
 

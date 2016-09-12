@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.unicorn.qingkee.R;
+import com.unicorn.qingkee.activity.address.event.AddressChooseEvent;
 import com.unicorn.qingkee.activity.address.model.Address;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +63,11 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
         }
 
         @OnClick(R.id.item)
-        public void itemOnClick(){
-
+        public void itemOnClick() {
+            Address address = addressList.get(getAdapterPosition());
+            AddressChooseEvent addressChooseEvent = new AddressChooseEvent();
+            addressChooseEvent.setAddress(address);
+            EventBus.getDefault().post(addressChooseEvent);
         }
     }
 

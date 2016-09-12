@@ -1,7 +1,9 @@
 package com.unicorn.qingkee.activity.address.model;
 
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable{
 
     /**
      * doccode : TFL-236-10-604

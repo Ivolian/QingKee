@@ -1,6 +1,7 @@
 package com.unicorn.qingkee.activity.address;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.unicorn.qingkee.R;
+import com.unicorn.qingkee.activity.address.event.AddressChooseEvent;
 import com.unicorn.qingkee.activity.address.model.Address;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.util.DensityUtils;
@@ -25,6 +27,8 @@ import com.unicorn.qingkee.util.UrlUtils;
 import com.unicorn.qingkee.volley.MyVolley;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -136,5 +140,26 @@ public class AddressSearchActivity extends ToolbarActivity {
         return builder.toString();
     }
 
+    //
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
+    @Subscribe
+    public void onAddressChosen(AddressChooseEvent addressChooseEvent) {
+        Intent data = new Intent();
+        data.putExtra("address", addressChooseEvent.getAddress());
+        setResult(233, data);
+        finish();
+    }
 
 }

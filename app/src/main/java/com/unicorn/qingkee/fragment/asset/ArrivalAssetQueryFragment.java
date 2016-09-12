@@ -10,6 +10,8 @@ import android.widget.AdapterView;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.unicorn.qingkee.MyApplication;
 import com.unicorn.qingkee.R;
+import com.unicorn.qingkee.activity.address.AddressSearchActivity;
+import com.unicorn.qingkee.activity.address.model.Address;
 import com.unicorn.qingkee.activity.asset.ArrivalAssetListActivity;
 import com.unicorn.qingkee.bean.AssetQueryInfo;
 import com.unicorn.qingkee.fragment.base.BaseFragment;
@@ -119,6 +121,25 @@ public class ArrivalAssetQueryFragment extends BaseFragment {
         spinnerDataList.add(new SpinnerData("2", "租赁"));
         spAssetSort.setSpinnerDataList(spinnerDataList);
     }
+
+    //  address
+
+    @OnClick(R.id.et_address)
+    public void addressOnClick() {
+        Intent intent = new Intent(getActivity(), AddressSearchActivity.class);
+        startActivityForResult(intent, 2333);
+    }
+
+    Address address;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            address = (Address) data.getSerializableExtra("address");
+            etAddress.setText(address.getDocname());
+        }
+    }
+
 
 }
 
