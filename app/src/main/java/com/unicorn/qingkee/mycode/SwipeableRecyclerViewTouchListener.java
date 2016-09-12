@@ -20,6 +20,12 @@ import java.util.List;
 
 
 public class SwipeableRecyclerViewTouchListener implements RecyclerView.OnItemTouchListener {
+
+    @Override
+    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+    }
+
     // Cached ViewConfiguration and system-wide constant values
     private int mSlop;
     private int mMinFlingVelocity;

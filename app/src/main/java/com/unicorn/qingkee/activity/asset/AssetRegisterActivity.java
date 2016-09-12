@@ -42,7 +42,6 @@ import com.unicorn.qingkee.volley.MyVolley;
 import com.unicorn.qingkee.volley.toolbox.VolleyErrorHelper;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-import org.apache.http.Header;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -54,6 +53,7 @@ import java.util.List;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
+import cz.msebera.android.httpclient.Header;
 
 
 public class AssetRegisterActivity extends ToolbarActivity {
