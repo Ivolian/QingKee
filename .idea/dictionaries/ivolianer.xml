@@ -1,8 +1,12 @@
 <component name="ProjectDictionaryState">
   <dictionary name="ivolianer">
     <words>
+      <w>addresscode</w>
+      <w>deptid</w>
+      <w>employeeid</w>
       <w>keyaddr</w>
       <w>pagersize</w>
+      <w>transferin</w>
     </words>
   </dictionary>
 </component>

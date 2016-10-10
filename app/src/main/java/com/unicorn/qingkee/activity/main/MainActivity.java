@@ -1,6 +1,5 @@
 package com.unicorn.qingkee.activity.main;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -22,7 +21,7 @@ public class MainActivity extends ToolbarActivity {
 
     public final String[] FRAGMENT_TITLES = {
             "到货查询", "调拨出库", "调拨入库", "资产领用", "资产盘点",
-            "资产转移", "资产报废", "维修入库", "维修出库"
+            "资产转出", "资产转入", "维修入库", "维修出库", "资产报废"
     };
 
     @InjectView(R.id.viewpager)
@@ -74,7 +73,6 @@ public class MainActivity extends ToolbarActivity {
 
             @Override
             public void onPageSelected(int position) {
-
                 toolbar.setTitle(FRAGMENT_TITLES[position]);
                 sideMenuAdapter.notifyDataSetChanged();
             }

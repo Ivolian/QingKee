@@ -23,6 +23,7 @@ import com.unicorn.qingkee.activity.address.event.AddressChooseEvent;
 import com.unicorn.qingkee.activity.address.model.Address;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.util.DensityUtils;
+import com.unicorn.qingkee.util.ToastUtils;
 import com.unicorn.qingkee.util.UrlUtils;
 import com.unicorn.qingkee.volley.MyVolley;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -130,6 +131,9 @@ public class AddressSearchActivity extends ToolbarActivity {
         }.getType());
         adapter.setAddressList(addressList);
         adapter.notifyDataSetChanged();
+        if (addressList.size() == 0){
+            ToastUtils.show("无符合查询条件的地址");
+        }
     }
 
     private String getUrl(String keyword) {

@@ -31,12 +31,17 @@ import com.unicorn.qingkee.volley.toolbox.VolleyErrorHelper;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
 
 
 public class AssetsListActivity extends ToolbarActivity {
+
+    public boolean checkAssetList(List<Asset> assetList, Asset current) {
+        return true;
+    }
 
     @InjectView(R.id.floatingActionButton)
     FloatingActionButton floatingActionButton;
@@ -191,6 +196,12 @@ public class AssetsListActivity extends ToolbarActivity {
                                     return;
                                 }
                             }
+
+
+                            if (!checkAssetList(assetsListAdapter.getAssetList(), asset)) {
+                                return;
+                            }
+
                             assetsListAdapter.getAssetList().add(asset);
                             assetsListAdapter.notifyDataSetChanged();
                             floatingActionButton.show(true);

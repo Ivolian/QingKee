@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.unicorn.qingkee.R;
+import com.unicorn.qingkee.activity.asset.AssetTransferOutListActivity;
 import com.unicorn.qingkee.activity.asset.AssetsListActivity;
 import com.unicorn.qingkee.activity.base.ToolbarActivity;
 import com.unicorn.qingkee.bean.Asset;
@@ -23,12 +24,17 @@ public abstract class AssetsFragment extends BaseFragment {
     @InjectView(R.id.et_assets)
     public MaterialEditText etAssets;
 
-    ArrayList<Asset> assetList = new ArrayList<>();
+    public ArrayList<Asset> assetList = new ArrayList<>();
+
+
+    public boolean isTransferOut() {
+        return false;
+    }
 
     @OnClick(R.id.et_assets)
     public void startAssetDisplayActivity() {
 
-        Intent intent = new Intent(getActivity(), AssetsListActivity.class);
+        Intent intent = new Intent(getActivity(), isTransferOut() ? AssetTransferOutListActivity.class : AssetsListActivity.class);
         intent.putExtra("title", ((ToolbarActivity) getActivity()).getToolbarTitle());
         intent.putExtra("assetStatus", getAssetStatus());
         intent.putExtra("assetList", assetList);
@@ -40,10 +46,12 @@ public abstract class AssetsFragment extends BaseFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if (data != null) {
-            assetList = (ArrayList<Asset>) data.getSerializableExtra("assetList");
-            etAssets.setText(getAssetsText());
+            ArrayList<Asset> tempList = (ArrayList<Asset>) data.getSerializableExtra("assetList");
+            if (tempList != null) {
+                assetList = tempList;
+                etAssets.setText(getAssetsText());
+            }
         }
     }
 

@@ -67,7 +67,8 @@ public class ArrivalAssetQueryFragment extends BaseFragment {
 
     @OnClick(R.id.btn_clear_views)
     public void clearViews() {
-
+        address=null;
+        etAddress.setText(StringUtils.EMPTY);
         spCompany.setText(StringUtils.EMPTY);
         spDept.clear();
         spAssetSort.setText(StringUtils.EMPTY);

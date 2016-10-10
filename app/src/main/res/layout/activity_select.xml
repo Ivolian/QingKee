@@ -142,7 +142,7 @@
 
             </LinearLayout>
 
-            <!-- 转移 & 报废 -->
+            <!-- 转出 & 转入 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
@@ -150,7 +150,7 @@
                 android:orientation="horizontal">
 
                 <com.andexert.library.RippleView
-                    android:id="@+id/asset_transfer"
+                    android:id="@+id/asset_transfer_out"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/select_activity_half_interval"
@@ -162,11 +162,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="fitXY"
-                        android:src="@drawable/asset_transfer" />
+                        android:src="@drawable/asset_transfer_out" />
                 </com.andexert.library.RippleView>
 
                 <com.andexert.library.RippleView
-                    android:id="@+id/asset_abandon"
+                    android:id="@+id/asset_transfer_in"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/select_activity_half_interval"
@@ -178,7 +178,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="fitXY"
-                        android:src="@drawable/asset_abandon" />
+                        android:src="@drawable/asset_transfer_in" />
                 </com.andexert.library.RippleView>
 
             </LinearLayout>
@@ -223,6 +223,22 @@
                 </com.andexert.library.RippleView>
 
             </LinearLayout>
+
+            <!-- 报废 -->
+            <com.andexert.library.RippleView
+                android:id="@+id/asset_abandon"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+                ripple:rv_type="rectangle"
+                ripple:rv_zoom="true">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/asset_abandon" />
+            </com.andexert.library.RippleView>
 
         </LinearLayout>
         <!-- end 布局 -->

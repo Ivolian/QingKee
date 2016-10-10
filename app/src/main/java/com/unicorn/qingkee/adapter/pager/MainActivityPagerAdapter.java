@@ -12,7 +12,8 @@ import com.unicorn.qingkee.fragment.asset.AssetApplyFragment;
 import com.unicorn.qingkee.fragment.asset.AssetInventoryListFragment;
 import com.unicorn.qingkee.fragment.asset.AssetRepairInFragment;
 import com.unicorn.qingkee.fragment.asset.AssetRepairOutFragment;
-import com.unicorn.qingkee.fragment.asset.AssetTransferFragment;
+import com.unicorn.qingkee.fragment.asset.AssetTransferInFragment;
+import com.unicorn.qingkee.fragment.asset.AssetTransferOutFragment;
 
 
 public class MainActivityPagerAdapter extends FragmentPagerAdapter {
@@ -44,13 +45,15 @@ public class MainActivityPagerAdapter extends FragmentPagerAdapter {
             case 4:
                 return new AssetInventoryListFragment();
             case 5:
-                return new AssetTransferFragment();
+                return new AssetTransferOutFragment();
             case 6:
-                return new AssetAbandonFragment();
+                return new AssetTransferInFragment();
             case 7:
                 return new AssetRepairInFragment();
             case 8:
                 return new AssetRepairOutFragment();
+            case 9:
+                return new AssetAbandonFragment();
             default:
                 return null;
         }
